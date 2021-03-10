@@ -18,7 +18,28 @@ In addition to your code, a README explaining your thought process and your choi
 
 ### Sketches :
 
-![phone main](./sketches/phone_main.png)
+Obvisouly, it is up to you to make something nice and pretty. The sketches are here to give you an idea on how it should looks.
+
+<details>
+  <summary>Click to see the sketches</summary>
+  
+Mobile list :
+
+![](./sketches/list-mobile.jpg)
+
+Desktop list :
+
+![](./sketches/list-desktop.jpg)
+
+Mobile conversation :
+
+![](./sketches/conv-mobile.jpg)
+
+Desktop conversation :
+
+![](./sketches/conv-desktop.jpg)
+
+</details>
 
 ### API :
 
@@ -38,12 +59,13 @@ Our infrastructure is a bit shaky.. Sometimes the servers are crashing. “It’
 
 Feel free to make as many improvements as you like.
 We love creativity and technical challenges.
+
 If you are out of ideas, here are some thoughts :
 
 - Now that your app is great and beautiful, wouldn’t it be better if it was more secure ?
   Everybody can read and send messages on your behalf.
 
-- The provided APIs allow you to pass a cookie parameter, can you make some modifications to make it work ?
+  The provided APIs allow you to pass a cookie parameter, can you make some modifications to make it work ?
 
 - As we want our user anywhere, we need to make sure the app is performing well. What can you do to make it blazing fast ?
 
