@@ -1,0 +1,279 @@
+swagger: "2.0"
+info:
+  description: "Simple API for frontend technical test - leboncoin"
+  version: "1.0.0"
+  title: "Frontend technical test"
+host: "localhost:3000"
+basePath: "/api"
+tags:
+- name: "conversations"
+  description: "Everything about your Conversations"
+- name: "messages"
+  description: "Everything about your Messages"
+- name: "users"
+  description: "Everything about your Users"
+schemes:
+- "https"
+paths:
+  /conversations/{userId}:
+    get:
+      tags:
+      - "conversations"
+      summary: "Get all conversations for one user"
+      description: ""
+      operationId: "getConversationsByUserId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "path"
+        description: "ID of the user"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            userToken:
+              type: "string"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Conversation"
+        404:
+          description: "No conversations found"
+        503:
+          description: "Unavailable"
+    post:
+      tags:
+      - "conversations"
+      summary: "Create a new Conversation"
+      description: ""
+      operationId: "addConversation"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "path"
+        description: "ID of the user"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Conversation object to create"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            recipientId:
+              type: "integer"
+            userToken:
+              type: "string"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "object"
+            properties:
+              id:
+                type: "integer"
+        400:
+          description: "Invalid input"
+        503:
+          description: "Unavailable"
+  /conversation/{conversationId}:
+    delete:
+      tags:
+      - "conversations"
+      summary: "Delete one conversation"
+      description: ""
+      operationId: "deleteConversationById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "conversationId"
+        in: "path"
+        description: "ID of the conversation"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            userToken:
+              type: "string"
+      responses:
+        200:
+          description: "Success"
+        503:
+          description: "Unavailable"
+  /messages/{conversationId}:
+    get:
+      tags:
+      - "messages"
+      summary: "Get all messages for one conversation"
+      description: ""
+      operationId: "getMessagesByConversationId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "conversationId"
+        in: "path"
+        description: "ID of the conversation"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            userToken:
+              type: "string"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Message"
+        404:
+          description: "No messages found"
+        503:
+          description: "Unavailable"
+    post:
+      tags:
+      - "messages"
+      summary: "Create a new message in conversation"
+      description: ""
+      operationId: "addMessageInConversation"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "conversationId"
+        in: "path"
+        description: "ID of the conversation"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            userToken:
+              type: "string"
+            body:
+              type: "string"
+            timestamp:
+              type: "integer"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "object"
+            properties:
+              id:
+                type: "integer"
+        400:
+          description: "Invalid input"
+        503:
+          description: "Unavailable"
+  /message/{messageId}:
+    delete:
+      tags:
+      - "messages"
+      summary: "Delete one message"
+      description: ""
+      operationId: "deleteMessage"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "messageId"
+        in: "path"
+        description: "ID of the message"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            userToken:
+              type: "string"
+      responses:
+        200:
+          description: "Success"
+        503:
+          description: "Unavailable"
+  /users:
+    get:
+      tags:
+      - "users"
+      summary: "get all users"
+      description: ""
+      operationId: "getUsers"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        503:
+          description: "Unavailable"
+definitions:
+  Conversation:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      senderId:
+        type: "integer"
+        format: "int32"
+      SenderPseudo:
+        type: "string"
+      recipientId:
+        type: "integer"
+        format: "int32"
+      RecipientPseudo:
+        type: "string"
+  Message:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      conversationID:
+        type: "integer"
+        format: "int32"
+      timestamp:
+        type: "string"
+      body:
+        type: "string"
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      pseudo:
+        type: "string"
+      token:
+        type: "string"
+      

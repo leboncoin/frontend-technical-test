@@ -43,7 +43,9 @@ Desktop conversation :
 
 ### API :
 
-Swagger
+You can find the API swagger file in `docs/api-swagger.yaml`.
+
+For a better readibility, you can use [https://editor.swagger.io/](https://editor.swagger.io/) and import the file.
 
 ---
 
