@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Swagger UI</title>
-    <link rel="stylesheet" type="text/css" href="./dist.swagger-ui.css" />
+    <link rel="stylesheet" type="text/css" href="./dist/swagger-ui.css" />
     <link
       rel="icon"
       type="image/png"
@@ -49,8 +49,7 @@
       window.onload = function () {
         // Begin Swagger UI call region
         const ui = SwaggerUIBundle({
-          url:
-            "https://github.com/leboncoin/frontend-technical-test/blob/main/docs/api-swagger.yaml",
+          url: "./docs/api-swagger.yaml",
           dom_id: "#swagger-ui",
           deepLinking: true,
           presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
