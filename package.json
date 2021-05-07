@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "start-server": "json-server --watch src/server/db.json",
+    "start-server": "json-server --watch src/server/db.json --routes src/server/routes.json",
     "test": "jest"
   },
   "dependencies": {

@@ -3,41 +3,53 @@
     {
       "id": 1,
       "senderId": 1,
-      "SenderPseudo": "Thibaut",
+      "SenderNickname": "Thibaut",
       "recipientId": 2,
-      "RecipientPseudo": "Jeremie"
+      "RecipientNickname": "Jeremie"
     },
     {
       "id": 2,
       "senderId": 1,
-      "SenderPseudo": "Thibaut",
+      "SenderNickname": "Thibaut",
       "recipientId": 3,
-      "RecipientPseudo": "Patrick"
+      "RecipientNickname": "Patrick"
     }
   ],
   "messages": [
     {
       "id": 1,
-      "conversationID": 1,
+      "conversationId": 1,
       "timestamp": 26949849,
       "body": "Bonjour c'est le premier message"
     },
     {
       "id": 2,
-      "conversationID": 1,
+      "conversationId": 1,
       "timestamp": 26949849,
       "body": "Bonjour c'est le second message"
     },
     {
       "id": 3,
-      "conversationID": 2,
+      "conversationId": 2,
       "timestamp": 26949849,
       "body": "Bonjour c'est la seconde conversation"
     }
   ],
   "users": [
-    { "id": 1, "pseudo": "Thibaut", "token": "xxxx" },
-    { "id": 2, "pseudo": "Jeremie", "token": "xxxx" },
-    { "id": 3, "pseudo": "Patrick", "token": "xxxx" }
+    {
+      "id": 1,
+      "nickname": "Thibaut",
+      "token": "xxxx"
+    },
+    {
+      "id": 2,
+      "nickname": "Jeremie",
+      "token": "xxxx"
+    },
+    {
+      "id": 3,
+      "nickname": "Patrick",
+      "token": "xxxx"
+    }
   ]
 }
