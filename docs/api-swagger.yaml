@@ -1,279 +1,288 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "Simple API for frontend technical test - leboncoin"
-  version: "1.0.0"
-  title: "Frontend technical test"
-host: "localhost:3000"
-basePath: "/api"
+  description: Simple API for frontend technical test - leboncoin
+  version: 1.0.0
+  title: Frontend technical test
+host: 'localhost:3000'
+basePath: /api
 tags:
-- name: "conversations"
-  description: "Everything about your Conversations"
-- name: "messages"
-  description: "Everything about your Messages"
-- name: "users"
-  description: "Everything about your Users"
+  - name: conversations
+    description: Everything about your Conversations
+  - name: messages
+    description: Everything about your Messages
+  - name: users
+    description: Everything about your Users
 schemes:
-- "https"
+  - https
 paths:
-  /conversations/{userId}:
+  '/conversations/{userId}':
     get:
       tags:
-      - "conversations"
-      summary: "Get all conversations for one user"
-      description: ""
-      operationId: "getConversationsByUserId"
+        - conversations
+      summary: Get all conversations for one user
+      description: ''
+      operationId: getConversationsByUserId
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "userId"
-        in: "path"
-        description: "ID of the user"
-        required: true
-        type: "string"
-      - in: "body"
-        name: "body"
-        required: true
-        schema:
-          type: "object"
-          properties:
-            userToken:
-              type: "string"
-      responses:
-        200:
-          description: "Success"
+        - name: userId
+          in: path
+          description: ID of the user
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
           schema:
-            type: "array"
+            type: object
+            properties:
+              userToken:
+                type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
             items:
-              $ref: "#/definitions/Conversation"
-        404:
-          description: "No conversations found"
-        503:
-          description: "Unavailable"
+              $ref: '#/definitions/Conversation'
+        '404':
+          description: No conversations found
+        '503':
+          description: Unavailable
     post:
       tags:
-      - "conversations"
-      summary: "Create a new Conversation"
-      description: ""
-      operationId: "addConversation"
+        - conversations
+      summary: Create a new Conversation
+      description: ''
+      operationId: addConversation
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "userId"
-        in: "path"
-        description: "ID of the user"
-        required: true
-        type: "string"
-      - in: "body"
-        name: "body"
-        description: "Conversation object to create"
-        required: true
-        schema:
-          type: "object"
-          properties:
-            recipientId:
-              type: "integer"
-            userToken:
-              type: "string"
-      responses:
-        200:
-          description: "Success"
+        - name: userId
+          in: path
+          description: ID of the user
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Conversation object to create
+          required: true
           schema:
-            type: "object"
+            type: object
+            properties:
+              recipientId:
+                type: integer
+              userToken:
+                type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
             properties:
               id:
-                type: "integer"
-        400:
-          description: "Invalid input"
-        503:
-          description: "Unavailable"
-  /conversation/{conversationId}:
+                type: integer
+        '400':
+          description: Invalid input
+        '503':
+          description: Unavailable
+  '/conversation/{conversationId}':
     delete:
       tags:
-      - "conversations"
-      summary: "Delete one conversation"
-      description: ""
-      operationId: "deleteConversationById"
+        - conversations
+      summary: Delete one conversation
+      description: ''
+      operationId: deleteConversationById
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "conversationId"
-        in: "path"
-        description: "ID of the conversation"
-        required: true
-        type: "string"
-      - in: "body"
-        name: "body"
-        required: true
-        schema:
-          type: "object"
-          properties:
-            userToken:
-              type: "string"
+        - name: conversationId
+          in: path
+          description: ID of the conversation
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              userToken:
+                type: string
       responses:
-        200:
-          description: "Success"
-        503:
-          description: "Unavailable"
-  /messages/{conversationId}:
+        '200':
+          description: Success
+        '503':
+          description: Unavailable
+  '/messages/{conversationId}':
     get:
       tags:
-      - "messages"
-      summary: "Get all messages for one conversation"
-      description: ""
-      operationId: "getMessagesByConversationId"
+        - messages
+      summary: Get all messages for one conversation
+      description: ''
+      operationId: getMessagesByConversationId
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "conversationId"
-        in: "path"
-        description: "ID of the conversation"
-        required: true
-        type: "string"
-      - in: "body"
-        name: "body"
-        required: true
-        schema:
-          type: "object"
-          properties:
-            userToken:
-              type: "string"
-      responses:
-        200:
-          description: "Success"
+        - name: conversationId
+          in: path
+          description: ID of the conversation
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
           schema:
-            type: "array"
+            type: object
+            properties:
+              userToken:
+                type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
             items:
-              $ref: "#/definitions/Message"
-        404:
-          description: "No messages found"
-        503:
-          description: "Unavailable"
+              $ref: '#/definitions/Message'
+        '404':
+          description: No messages found
+        '503':
+          description: Unavailable
     post:
       tags:
-      - "messages"
-      summary: "Create a new message in conversation"
-      description: ""
-      operationId: "addMessageInConversation"
+        - messages
+      summary: Create a new message in conversation
+      description: ''
+      operationId: addMessageInConversation
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "conversationId"
-        in: "path"
-        description: "ID of the conversation"
-        required: true
-        type: "string"
-      - in: "body"
-        name: "body"
-        required: true
-        schema:
-          type: "object"
-          properties:
-            userToken:
-              type: "string"
-            body:
-              type: "string"
-            timestamp:
-              type: "integer"
-      responses:
-        200:
-          description: "Success"
+        - name: conversationId
+          in: path
+          description: ID of the conversation
+          required: true
+          type: string
+        - name: authorId
+          in: path
+          description: ID of the author
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
           schema:
-            type: "object"
+            type: object
+            properties:
+              userToken:
+                type: string
+              body:
+                type: string
+              timestamp:
+                type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
             properties:
               id:
-                type: "integer"
-        400:
-          description: "Invalid input"
-        503:
-          description: "Unavailable"
-  /message/{messageId}:
+                type: integer
+        '400':
+          description: Invalid input
+        '503':
+          description: Unavailable
+  '/message/{messageId}':
     delete:
       tags:
-      - "messages"
-      summary: "Delete one message"
-      description: ""
-      operationId: "deleteMessage"
+        - messages
+      summary: Delete one message
+      description: ''
+      operationId: deleteMessage
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "messageId"
-        in: "path"
-        description: "ID of the message"
-        required: true
-        type: "string"
-      - in: "body"
-        name: "body"
-        required: true
-        schema:
-          type: "object"
-          properties:
-            userToken:
-              type: "string"
+        - name: messageId
+          in: path
+          description: ID of the message
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              userToken:
+                type: string
       responses:
-        200:
-          description: "Success"
-        503:
-          description: "Unavailable"
+        '200':
+          description: Success
+        '401':
+          description: Bad Token
+        '503':
+          description: Unavailable
   /users:
     get:
       tags:
-      - "users"
-      summary: "get all users"
-      description: ""
-      operationId: "getUsers"
+        - users
+      summary: get all users
+      description: ''
+      operationId: getUsers
       produces:
-      - "application/json"
+        - application/json
       responses:
-        200:
-          description: "Success"
+        '200':
+          description: Success
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/User"
-        503:
-          description: "Unavailable"
+              $ref: '#/definitions/User'
+        '503':
+          description: Unavailable
 definitions:
   Conversation:
-    type: "object"
+    type: object
     properties:
       id:
-        type: "integer"
-        format: "int32"
+        type: integer
+        format: int32
       senderId:
-        type: "integer"
-        format: "int32"
-      SenderPseudo:
-        type: "string"
+        type: integer
+        format: int32
+      SenderNickname:
+        type: string
       recipientId:
-        type: "integer"
-        format: "int32"
-      RecipientPseudo:
-        type: "string"
+        type: integer
+        format: int32
+      RecipientNickname:
+        type: string
   Message:
-    type: "object"
+    type: object
     properties:
       id:
-        type: "integer"
-        format: "int32"
-      conversationID:
-        type: "integer"
-        format: "int32"
+        type: integer
+        format: int32
+      conversationId:
+        type: integer
+        format: int32
+      authorId:
+        type: integer
+        format: int32
       timestamp:
-        type: "string"
+        type: string
       body:
-        type: "string"
+        type: string
   User:
-    type: "object"
+    type: object
     properties:
       id:
-        type: "integer"
-        format: "int32"
-      pseudo:
-        type: "string"
+        type: integer
+        format: int32
+      nickname:
+        type: string
       token:
-        type: "string"
-      
+        type: string
