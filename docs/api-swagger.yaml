@@ -164,11 +164,6 @@ paths:
           description: ID of the conversation
           required: true
           type: string
-        - name: authorId
-          in: path
-          description: ID of the author
-          required: true
-          type: string
         - in: body
           name: body
           required: true
