@@ -32,7 +32,7 @@ paths:
           type: string
         - in: body
           name: body
-          required: true
+          required: false
           schema:
             type: object
             properties:
@@ -74,8 +74,6 @@ paths:
             properties:
               recipientId:
                 type: integer
-              userToken:
-                type: string
       responses:
         '200':
           description: Success
@@ -105,7 +103,7 @@ paths:
           type: string
         - in: body
           name: body
-          required: true
+          required: false
           schema:
             type: object
             properties:
@@ -133,7 +131,7 @@ paths:
           type: string
         - in: body
           name: body
-          required: true
+          required: false
           schema:
             type: object
             properties:
@@ -177,8 +175,6 @@ paths:
           schema:
             type: object
             properties:
-              userToken:
-                type: string
               body:
                 type: string
               timestamp:
@@ -212,7 +208,7 @@ paths:
           type: string
         - in: body
           name: body
-          required: true
+          required: false
           schema:
             type: object
             properties:
