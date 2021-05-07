@@ -1,6 +1,6 @@
 # Context :
 
-At leboncoin, our users can share some messages about a transaction, or ask for information about any sold products.
+At leboncoin, our users can share messages about a transaction, or ask for informations about any products.
 
 Your job is to create the interface to consult those messages.
 The interface needs to work on both desktop & mobile devices.
@@ -18,7 +18,7 @@ In addition to your code, a README explaining your thought process and your choi
 
 ### Sketches :
 
-Obvisouly, it is up to you to make something nice and pretty. The sketches are here to give you an idea on how it should looks.
+Obvisouly, it is up to you to make something nice and pretty. The sketches are here to give you an idea on how it should look.
 
 <details>
   <summary>Click to see the sketches</summary>
@@ -45,7 +45,7 @@ Desktop conversation :
 
 You can find the API swagger file in `docs/api-swagger.yaml`.
 
-For a better readibility, you can use [https://editor.swagger.io/](https://editor.swagger.io/) and import the file.
+For a better readibility, you view it on [https://pages.github.com/leboncoin/frontend-technical-test](https://pages.github.com/leboncoin/frontend-technical-test).
 
 ---
 
@@ -55,7 +55,7 @@ We provide some conversation samples, but can you improve the app so the user ca
 
 ## Bonus 2 :
 
-Our infrastructure is a bit shaky.. Sometimes the servers are crashing. “It’s not you, it’s me”, but maybe you can display something nice to warn the user.
+Our infrastructure is a bit shaky.. Sometimes the servers are crashing. “It’s not you, it’s me”, but maybe you can display something nice to warn the user and handle it gracefully.
 
 ## Do you want to make the app even better ?
 
@@ -64,13 +64,8 @@ We love creativity and technical challenges.
 
 If you are out of ideas, here are some thoughts :
 
-- Now that your app is great and beautiful, wouldn’t it be better if it was more secure ?
-  Everybody can read and send messages on your behalf.
+- As we want to reach our users anywhere, we need to make sure the app is performing well. What can you do to make it really fast ?
 
-  The provided APIs allow you to pass a cookie parameter, can you make some modifications to make it work ?
-
-- As we want our user anywhere, we need to make sure the app is performing well. What can you do to make it blazing fast ?
-
-- Our goal is to reach everybody in the country, including people with disabilities. As a good citizen and a good developer, can you make sure the app is accessible for everyone ?
+- Our goal is to support everybody in the country, including people with disabilities. As a good citizen and a good developer, can you make sure the app is accessible for everyone ?
 
 - We all love to relax after a hard day’s work. It would be a shame if we didn’t feel confident enough about the upcoming automatic deployment. Are you sure everything has been tested thoroughly ?
