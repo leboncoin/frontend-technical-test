@@ -8,7 +8,7 @@
     "start": "next start",
     "start-server": "json-server --watch src/server/db.json --routes src/server/routes.json",
     "test": "jest",
-    "lint": "next lint"
+    "lint": "next lint --no-error-on-unmatched-pattern"
   },
   "engines": {
     "node": ">=14.17.2"
@@ -25,6 +25,8 @@
     "@types/node": "^16.0.0",
     "@types/react": "^17.0.13",
     "babel-jest": "^27.0.6",
+    "eslint": "^7.30.0",
+    "eslint-config-next": "^11.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
     "typescript": "^4.3.5"
