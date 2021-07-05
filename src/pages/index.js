@@ -46,7 +46,7 @@ export default function Home() {
             <h2>API Server&rarr;</h2>
             <p>
               Start the API server by running<br /><code className={styles.code}>npm run start:server</code>.<br/>
-              Find the swagger defintions in <code className={styles.code}>docs/api-swagger.yml</code>.
+              Find the swagger definitions in <code className={styles.code}>docs/api-swagger.yml</code> or <a href="https://leboncoin.tech/frontend-technical-test/" target="_blank" rel="noopener noreferrer">here</a>.
             </p>
           </article>
 

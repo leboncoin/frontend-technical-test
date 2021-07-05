@@ -45,7 +45,7 @@ Desktop conversation :
 
 You can find the API swagger file in `docs/api-swagger.yaml`.
 
-For a better readibility, you view it on [https://pages.github.com/leboncoin/frontend-technical-test](https://pages.github.com/leboncoin/frontend-technical-test).
+For a better readibility, you view it on [https://leboncoin.tech/frontend-technical-test/](https://leboncoin.tech/frontend-technical-test/).
 
 ---
 
