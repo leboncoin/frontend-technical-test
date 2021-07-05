@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-import Logo from '../../public/lbc-logo.png'
+import Logo from '../assets/lbc-logo.webp'
 
 export default function Home() {
 
@@ -12,6 +12,7 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>Frontend Technical test - Leboncoin</title>
+        <meta name="description" content="Frontend exercise for developpers who want to join us on leboncoin.fr"></meta>
       </Head>
 
       <main className={styles.main}>
@@ -32,17 +33,17 @@ export default function Home() {
 
         <div className={styles.grid}>
           <article href="#" className={styles.card}>
-            <h3>Design &rarr;</h3>
+            <h2>Design &rarr;</h2>
             <p>Feel free to create any design you want for this exercise. Let your creativity talks !</p>
           </article>
 
           <article href="#" className={styles.card}>
-            <h3>Libraries &rarr;</h3>
+            <h2>Libraries &rarr;</h2>
             <p>Feel free to use any library you want. Only Next.js / React are required.</p>
           </article>
 
           <article href="#" className={styles.card}>
-            <h3>API Server&rarr;</h3>
+            <h2>API Server&rarr;</h2>
             <p>
               Start the API server by running<br /><code className={styles.code}>npm run start:server</code>.<br/>
               Find the swagger defintions in <code className={styles.code}>docs/api-swagger.yml</code>.
@@ -50,7 +51,7 @@ export default function Home() {
           </article>
 
           <article href="#" className={styles.card}>
-            <h3>Timing &rarr;</h3>
+            <h2>Timing &rarr;</h2>
             <p>We recommend 4 hours for this test. Feel free to use more or less time, but let us know how much time you take for your test.</p>
           </article>
         </div>
