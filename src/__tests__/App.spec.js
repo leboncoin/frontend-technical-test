@@ -5,7 +5,7 @@ describe("App", () => {
   it("should render correctly App", () => {
     render(<App />)
     expect(
-      screen.getByRole("heading", { name: "Welcome to Next.js!" })
+      screen.getByText(/Welcome/)
     ).toBeInTheDocument()
   })
 })
