@@ -1,2 +1,0 @@
-// Prevent ESLint fail
-export {}
