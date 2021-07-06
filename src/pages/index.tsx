@@ -1,11 +1,11 @@
+import type { FC } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 import Logo from '../assets/lbc-logo.webp'
 
-export default function Home() {
-
+const Home: FC = () => {
   const year = new Date().getFullYear()
 
   return (
@@ -32,17 +32,17 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <article href="#" className={styles.card}>
+          <article className={styles.card}>
             <h2>Design &rarr;</h2>
             <p>Feel free to create any design you want for this exercise. Let your creativity talks !</p>
           </article>
 
-          <article href="#" className={styles.card}>
+          <article className={styles.card}>
             <h2>Libraries &rarr;</h2>
             <p>Feel free to use any library you want. Only Next.js / React are required.</p>
           </article>
 
-          <article href="#" className={styles.card}>
+          <article className={styles.card}>
             <h2>API Server&rarr;</h2>
             <p>
               Start the API server by running<br /><code className={styles.code}>npm run start:server</code>.<br/>
@@ -50,7 +50,7 @@ export default function Home() {
             </p>
           </article>
 
-          <article href="#" className={styles.card}>
+          <article className={styles.card}>
             <h2>Timing &rarr;</h2>
             <p>We recommend 4 hours for this test. Feel free to use more or less time, but let us know how much time you take for your test.</p>
           </article>
@@ -63,3 +63,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Home
