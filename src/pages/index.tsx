@@ -22,10 +22,11 @@ const Home: FC = () => {
 
         <p className={styles.description}>
           This test is based on a <a href="https://nextjs.org/docs/getting-started" target="_blank" rel="noopener noreferrer">Next.js</a> application.<br />
+          Fork the repository and use the <code className={styles.code}>main</code> branch as your starting point.
+          <br /><br />
+
           Get started by reading{' '}
           <code className={styles.code}>README.md</code> and editing <code className={styles.code}>src/pages/index.js</code>
-          <br /><br />
-          Clone the repository and use the <code className={styles.code}>main</code> branch as your starting point.
           <br />
           Once you are done, send the repository link to your HR contact.
         </p>
