@@ -18,7 +18,7 @@ In addition to your code, a README explaining your thought process and your choi
 
 ### Sketches :
 
-Obvisouly, it is up to you to make something nice and pretty. The sketches are here to give you an idea on how it should look.
+Obvisouly, it is up to you to make something nice and pretty, you are free to design it the way you like. The sketches are here to give you an idea on how it should look.
 
 <details>
   <summary>Click to see the sketches</summary>
@@ -45,7 +45,7 @@ Desktop conversation :
 
 You can find the API swagger file in `docs/api-swagger.yaml`.
 
-For a better readibility, you view it on [https://leboncoin.tech/frontend-technical-test/](https://leboncoin.tech/frontend-technical-test/).
+For a better readibility, you can view it on [https://leboncoin.tech/frontend-technical-test/](https://leboncoin.tech/frontend-technical-test/).
 
 ---
 
