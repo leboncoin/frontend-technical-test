@@ -1,9 +1,8 @@
 import type { FC } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-
 import Logo from '../assets/lbc-logo.webp'
+import styles from '../styles/Home.module.css'
 
 const Home: FC = () => {
   const year = new Date().getFullYear()
@@ -26,33 +25,33 @@ const Home: FC = () => {
           Get started by reading{' '}
           <code className={styles.code}>README.md</code> and editing <code className={styles.code}>src/pages/index.js</code>
           <br /><br />
-          Create your branch using the <code className={styles.code}>[YYYY-mm]-[name]</code> pattern.
+          Clone the repository and use the <code className={styles.code}>main</code> branch as your starting point.
           <br />
-          Once you have finished your test, create a pull request on our <a href="https://github.com/leboncoin/frontend-technical-test" target="_blank" rel="noopener noreferrer">repository</a>.
+          Once you are done, send the repository link to your HR contact.
         </p>
 
         <div className={styles.grid}>
           <article className={styles.card}>
-            <h2>Design &rarr;</h2>
+            <h2>Design</h2>
             <p>Feel free to create any design you want for this exercise. Let your creativity talks !</p>
           </article>
 
           <article className={styles.card}>
-            <h2>Libraries &rarr;</h2>
+            <h2>Libraries</h2>
             <p>Feel free to use any library you want. Only Next.js / React are required.</p>
           </article>
 
           <article className={styles.card}>
-            <h2>API Server&rarr;</h2>
+            <h2>API Server</h2>
             <p>
-              Start the API server by running<br /><code className={styles.code}>npm run start:server</code>.<br/>
+              Start the API server on port <code className={styles.code}>3005</code> by running<br /><code className={styles.code}>npm run start-server</code>.<br/>
               Find the swagger definitions in <code className={styles.code}>docs/api-swagger.yml</code> or <a href="https://leboncoin.tech/frontend-technical-test/" target="_blank" rel="noopener noreferrer">here</a>.
             </p>
           </article>
 
           <article className={styles.card}>
-            <h2>Timing &rarr;</h2>
-            <p>We recommend 4 hours for this test. Feel free to use more or less time, but let us know how much time you take for your test.</p>
+            <h2>Timing</h2>
+            <p>We recommend 4 hours for this test. You are free to spend more (or less) time, let us know how much time did you spend.</p>
           </article>
         </div>
       </main>

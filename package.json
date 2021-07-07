@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "start-server": "json-server --watch src/server/db.json --routes src/server/routes.json",
+    "start-server": "json-server --watch src/server/db.json --routes src/server/routes.json --port 3005",
     "test": "jest",
     "lint": "next lint --no-error-on-unmatched-pattern"
   },
@@ -29,6 +29,7 @@
     "eslint-config-next": "^11.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
+    "json-server": "^0.16.3",
     "typescript": "^4.3.5"
   }
 }

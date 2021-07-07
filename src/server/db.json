@@ -2,17 +2,17 @@
   "conversations": [
     {
       "id": 1,
-      "senderId": 1,
-      "SenderNickname": "Thibaut",
       "recipientId": 2,
-      "RecipientNickname": "Jeremie"
+      "recipientNickname": "Jeremie",
+      "senderId": 1,
+      "senderNickname": "Thibaut"
     },
     {
       "id": 2,
-      "senderId": 1,
-      "SenderNickname": "Thibaut",
       "recipientId": 3,
-      "RecipientNickname": "Patrick"
+      "recipientNickname": "Patrick",
+      "senderId": 1,
+      "senderNickname": "Thibaut"
     }
   ],
   "messages": [
