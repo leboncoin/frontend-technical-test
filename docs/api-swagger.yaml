@@ -13,7 +13,7 @@ tags:
   - name: users
     description: Everything about your Users
 schemes:
-  - https
+  - http
 paths:
   "/conversations/{userId}":
     get:
