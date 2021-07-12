@@ -3,8 +3,8 @@ info:
   description: Simple API for frontend technical test - leboncoin
   version: 1.0.0
   title: Frontend technical test
-host: "localhost:3000"
-basePath: /api
+host: "localhost:3005"
+basePath: /
 tags:
   - name: conversations
     description: Everything about your Conversations
