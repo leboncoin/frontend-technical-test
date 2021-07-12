@@ -27,19 +27,29 @@
       "id": 1,
       "conversationId": 1,
       "timestamp": 26949849,
-      "body": "Bonjour c'est le premier message"
+      "authorId": 1,
+      "body": "Bonjour c'est le premier message de la première conversation"
     },
     {
       "id": 2,
       "conversationId": 1,
       "timestamp": 26949849,
-      "body": "Bonjour c'est le second message"
+      "authorId": 1,
+      "body": "Bonjour c'est le second message de la première conversation"
     },
     {
       "id": 3,
+      "conversationId": 1,
+      "timestamp": 26949849,
+      "authorId": 2,
+      "body": "Bonjour c'est le troisième message de la première conversation"
+    },
+    {
+      "id": 4,
       "conversationId": 2,
       "timestamp": 26949849,
-      "body": "Bonjour c'est la seconde conversation"
+      "authorId": 2,
+      "body": "Bonjour c'est le premier message de la seconde conversation"
     }
   ],
   "users": [
