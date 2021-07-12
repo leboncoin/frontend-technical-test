@@ -13,6 +13,13 @@
       "recipientNickname": "Patrick",
       "senderId": 1,
       "senderNickname": "Thibaut"
+    },
+    {
+      "id": 3,
+      "recipientId": 1,
+      "recipientNickname": "Thibaut",
+      "senderId": 2,
+      "senderNickname": "Jeremie"
     }
   ],
   "messages": [
