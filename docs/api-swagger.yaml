@@ -202,6 +202,28 @@ paths:
               $ref: "#/definitions/User"
         "503":
           description: Unavailable
+  "/user/{userId}":
+    get:
+      tags:
+        - users
+      summary: get specific user
+      description: ""
+      operationId: getUser
+      produces:
+        - application/json
+      parameters:
+        - name: userId
+          in: path
+          description: ID of the user
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/User"
+        "503":
+          description: Unavailable
 definitions:
   Conversation:
     type: object
@@ -219,6 +241,9 @@ definitions:
         format: int32
       recipientNickname:
         type: string
+      lastMessageTimestamp:
+        type: integer
+        format: int32
   Message:
     type: object
     properties:
