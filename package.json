@@ -14,7 +14,7 @@
     "node": ">=14.17.2"
   },
   "dependencies": {
-    "next": "^11.0.1",
+    "next": "^11.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -22,11 +22,11 @@
     "@testing-library/dom": "^8.1.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
-    "@types/node": "^16.0.0",
-    "@types/react": "^17.0.13",
+    "@types/node": "^16.6.1",
+    "@types/react": "^17.0.18",
     "babel-jest": "^27.0.6",
-    "eslint": "^7.30.0",
-    "eslint-config-next": "^11.0.1",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "^11.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
     "json-server": "^0.16.3",
