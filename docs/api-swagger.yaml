@@ -15,7 +15,7 @@ tags:
 schemes:
   - http
 paths:
-  "/conversations/{userId}":
+  "/sender/{userId}/conversations/":
     get:
       tags:
         - conversations
@@ -41,6 +41,7 @@ paths:
           description: No conversations found
         "503":
           description: Unavailable
+  "/conversations/{conversationId}":
     post:
       tags:
         - conversations
@@ -52,9 +53,9 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: userId
+        - name: conversationId
           in: path
-          description: ID of the user
+          description: ID of the conversation
           required: true
           type: string
         - in: body
@@ -78,7 +79,6 @@ paths:
           description: Invalid input
         "503":
           description: Unavailable
-  "/conversation/{conversationId}":
     delete:
       tags:
         - conversations
@@ -98,7 +98,7 @@ paths:
           description: Success
         "503":
           description: Unavailable
-  "/messages/{conversationId}":
+  "/conversation/{conversationId}/messages/":
     get:
       tags:
         - messages
@@ -162,7 +162,7 @@ paths:
           description: Invalid input
         "503":
           description: Unavailable
-  "/message/{messageId}":
+  "/messages/{messageId}":
     delete:
       tags:
         - messages
