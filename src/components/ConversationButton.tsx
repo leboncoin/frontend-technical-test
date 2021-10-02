@@ -3,8 +3,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import useSWR, { SWRConfig } from 'swr'
 import { userId, baseUrl } from '../constants'
-import { differenceInHours, differenceInMinutes } from 'date-fns'
-import { differenceInDays } from 'date-fns'
+import { differenceInMinutes } from 'date-fns'
 
 type ConversationButtonProps = {
   conversationId: number

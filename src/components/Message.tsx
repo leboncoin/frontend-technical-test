@@ -1,4 +1,6 @@
 import type { FC } from 'react'
+import { format } from 'date-fns'
+import fr from 'date-fns/locale/fr'
 
 export type MessageProps = {
   timestamp: number
@@ -19,7 +21,7 @@ export const Message: FC<MessageProps> = ({
     >
       <span className="block">{body}</span>
       <span className="block text-xs text-right">
-        {new Date(timestamp).toUTCString()}
+        {format(new Date(timestamp), "H 'h' mm", { locale: fr })}
       </span>
     </div>
   )

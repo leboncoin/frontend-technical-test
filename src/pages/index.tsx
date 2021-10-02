@@ -4,6 +4,7 @@ import { userId, baseUrl } from '../constants'
 import useSWR, { SWRConfig } from 'swr'
 import ConversationButton from '../components/ConversationButton'
 import toast from 'react-hot-toast'
+import { useToasterStore } from 'react-hot-toast'
 import { useEffect } from 'react'
 
 import '../styles/Home.module.css'
@@ -23,7 +24,6 @@ const Home: FC = () => {
     if (pageLoading(conversationsError, conversationsData)) {
       toast.loading('chargement de tes conversations...', {
         id: 'conversations',
-        duration: 2000,
       })
     }
   }, [conversationsError, conversationsData])

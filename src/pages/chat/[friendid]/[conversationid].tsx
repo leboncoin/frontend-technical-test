@@ -46,7 +46,6 @@ const Chat = () => {
       pageLoading(messageError, friendError, messages, friendData)
     ) {
       toast.loading('chargement de tes messages...', {
-        duration: 2000,
         id: 'messages',
       })
     }

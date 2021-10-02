@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "start-server": "json-server --watch src/server/db.json --routes src/server/routes.json --middlewares src/server/middlewares.js --port 3005",
+    "start-server": "json-server src/server/index.js --watch src/server/db.json --routes src/server/routes.json --middlewares src/server/middlewares.js --port 3005",
     "test": "jest",
     "lint": "next lint --no-error-on-unmatched-pattern",
     "format": "prettier-eslint --write $PWD/'**/*.{ts,tsx}'"
@@ -45,6 +45,7 @@
     "postcss": "^8.3.7",
     "prettier": "^2.4.1",
     "prettier-eslint-cli": "^5.0.1",
+    "ramda": "^0.27.1",
     "tailwindcss": "^2.2.15",
     "typescript": "^4.3.5"
   }
