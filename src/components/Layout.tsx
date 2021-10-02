@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 const Layout: FC = ({ children }) => {
   return (
-    <div className="layout">
+    <>
       <Head>
         <title>Chaty</title>
         <meta
@@ -11,8 +11,8 @@ const Layout: FC = ({ children }) => {
           content="Chat with your friends, everywhere !!"
         ></meta>
       </Head>
-      <main className="sm:container">{children}</main>
-    </div>
+      <main className="container max-w-2xl">{children}</main>
+    </>
   )
 }
 export default Layout

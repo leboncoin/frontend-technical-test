@@ -7,9 +7,15 @@ module.exports = (req, res, next) => {
   if (/conversations/.test(req.url) && req.method === 'GET') {
     const userId = req.query.senderId
     const result = db.conversations.filter(
-      conv => conv.senderId == userId || conv.recipientId == userId
+      (conv) => conv.senderId == userId || conv.recipientId == userId,
     )
-    res.json({body: ''})
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept',
+    )
+
+    res.json({ result })
   } else {
     next()
   }

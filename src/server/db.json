@@ -59,22 +59,20 @@
     {
       "id": 1,
       "nickname": "Thibaut",
-      "token": "xxxx"
+      "token": "xxxx",
+      "avatar": "https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
     },
     {
       "id": 2,
       "nickname": "Jeremie",
-      "token": "xxxx"
+      "token": "xxxx",
+      "avatar": "https://images.pexels.com/photos/6238133/pexels-photo-6238133.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
     },
     {
       "id": 3,
       "nickname": "Patrick",
-      "token": "xxxx"
-    },
-    {
-      "id": 4,
-      "nickname": "Elodie",
-      "token": "xxxx"
+      "token": "xxxx",
+      "avatar": "https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
     }
   ]
 }
