@@ -3,5 +3,6 @@
   "/conversation/:id": "/conversations?id=:id",
   "/messages/:id": "/messages?conversationId=:id",
   "/message/:id": "/messages?id=:id",
-  "/user/:id": "/users?id=:id"
+  "/user/:id": "/users?id=:id",
+  "/message/latest/:id": "/message/latest?conversationId=:id"
 }

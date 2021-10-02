@@ -3,68 +3,88 @@
     {
       "id": 1,
       "recipientId": 2,
-      "recipientNickname": "Jeremie",
+      "recipientNickname": "Elodie",
       "senderId": 1,
-      "senderNickname": "Thibaut",
-      "lastMessageTimestamp": 1625637849
+      "latestMessageTimestamp": 1632670339406,
+      "senderNickname": "47tibo"
     },
     {
       "id": 2,
       "recipientId": 3,
       "recipientNickname": "Patrick",
       "senderId": 1,
-      "senderNickname": "Thibaut",
-      "lastMessageTimestamp": 1620284667
+      "latestMessageTimestamp": 1632670636842,
+      "senderNickname": "47tibo"
     },
     {
       "id": 3,
       "recipientId": 1,
-      "recipientNickname": "Thibaut",
+      "recipientNickname": "47tibo",
       "senderId": 4,
-      "senderNickname": "Elodie",
-      "lastMessageTimestamp": 1625648667
+      "latestMessageTimestamp": 1632670955389,
+      "senderNickname": "Eloi"
     }
   ],
   "messages": [
     {
       "id": 1,
       "conversationId": 1,
-      "timestamp": 1625637849,
+      "timestamp": 1632669049682,
       "authorId": 1,
-      "body": "Bonjour c'est le premier message de la première conversation"
+      "body": "Bonjour c'est le premier message de la première conversation "
     },
     {
       "id": 2,
       "conversationId": 1,
-      "timestamp": 1625637867,
+      "timestamp": 1632669728426,
       "authorId": 1,
-      "body": "Bonjour c'est le second message de la première conversation"
+      "body": "Bonjour c'est le second message de la première conversation "
     },
     {
       "id": 3,
       "conversationId": 1,
-      "timestamp": 1625648667,
+      "timestamp": 1632670339406,
       "authorId": 2,
-      "body": "Bonjour c'est le troisième message de la première conversation"
+      "body": "Bonjour c'est le troisième message de la première conversatio"
     },
     {
       "id": 4,
       "conversationId": 2,
-      "timestamp": 1620284667,
-      "authorId": 2,
-      "body": "Bonjour c'est le premier message de la seconde conversation"
+      "timestamp": 1632149369,
+      "authorId": 3,
+      "body": "Bonjour c'est le premier message de la seconde conversatio"
+    },
+    {
+      "id": 5,
+      "conversationId": 2,
+      "timestamp": 1632670472475,
+      "authorId": 1,
+      "body": "yooo man "
+    },
+    {
+      "id": 6,
+      "conversationId": 2,
+      "timestamp": 1632670636842,
+      "authorId": 3,
+      "body": "ça va "
+    },
+    {
+      "id": 7,
+      "conversationId": 3,
+      "timestamp": 1632670955389,
+      "authorId": 4,
+      "body": "hello tibtib c'est eloi, super récent"
     }
   ],
   "users": [
     {
       "id": 1,
-      "nickname": "Thibaut",
-      "token": "xxxx",
-      "avatar": "https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+      "nickname": "47tibo",
+      "token": "xxxx"
     },
     {
       "id": 2,
-      "nickname": "Jeremie",
+      "nickname": "Elodie",
       "token": "xxxx",
       "avatar": "https://images.pexels.com/photos/6238133/pexels-photo-6238133.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
     },
@@ -73,6 +93,12 @@
       "nickname": "Patrick",
       "token": "xxxx",
       "avatar": "https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+    },
+    {
+      "id": 4,
+      "nickname": "Eloi",
+      "token": "xxxx",
+      "avatar": "https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
     }
   ]
 }

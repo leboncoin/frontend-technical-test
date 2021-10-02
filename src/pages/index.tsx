@@ -1,55 +1,45 @@
 import type { FC } from 'react'
+import { useRouter } from 'next/router'
+import { userId, baseUrl } from '../constants'
+import useSWR, { SWRConfig } from 'swr'
+import ConversationButton from '../components/ConversationButton'
+
 import '../styles/Home.module.css'
 
+const fetcher = (url) => fetch(url).then((res) => res.json())
+
 const Home: FC = () => {
+  const router = useRouter()
+  const { data: conversationsData, error: conversationsError } =
+    useSWR(`${baseUrl}/conversations/${userId}`, fetcher)
+
+  if (!conversationsData) return <div>loading...</div>
+
+  if (conversationsError) return <div>failed to load</div>
+
+  const conversations = conversationsData.result.sort(
+    (a, b) => b.latestMessageTimestamp - a.latestMessageTimestamp,
+  )
+
   return (
     <>
       <ul className="overflow-auto h-screen">
         <h2 className="ml-2 mb-2 text-gray-600 text-lg my-2">
           Chats
         </h2>
-        <li>
-          <a className="hover:bg-gray-100 border-b border-gray-300 px-3 py-2 cursor-pointer flex items-center text-sm focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-            <img
-              className="h-10 w-10 rounded-full object-cover"
-              src="https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-              alt="username"
-            />
-            <div className="w-full pb-2">
-              <div className="flex justify-between">
-                <span className="block ml-2 font-semibold text-base text-gray-600 ">
-                  Jhon C
-                </span>
-                <span className="block ml-2 text-sm text-gray-600">
-                  5 minutes
-                </span>
-              </div>
-              <span className="block ml-2 text-sm text-gray-600">
-                Hello world!!
-              </span>
-            </div>
-          </a>
-          <a className="bg-gray-100 border-b border-gray-300 px-3 py-2 cursor-pointer flex items-center text-sm focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-            <img
-              className="h-10 w-10 rounded-full object-cover"
-              src="https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-              alt="username"
-            />
-            <div className="w-full pb-2">
-              <div className="flex justify-between">
-                <span className="block ml-2 font-semibold text-base text-gray-600 ">
-                  Eduard
-                </span>
-                <span className="block ml-2 text-sm text-gray-600">
-                  15 minutes
-                </span>
-              </div>
-              <span className="block ml-2 text-sm text-gray-600">
-                I am fine
-              </span>
-            </div>
-          </a>
-        </li>
+        {conversations.map((conversation) => {
+          const friendId =
+            conversation.recipientId !== userId
+              ? conversation.recipientId
+              : conversation.senderId
+          return (
+            <ConversationButton
+              key={conversation.id}
+              friendId={friendId}
+              conversationId={conversation.id}
+            ></ConversationButton>
+          )
+        })}
       </ul>
     </>
   )

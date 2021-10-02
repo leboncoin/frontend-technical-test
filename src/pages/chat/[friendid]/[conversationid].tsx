@@ -10,7 +10,7 @@ const Chat = () => {
   const router = useRouter()
   const { conversationid, friendid } = router.query
 
-  const { data: messageData, error: messageError } = useSWR(
+  const { data: messagesData, error: messageError } = useSWR(
     `${baseUrl}/messages/${conversationid}`,
     fetcher,
   )
@@ -18,14 +18,14 @@ const Chat = () => {
     `${baseUrl}/users/${friendid}`,
     fetcher,
   )
-  if (!messageData || !friendData) return <div>loading...</div>
+  if (!messagesData || !friendData) return <div>loading...</div>
 
   if (messageError || friendError) return <div>failed to load</div>
 
-  const userMessages = messageData.filter(
+  const userMessages = messagesData.filter(
     (message) => message.authorId === userId,
   )
-  const friendMessages = messageData.filter(
+  const friendMessages = messagesData.filter(
     (message) => message.authorId !== userId,
   )
 
