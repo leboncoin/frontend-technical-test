@@ -8,7 +8,8 @@
     "start": "next start",
     "start-server": "json-server --watch src/server/db.json --routes src/server/routes.json --middlewares src/server/middlewares.js --port 3005",
     "test": "jest",
-    "lint": "next lint --no-error-on-unmatched-pattern"
+    "lint": "next lint --no-error-on-unmatched-pattern",
+    "format": "prettier-eslint --write $PWD/'**/*.{ts,tsx}'"
   },
   "engines": {
     "node": ">=14.17.2"
@@ -25,14 +26,23 @@
     "@testing-library/react": "^12.0.0",
     "@types/node": "^16.6.1",
     "@types/react": "^17.0.18",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
     "autoprefixer": "^10.3.5",
     "babel-jest": "^27.0.6",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
     "json-server": "^0.16.3",
     "postcss": "^8.3.7",
+    "prettier": "^2.4.1",
+    "prettier-eslint-cli": "^5.0.1",
     "tailwindcss": "^2.2.15",
     "typescript": "^4.3.5"
   }
