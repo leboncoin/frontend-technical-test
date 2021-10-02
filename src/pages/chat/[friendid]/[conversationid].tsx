@@ -1,10 +1,10 @@
-import { NextPage } from 'next'
+import MessageSender from '../../../components/MessageSender'
 import { Message } from '../../../components/Message'
 import { userId, baseUrl } from '../../../constants'
 import useSWR, { SWRConfig } from 'swr'
 import { useRouter } from 'next/router'
 import toast from 'react-hot-toast'
-import { useEffect } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
@@ -28,9 +28,27 @@ const pageLoading = (
   )
 }
 
+const postMessage = (message: string, conversationId) => {
+  return fetch(`${baseUrl}/messages`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      body: message,
+      conversationId: Number(conversationId),
+      authorId: userId,
+    }),
+  })
+}
+
 const Chat = () => {
   const router = useRouter()
   const { conversationid, friendid } = router.query
+
+  const messageSenderRef = useRef<any>()
+
+  const [newMessage, setNewMessage] = useState(null)
 
   const { data: messages, error: messageError } = useSWR(
     `${baseUrl}/messages/${conversationid}`,
@@ -51,6 +69,14 @@ const Chat = () => {
     }
   }, [messageError, friendError, messages, friendData])
 
+  useEffect(() => {
+    if (newMessage && conversationid) {
+      postMessage(newMessage, conversationid).then(() => {
+        messageSenderRef.current.reset()
+      })
+    }
+  }, [newMessage, conversationid])
+
   if (pageLoading(messageError, friendError, messages, friendData)) {
     return <></>
   }
@@ -69,10 +95,7 @@ const Chat = () => {
           {friendData.nickname}
         </span>
       </div>
-      <div
-        id="chat"
-        className="chatbar w-full overflow-y-auto p-10 relative"
-      >
+      <div className="chatbar w-full overflow-y-auto p-10 relative">
         <ul>
           <li className="clearfix2">
             {messages.map((message) => {
@@ -95,31 +118,10 @@ const Chat = () => {
           </li>
         </ul>
       </div>
-
-      <div className="w-full mt-auto py-3 px-3 flex  border-t border-gray-300">
-        <input
-          aria-placeholder="Escribe un mensaje aquí"
-          placeholder="Escribe un mensaje aquí"
-          className="py-2 mx-3 pl-5 block w-full rounded-full bg-gray-100 outline-none focus:text-gray-700"
-          type="text"
-          name="message"
-          required
-        />
-
-        <button
-          className="outline-none focus:outline-none"
-          type="submit"
-        >
-          <svg
-            className="text-gray-400 h-7 w-7 origin-center transform rotate-90"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-          </svg>
-        </button>
-      </div>
+      <MessageSender
+        ref={messageSenderRef}
+        onSend={setNewMessage}
+      ></MessageSender>
     </div>
   )
 }

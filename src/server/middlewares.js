@@ -1,5 +1,6 @@
 const path = require('path')
 const db = require(`${path.dirname(__filename)}/db.json`)
+const { getTime } = require('date-fns')
 
 // datefns generator
 // _.subMinutes(new Date(), 1).getTime()
@@ -40,6 +41,9 @@ module.exports = (req, res, next) => {
     )
 
     res.json({ result: messagesFilteredByTS[0] })
+  } else if (req.method === 'POST') {
+    req.body.timestamp = getTime(Date.now())
+    next()
   } else {
     next()
   }
