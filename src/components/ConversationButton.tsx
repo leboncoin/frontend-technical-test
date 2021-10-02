@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import useSWR, { SWRConfig } from 'swr'
 import { userId, baseUrl } from '../constants'
 import { differenceInHours, differenceInMinutes } from 'date-fns'
@@ -34,30 +35,32 @@ const ConversationButton: FC<ConversationButtonProps> = ({
 
   return (
     <li>
-      <a className="hover:bg-gray-100 border-b border-gray-300 px-3 py-2 cursor-pointer flex items-center text-sm focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-        <img
-          className="h-10 w-10 rounded-full object-cover"
-          src={friendData.avatar}
-          alt="username"
-        />
-        <div className="w-full pb-2">
-          <div className="flex justify-between">
-            <span className="block ml-2 font-semibold text-base text-gray-600 ">
-              {friendData.nickname}
-            </span>
+      <Link href={`/chat/${friendId}/${conversationId}`}>
+        <a className="hover:bg-gray-100 border-b border-gray-300 px-3 py-2 cursor-pointer flex items-center text-sm focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+          <img
+            className="h-10 w-10 rounded-full object-cover"
+            src={friendData.avatar}
+            alt="username"
+          />
+          <div className="w-full pb-2">
+            <div className="flex justify-between">
+              <span className="block ml-2 font-semibold text-base text-gray-600 ">
+                {friendData.nickname}
+              </span>
+              <span className="block ml-2 text-sm text-gray-600">
+                {differenceInMinutes(
+                  new Date(),
+                  new Date(message.timestamp),
+                )}{' '}
+                min
+              </span>
+            </div>
             <span className="block ml-2 text-sm text-gray-600">
-              {differenceInMinutes(
-                new Date(),
-                new Date(message.timestamp),
-              )}{' '}
-              min
+              {message.body}
             </span>
           </div>
-          <span className="block ml-2 text-sm text-gray-600">
-            {message.body}
-          </span>
-        </div>
-      </a>
+        </a>
+      </Link>
     </li>
   )
 }

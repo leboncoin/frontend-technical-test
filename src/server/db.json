@@ -3,23 +3,23 @@
     {
       "id": 1,
       "recipientId": 2,
-      "recipientNickname": "Elodie",
+      "recipientNickname": "Mélisse",
       "senderId": 1,
       "latestMessageTimestamp": 1632670339406,
-      "senderNickname": "47tibo"
+      "senderNickname": "Thibaut"
     },
     {
       "id": 2,
       "recipientId": 3,
-      "recipientNickname": "Patrick",
+      "recipientNickname": "Vivien",
       "senderId": 1,
       "latestMessageTimestamp": 1632670636842,
-      "senderNickname": "47tibo"
+      "senderNickname": "Thibaut"
     },
     {
       "id": 3,
       "recipientId": 1,
-      "recipientNickname": "47tibo",
+      "recipientNickname": "Thibaut",
       "senderId": 4,
       "latestMessageTimestamp": 1632670955389,
       "senderNickname": "Eloi"
@@ -31,66 +31,66 @@
       "conversationId": 1,
       "timestamp": 1632669049682,
       "authorId": 1,
-      "body": "Bonjour c'est le premier message de la première conversation "
+      "body": "Coucou mélisse, tu seras au resta AJD vendredi soir?"
     },
     {
       "id": 2,
       "conversationId": 1,
       "timestamp": 1632669728426,
       "authorId": 1,
-      "body": "Bonjour c'est le second message de la première conversation "
+      "body": "je voulais faire découvrir à un poto"
     },
     {
       "id": 3,
       "conversationId": 1,
       "timestamp": 1632670339406,
       "authorId": 2,
-      "body": "Bonjour c'est le troisième message de la première conversatio"
+      "body": "heyyyyy oui je bosse sur place à partir de 20h15"
     },
     {
       "id": 4,
       "conversationId": 2,
-      "timestamp": 1632149369,
+      "timestamp": 1632669128547,
       "authorId": 3,
-      "body": "Bonjour c'est le premier message de la seconde conversatio"
+      "body": "salut poulet, grosse fiesta samedi soir chez moi"
     },
     {
       "id": 5,
       "conversationId": 2,
       "timestamp": 1632670472475,
       "authorId": 1,
-      "body": "yooo man "
+      "body": "top je vais faire des cocktails"
     },
     {
       "id": 6,
       "conversationId": 2,
       "timestamp": 1632670636842,
       "authorId": 3,
-      "body": "ça va "
+      "body": "parfait tu me diras ce qu'il faut que j'achète"
     },
     {
       "id": 7,
       "conversationId": 3,
       "timestamp": 1632670955389,
       "authorId": 4,
-      "body": "hello tibtib c'est eloi, super récent"
+      "body": "yo c'est Eloi, t'es sur paris ce we ?"
     }
   ],
   "users": [
     {
       "id": 1,
-      "nickname": "47tibo",
+      "nickname": "Thibaut",
       "token": "xxxx"
     },
     {
       "id": 2,
-      "nickname": "Elodie",
+      "nickname": "Mélisse",
       "token": "xxxx",
       "avatar": "https://images.pexels.com/photos/6238133/pexels-photo-6238133.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
     },
     {
       "id": 3,
-      "nickname": "Patrick",
+      "nickname": "Vivien",
       "token": "xxxx",
       "avatar": "https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
     },

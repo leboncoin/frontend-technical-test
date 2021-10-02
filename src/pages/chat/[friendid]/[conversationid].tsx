@@ -10,7 +10,7 @@ const Chat = () => {
   const router = useRouter()
   const { conversationid, friendid } = router.query
 
-  const { data: messagesData, error: messageError } = useSWR(
+  const { data: messages, error: messageError } = useSWR(
     `${baseUrl}/messages/${conversationid}`,
     fetcher,
   )
@@ -18,16 +18,9 @@ const Chat = () => {
     `${baseUrl}/users/${friendid}`,
     fetcher,
   )
-  if (!messagesData || !friendData) return <div>loading...</div>
+  if (!messages || !friendData) return <div>loading...</div>
 
   if (messageError || friendError) return <div>failed to load</div>
-
-  const userMessages = messagesData.filter(
-    (message) => message.authorId === userId,
-  )
-  const friendMessages = messagesData.filter(
-    (message) => message.authorId !== userId,
-  )
 
   return (
     <div className=" h-screen flex flex-col">
@@ -47,33 +40,20 @@ const Chat = () => {
       >
         <ul>
           <li className="clearfix2">
-            {userMessages.map((message) => {
+            {messages.map((message) => {
+              const isUser = message.authorId === userId
               return (
                 <div
                   key={message.id}
-                  className="w-full flex justify-start"
+                  className={`w-full flex ${
+                    isUser ? 'justify-end' : 'justify-start'
+                  }`}
                 >
-                  <div className="message bg-gray-100 rounded px-5 py-2 my-2 text-gray-700 relative">
-                    <span className="block">{message.body}</span>
-                    <span className="block text-xs text-right">
-                      {new Date(message.timestamp).toUTCString()}
-                    </span>
-                  </div>
-                </div>
-              )
-            })}
-            {friendMessages.map((message) => {
-              return (
-                <div
-                  key={message.id}
-                  className="w-full flex justify-end"
-                >
-                  <div className="message bg-gray-100 rounded px-5 py-2 my-2 text-gray-700 relative">
-                    <span className="block">{message.body}</span>
-                    <span className="block text-xs text-left">
-                      {new Date(message.timestamp).toUTCString()}
-                    </span>
-                  </div>
+                  <Message
+                    body={message.body}
+                    isUser={isUser}
+                    timestamp={message.timestamp}
+                  ></Message>
                 </div>
               )
             })}
