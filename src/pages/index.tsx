@@ -3,19 +3,36 @@ import { useRouter } from 'next/router'
 import { userId, baseUrl } from '../constants'
 import useSWR, { SWRConfig } from 'swr'
 import ConversationButton from '../components/ConversationButton'
+import toast from 'react-hot-toast'
+import { useEffect } from 'react'
 
 import '../styles/Home.module.css'
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
+
+const pageLoading = (conversationsError, conversationsData) => {
+  if (!conversationsError && !conversationsData) return true
+}
 
 const Home: FC = () => {
   const router = useRouter()
   const { data: conversationsData, error: conversationsError } =
     useSWR(`${baseUrl}/conversations/${userId}`, fetcher)
 
-  if (!conversationsData) return <div>loading...</div>
+  useEffect(() => {
+    if (pageLoading(conversationsError, conversationsData)) {
+      toast.loading('chargement de tes conversations...', {
+        id: 'conversations',
+        duration: 2000,
+      })
+    }
+  }, [conversationsError, conversationsData])
 
-  if (conversationsError) return <div>failed to load</div>
+  if (pageLoading(conversationsError, conversationsData)) {
+    return <></>
+  }
+
+  if (conversationsError) return <></>
 
   const conversations = conversationsData.result.sort(
     (a, b) => b.latestMessageTimestamp - a.latestMessageTimestamp,

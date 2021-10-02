@@ -26,10 +26,10 @@ const ConversationButton: FC<ConversationButtonProps> = ({
     fetcher,
   )
 
-  if (!messageData || !messageData.result || !friendData)
-    return <div>bla...</div>
+  if (!messageData || !messageData.result || !friendData) return <></>
 
-  if (messageError || friendError) return <div>failed to load</div>
+  if (messageError || friendError)
+    return <div>cette conversation ne peut pas s'afficher</div>
 
   const message = messageData.result
 

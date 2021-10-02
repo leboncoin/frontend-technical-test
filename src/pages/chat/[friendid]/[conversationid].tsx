@@ -3,8 +3,30 @@ import { Message } from '../../../components/Message'
 import { userId, baseUrl } from '../../../constants'
 import useSWR, { SWRConfig } from 'swr'
 import { useRouter } from 'next/router'
+import toast from 'react-hot-toast'
+import { useEffect } from 'react'
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
+
+const pageHasError = (messageError, friendError) => {
+  if (messageError || friendError) return true
+}
+
+const pageHasData = (messages, friendData) => {
+  if (messages && friendData) return true
+}
+
+const pageLoading = (
+  messageError,
+  friendError,
+  messages,
+  friendData,
+) => {
+  return (
+    !pageHasError(messageError, friendError) &&
+    !pageHasData(messages, friendData)
+  )
+}
 
 const Chat = () => {
   const router = useRouter()
@@ -18,9 +40,23 @@ const Chat = () => {
     `${baseUrl}/users/${friendid}`,
     fetcher,
   )
-  if (!messages || !friendData) return <div>loading...</div>
 
-  if (messageError || friendError) return <div>failed to load</div>
+  useEffect(() => {
+    if (
+      pageLoading(messageError, friendError, messages, friendData)
+    ) {
+      toast.loading('chargement de tes messages...', {
+        duration: 2000,
+        id: 'messages',
+      })
+    }
+  }, [messageError, friendError, messages, friendData])
+
+  if (pageLoading(messageError, friendError, messages, friendData)) {
+    return <></>
+  }
+
+  if (messageError || friendError) return <></>
 
   return (
     <div className=" h-screen flex flex-col">
