@@ -1,71 +1,16 @@
-# Context :
-
-At leboncoin, our users can share messages about a transaction, or ask for informations about any products.
-
-Your job is to create the interface to consult those messages.
-The interface needs to work on both desktop & mobile devices.
-
-In addition to your code, a README explaining your thought process and your choices would be appreciated.
-
-# Exercice :
-
-- Display a list of all the conversations
-- Allow the user to select a conversation
-  - Inside the conversation, there is a list of all the messages between these two users.
-  - As a user, you can type and send new messages in this conversation
-
-**As your application can be used by millions of users, make sure to provide some robust safety guards.**
-
-### Sketches :
-
-Obvisouly, it is up to you to make something nice and pretty, you are free to design it the way you like. The sketches are here to give you an idea on how it should look.
-
-<details>
-  <summary>Click to see the sketches</summary>
-  
-Mobile list :
-
-![](./sketches/list-mobile.jpg)
-
-Desktop list :
-
-![](./sketches/list-desktop.jpg)
-
-Mobile conversation :
-
-![](./sketches/conv-mobile.jpg)
-
-Desktop conversation :
-
-![](./sketches/conv-desktop.jpg)
-
-</details>
-
-### API :
-
-You can find the API swagger file in `docs/api-swagger.yaml`.
-
-For a better readibility, you can view it on [https://leboncoin.tech/frontend-technical-test/](https://leboncoin.tech/frontend-technical-test/).
-
----
-
-## Bonus 1 :
-
-We provide some conversation samples, but can you improve the app so the user can now create new conversations ?
-
-## Bonus 2 :
-
-Our infrastructure is a bit shaky.. Sometimes the servers are crashing. “It’s not you, it’s me”, but maybe you can display something nice to warn the user and handle it gracefully.
-
-## Do you want to make the app even better ?
-
-Feel free to make as many improvements as you like.
-We love creativity and technical challenges.
-
-If you are out of ideas, here are some thoughts :
-
-- As we want to reach our users anywhere, we need to make sure the app is performing well. What can you do to make it really fast ?
-
-- Our goal is to support everybody in the country, including people with disabilities. As a good citizen and a good developer, can you make sure the app is accessible for everyone ?
-
-- We all love to relax after a hard day’s work. It would be a shame if we didn’t feel confident enough about the upcoming automatic deployment. Are you sure everything has been tested thoroughly ?
+## Main steps of my work
+- I started by focusing on the main goals : show conversations, display one, add new messages
+- I installed the necessary dependencies for linting & code formating in Typescript
+- I picked up SWR to handle requests, pulling, errors, & retries
+- Concerning look & feel, Tailwind is the de facto standard on Next. I also picked a free layout https://tailwindcomponents.com/component/example-chat
+- I started by implementing the chat page, which was the major feature. Concerning requests' handling I installed react-hot-toast which is really sexy with tailwind
+- at this point an essential part of my work consisted in the server side implementation. I had to make the DB more "realistic" by defining "real" conversations and timestamps. When I handle db's collections I like to use Ramda, which is the best functional programming JS lib I know. 
+- defining an index.js for json-server allowed me to initialize the DB in a good state
+- concerning date manipulation & formating, I'm used to date-fns, which is clearly smaller than moment.js
+- once I was able to add new messages I focused on the feature : "create a new conversation"
+  - I love daisyUi components for their "css only" behaviors. so I picked this lib
+  - once the drawer UI was implemented I jumped to the server side to handle the conversation POST in two way : either create new conversation or update an existing one. and do a redirect accordingly
+- at this point all of the features were implemented, even bonuses.
+- I created unit tests, essentially on "dummy components" (UI only)
+- As a public app, the code should be accessible. so I refactor the markup to be semantic and added aria attributes. Also I enforced auto focusing behaviors to help keys navigation
+- Finally I did a cleanup of my code, enforcing typings.
