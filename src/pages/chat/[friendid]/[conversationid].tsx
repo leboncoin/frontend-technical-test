@@ -84,7 +84,7 @@ const Chat = () => {
   if (messageError || friendError) return <></>
 
   return (
-    <div className=" h-screen flex flex-col">
+    <div className=" h-screen flex flex-col  max-w-2xl container">
       <div className="flex items-center border-b border-gray-300 pl-3 py-3">
         <img
           className="h-10 w-10 rounded-full object-cover"

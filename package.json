@@ -15,12 +15,12 @@
     "node": ">=14.17.2"
   },
   "dependencies": {
+    "date-fns": "^2.24.0",
     "next": "^11.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "swr": "^1.0.1",
-    "date-fns": "^2.24.0",
-    "react-hot-toast": "^2.1.1"
+    "react-hot-toast": "^2.1.1",
+    "swr": "^1.0.1"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.6.0",
@@ -29,7 +29,7 @@
     "@types/node": "^16.6.1",
     "@types/react": "^17.0.18",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
-    "autoprefixer": "^10.3.5",
+    "autoprefixer": "^10.3.6",
     "babel-jest": "^27.0.6",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.0",
@@ -42,11 +42,11 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
     "json-server": "^0.16.3",
-    "postcss": "^8.3.7",
+    "postcss": "^8.3.8",
     "prettier": "^2.4.1",
     "prettier-eslint-cli": "^5.0.1",
     "ramda": "^0.27.1",
-    "tailwindcss": "^2.2.15",
+    "tailwindcss": "^2.2.16",
     "typescript": "^4.3.5"
   }
 }

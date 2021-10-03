@@ -10,8 +10,13 @@ const Layout: FC = ({ children }) => {
           name="description"
           content="Chat with your friends, everywhere !!"
         ></meta>
+        <link
+          href="https://cdn.jsdelivr.net/npm/daisyui@1.14.2/dist/full.css"
+          rel="stylesheet"
+          type="text/css"
+        />
       </Head>
-      <main className="container max-w-2xl">{children}</main>
+      <main>{children}</main>
     </>
   )
 }

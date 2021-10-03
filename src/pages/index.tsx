@@ -8,6 +8,7 @@ import { useToasterStore } from 'react-hot-toast'
 import { useEffect } from 'react'
 
 import '../styles/Home.module.css'
+import Drawer from '../components/Drawer'
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
@@ -40,24 +41,27 @@ const Home: FC = () => {
 
   return (
     <>
-      <ul className="overflow-auto h-screen">
-        <h2 className="ml-2 mb-2 text-gray-600 text-lg my-2">
-          Chats
-        </h2>
-        {conversations.map((conversation) => {
-          const friendId =
-            conversation.recipientId !== userId
-              ? conversation.recipientId
-              : conversation.senderId
-          return (
-            <ConversationButton
-              key={conversation.id}
-              friendId={friendId}
-              conversationId={conversation.id}
-            ></ConversationButton>
-          )
-        })}
-      </ul>
+      <Drawer>
+        <ul className="overflow-auto h-screen max-w-2xl container">
+          <h2 className="ml-2 mb-2 text-gray-600 text-lg my-2">
+            Chats
+          </h2>
+          {conversations.map((conversation) => {
+            const friendId =
+              conversation.recipientId !== userId
+                ? conversation.recipientId
+                : conversation.senderId
+            return (
+              <ConversationButton
+                key={conversation.id}
+                friendId={friendId}
+                conversationId={conversation.id}
+              ></ConversationButton>
+            )
+          })}
+          <li></li>
+        </ul>
+      </Drawer>
     </>
   )
 }
