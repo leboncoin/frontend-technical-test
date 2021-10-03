@@ -86,19 +86,19 @@
       "id": 2,
       "nickname": "Sophie",
       "token": "xxxx",
-      "avatar": "https://images.pexels.com/photos/6238133/pexels-photo-6238133.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+      "avatar": "https://images.pexels.com/photos/6238133/pexels-photo-6238133.jpeg?auto=compress&cs=tinysrgb&h=60&w=60"
     },
     {
       "id": 3,
       "nickname": "Vivien",
       "token": "xxxx",
-      "avatar": "https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+      "avatar": "https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=60&w=60"
     },
     {
       "id": 4,
       "nickname": "Eloi",
       "token": "xxxx",
-      "avatar": "https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+      "avatar": "https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&h=60&w=60"
     }
   ],
   "chats": [{}]

@@ -5,6 +5,8 @@ import useSWR, { SWRConfig } from 'swr'
 import { useRouter } from 'next/router'
 import toast from 'react-hot-toast'
 import { useEffect, useState, useRef } from 'react'
+import Image from 'next/image'
+import anonymousPicture from '../../../../public/anonymous.jpg'
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
@@ -86,11 +88,13 @@ const Chat = () => {
   return (
     <div className=" h-screen flex flex-col  max-w-2xl container">
       <div className="flex items-center border-b border-gray-300 pl-3 py-3">
-        <img
+        <Image
           className="h-10 w-10 rounded-full object-cover"
-          src={friendData.avatar}
+          src={friendData.avatar || anonymousPicture}
+          width="60"
+          height="60"
           alt="username"
-        />
+        ></Image>
         <span className="block ml-2 font-bold text-base text-gray-600">
           {friendData.nickname}
         </span>

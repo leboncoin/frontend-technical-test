@@ -27,7 +27,9 @@ const postNewConversation = (newConversation, router) => {
     }),
   }).then((res) => {
     if (res.redirected) {
-      router.push(res.url.replace(baseUrl, window.location.href))
+      router.push(
+        res.url.replace(`${baseUrl}/`, window.location.href),
+      )
     }
   })
 }
@@ -51,7 +53,8 @@ const Home: FC = () => {
   }, [conversationsError, conversationsData])
 
   useEffect(() => {
-    postNewConversation(newConversation, router)
+    if (newConversation.nickname)
+      postNewConversation(newConversation, router)
   }, [newConversation, router])
 
   if (pageLoading(conversationsError, conversationsData)) {

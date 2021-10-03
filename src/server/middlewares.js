@@ -40,32 +40,53 @@ module.exports = (req, res, next) => {
 
     res.json({ result: messagesFilteredByTS[0] })
   } else if (/messages/.test(req.url) && req.method === 'POST') {
-    req.body.timestamp = getTime(Date.now())
+    const ts = getTime(Date.now())
+    db.conversations[
+      req.body.conversationId - 1
+    ].latestMessageTimestamp = ts
+    req.body.timestamp = ts
     next()
   } else if (/conversations/.test(req.url) && req.method === 'POST') {
     const value = req.body
-    const conversation = db.conversations.find(
+    const ts = getTime(Date.now())
+    let conversation = db.conversations.find(
       (conversation) =>
         conversation.senderNickname.toLowerCase() ===
           value.nickname.toLowerCase() ||
         conversation.recipientNickname.toLowerCase() ===
           value.nickname.toLowerCase(),
     )
-    if (conversation) {
-      db.messages.push({
-        id: db.messages[db.messages.length - 1].id + 1,
-        conversationId: conversation.id,
-        timestamp: getTime(Date.now()),
-        authorId,
-        body: value.body,
+    if (!conversation) {
+      // first time we chat this friend
+      const friendId = db.users[db.users.length - 1].id + 1
+      db.users.push({
+        id: friendId,
+        nickname: value.nickname,
+        token: 'xxxx',
       })
-      const friendId = db.users.find(
-        (user) =>
-          user.nickname.toLowerCase() ===
-          value.nickname.toLowerCase(),
-      ).id
-      res.redirect(`/chat/${friendId}/${conversation.id}`)
+      conversation = {
+        id: db.conversations[db.conversations.length - 1].id + 1,
+        recipientId: friendId,
+        recipientNickname: value.nickname,
+        senderNickname: db.users[authorId - 1].nickname,
+        senderId: authorId,
+        latestMessageTimestamp: ts,
+      }
+      db.conversations.push(conversation)
     }
+    // in any case, push message and redirect
+    db.messages.push({
+      id: db.messages[db.messages.length - 1].id + 1,
+      conversationId: conversation.id,
+      timestamp: ts,
+      authorId,
+      body: value.body,
+    })
+    const friendId = db.users.find(
+      (user) =>
+        user.nickname.toLowerCase() === value.nickname.toLowerCase(),
+    ).id
+    res.redirect(`/chat/${friendId}/${conversation.id}`)
   } else {
     next()
   }
