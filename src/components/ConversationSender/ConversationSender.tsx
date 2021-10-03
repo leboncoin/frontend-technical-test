@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import SendButton from './SendButton'
+import SendButton from '../SendButton'
 
 type ConversationSenderProps = {
   onSend: (conversation) => void
@@ -25,6 +25,7 @@ const ConversationSender: FC<ConversationSenderProps> = ({
   }
   return (
     <form
+      data-testid="conversation-form"
       onSubmit={onSubmit}
       className="md:flex md:items-center mb-6"
     >
@@ -32,6 +33,7 @@ const ConversationSender: FC<ConversationSenderProps> = ({
         <span className="label-text">Trouve un(e) pote ...</span>
       </label>
       <input
+        data-testid="nickname-input"
         type="text"
         autoComplete="off"
         placeholder="identifiant"
@@ -43,6 +45,7 @@ const ConversationSender: FC<ConversationSenderProps> = ({
         <span className="label-text">... et commence ton chat !</span>
       </label>
       <input
+        data-testid="message-input"
         type="text"
         autoComplete="off"
         placeholder="message"
@@ -51,7 +54,7 @@ const ConversationSender: FC<ConversationSenderProps> = ({
         onChange={(e) => setField('message', e.target.value)}
       ></input>
       <input type="submit" className="hidden" />
-      <SendButton className="mt-2"></SendButton>
+      <SendButton className="mt-2" onClick={onSubmit}></SendButton>
     </form>
   )
 }

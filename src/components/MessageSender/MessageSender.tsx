@@ -2,7 +2,7 @@
 
 import { useState, forwardRef, useImperativeHandle } from 'react'
 import { SyntheticEvent } from 'react'
-import SendButton from './SendButton'
+import SendButton from '../SendButton'
 
 type MessageSenderProps = {
   onSend: (message: string) => void
@@ -22,10 +22,12 @@ const MessageSender = ({ onSend }, ref) => {
 
   return (
     <form
+      data-testid="message-form"
       onSubmit={onSubmit}
       className="w-full mt-auto py-3 px-3 flex  border-t border-gray-300"
     >
       <input
+        data-testid="message-input"
         aria-placeholder="Ecrire un message"
         placeholder="message"
         className="py-2 mx-3 pl-5 block w-full rounded-full bg-gray-100 outline-none focus:text-gray-700"

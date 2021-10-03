@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import { useRouter } from 'next/router'
 import { userId, baseUrl } from '../constants'
 import useSWR from 'swr'
-import ConversationButton from '../components/ConversationButton'
+import ConversationButton from '../components/ConversationButton/ConversationButton'
 import toast from 'react-hot-toast'
 import { useEffect, useState } from 'react'
 

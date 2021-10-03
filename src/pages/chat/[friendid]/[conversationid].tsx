@@ -1,4 +1,4 @@
-import MessageSender from '../../../components/MessageSender'
+import MessageSender from '../../../components/MessageSender/MessageSender'
 import { Message } from '../../../components/Message'
 import { userId, baseUrl } from '../../../constants'
 import useSWR, { SWRConfig } from 'swr'

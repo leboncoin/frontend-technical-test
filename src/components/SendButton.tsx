@@ -3,17 +3,21 @@ import { FC } from 'react'
 type SendButtonProps = {
   className?: string
   htmlFor?: string
+  onClick?: (e) => void
 }
 
 const SendButton: FC<SendButtonProps> = ({
   className = '',
   htmlFor = '',
+  onClick,
 }) => {
   return (
     <>
       <label
+        data-testid="send-button"
         htmlFor={htmlFor}
         className={`btn btn-primary drawer-button  btn-circle btn-lg ${className}`}
+        onClick={onClick}
       >
         <svg
           className="h-7 w-7 origin-center transform rotate-90"

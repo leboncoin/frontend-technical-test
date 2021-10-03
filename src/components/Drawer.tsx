@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import ConversationSender from './ConversationSender'
+import ConversationSender from './ConversationSender/ConversationSender'
 import SendButton from './SendButton'
 
 type DrawerProps = {
