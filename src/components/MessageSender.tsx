@@ -1,8 +1,8 @@
 /* eslint react/display-name: 0 */
 
-import { FC, useState, forwardRef, useImperativeHandle } from 'react'
+import { useState, forwardRef, useImperativeHandle } from 'react'
 import { SyntheticEvent } from 'react'
-import ActionButton from './ActionButton'
+import SendButton from './SendButton'
 
 type MessageSenderProps = {
   onSend: (message: string) => void
@@ -40,7 +40,7 @@ const MessageSender = ({ onSend }, ref) => {
         className="outline-none focus:outline-none"
         type="submit"
       >
-        <ActionButton></ActionButton>
+        <SendButton></SendButton>
       </button>
     </form>
   )

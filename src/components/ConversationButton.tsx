@@ -1,8 +1,7 @@
 import type { FC } from 'react'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
-import useSWR, { SWRConfig } from 'swr'
-import { userId, baseUrl } from '../constants'
+import useSWR from 'swr'
+import { baseUrl } from '../constants'
 import { differenceInMinutes } from 'date-fns'
 
 type ConversationButtonProps = {
@@ -15,7 +14,6 @@ const ConversationButton: FC<ConversationButtonProps> = ({
   conversationId,
   friendId,
 }) => {
-  const router = useRouter()
   const { data: messageData, error: messageError } = useSWR(
     `${baseUrl}/message/latest/${conversationId}`,
     fetcher,

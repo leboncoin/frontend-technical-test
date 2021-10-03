@@ -1,9 +1,7 @@
 const path = require('path')
 const db = require(`${path.dirname(__filename)}/db.json`)
 const { getTime } = require('date-fns')
-
-// datefns generator
-// _.subMinutes(new Date(), 1).getTime()
+const authorId = 1
 
 // Need this middleware to catch some requests
 // and return both conversations where userId is sender or recipient
@@ -41,9 +39,33 @@ module.exports = (req, res, next) => {
     )
 
     res.json({ result: messagesFilteredByTS[0] })
-  } else if (req.method === 'POST') {
+  } else if (/messages/.test(req.url) && req.method === 'POST') {
     req.body.timestamp = getTime(Date.now())
     next()
+  } else if (/conversations/.test(req.url) && req.method === 'POST') {
+    const value = req.body
+    const conversation = db.conversations.find(
+      (conversation) =>
+        conversation.senderNickname.toLowerCase() ===
+          value.nickname.toLowerCase() ||
+        conversation.recipientNickname.toLowerCase() ===
+          value.nickname.toLowerCase(),
+    )
+    if (conversation) {
+      db.messages.push({
+        id: db.messages[db.messages.length - 1].id + 1,
+        conversationId: conversation.id,
+        timestamp: getTime(Date.now()),
+        authorId,
+        body: value.body,
+      })
+      const friendId = db.users.find(
+        (user) =>
+          user.nickname.toLowerCase() ===
+          value.nickname.toLowerCase(),
+      ).id
+      res.redirect(`/chat/${friendId}/${conversation.id}`)
+    }
   } else {
     next()
   }

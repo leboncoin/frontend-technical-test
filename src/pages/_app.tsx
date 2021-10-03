@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         onError: () => {
           toast.error(
             'petite erreur reseau, tiens bon ça va revenir',
-            { id: 'app' },
+            { duration: 5000, id: 'app' },
           )
         },
       }}
@@ -25,7 +25,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          duration: 1500,
+        }}
+      />
     </SWRConfig>
   )
 }

@@ -1,7 +1,12 @@
-import type { FC } from 'react'
-import ActionButton from './ActionButton'
+import { FC } from 'react'
+import ConversationSender from './ConversationSender'
+import SendButton from './SendButton'
 
-const Drawer: FC = ({ children }) => {
+type DrawerProps = {
+  onSend: (newConversation) => void
+}
+
+const Drawer: FC<DrawerProps> = ({ children, onSend }) => {
   return (
     <div className="rounded-lg shadow bg-base-200 drawer drawer-end">
       <input
@@ -11,10 +16,10 @@ const Drawer: FC = ({ children }) => {
       ></input>
       <div className="flex flex-col items-center justify-center drawer-content">
         {children}
-        <ActionButton
+        <SendButton
           className="fixed mb-10"
           htmlFor="my-drawer-4"
-        ></ActionButton>
+        ></SendButton>
       </div>
       <div className="drawer-side">
         <label
@@ -22,31 +27,7 @@ const Drawer: FC = ({ children }) => {
           className="drawer-overlay"
         ></label>
         <ul className="menu p-4 overflow-y-auto w-4/5 bg-base-100 text-base-content">
-          <div className="md:flex md:items-center mb-6">
-            <label className="label block text-grey font-bold md:text-right mb-1 md:mb-0 pr-4">
-              <span className="label-text">
-                Trouve un(e) pote ...
-              </span>
-            </label>
-            <input
-              type="text"
-              autoComplete="off"
-              placeholder="identifiant"
-              className="input input-primary mr-4"
-            ></input>
-            <label className="label block text-grey font-bold md:text-right mb-1 md:mb-0 pr-4">
-              <span className="label-text">
-                ... et commence ton chat !
-              </span>
-            </label>
-            <input
-              type="text"
-              autoComplete="off"
-              placeholder="message"
-              className="input input-primary mr-4 w-3/4"
-            ></input>
-            <ActionButton className="mt-2"></ActionButton>
-          </div>
+          <ConversationSender onSend={onSend}></ConversationSender>
         </ul>
       </div>
     </div>

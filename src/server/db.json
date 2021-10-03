@@ -3,7 +3,7 @@
     {
       "id": 1,
       "recipientId": 2,
-      "recipientNickname": "Mélisse",
+      "recipientNickname": "Sophie",
       "senderId": 1,
       "latestMessageTimestamp": 1632670339406,
       "senderNickname": "Thibaut"
@@ -31,7 +31,7 @@
       "conversationId": 1,
       "timestamp": 1632669049682,
       "authorId": 1,
-      "body": "Coucou mélisse, tu seras au resta AJD vendredi soir?"
+      "body": "Coucou Sophie, tu seras au resta AJD vendredi soir?"
     },
     {
       "id": 2,
@@ -84,7 +84,7 @@
     },
     {
       "id": 2,
-      "nickname": "Mélisse",
+      "nickname": "Sophie",
       "token": "xxxx",
       "avatar": "https://images.pexels.com/photos/6238133/pexels-photo-6238133.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
     },
@@ -100,5 +100,6 @@
       "token": "xxxx",
       "avatar": "https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
     }
-  ]
+  ],
+  "chats": [{}]
 }

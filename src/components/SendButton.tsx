@@ -1,4 +1,14 @@
-const ActionButton = ({ className = '', htmlFor = '' }) => {
+import { FC } from 'react'
+
+type SendButtonProps = {
+  className?: string
+  htmlFor?: string
+}
+
+const SendButton: FC<SendButtonProps> = ({
+  className = '',
+  htmlFor = '',
+}) => {
   return (
     <>
       <label
@@ -17,4 +27,4 @@ const ActionButton = ({ className = '', htmlFor = '' }) => {
     </>
   )
 }
-export default ActionButton
+export default SendButton

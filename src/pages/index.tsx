@@ -1,11 +1,10 @@
 import type { FC } from 'react'
 import { useRouter } from 'next/router'
 import { userId, baseUrl } from '../constants'
-import useSWR, { SWRConfig } from 'swr'
+import useSWR from 'swr'
 import ConversationButton from '../components/ConversationButton'
 import toast from 'react-hot-toast'
-import { useToasterStore } from 'react-hot-toast'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import '../styles/Home.module.css'
 import Drawer from '../components/Drawer'
@@ -16,8 +15,30 @@ const pageLoading = (conversationsError, conversationsData) => {
   if (!conversationsError && !conversationsData) return true
 }
 
+const postNewConversation = (newConversation, router) => {
+  fetch(`${baseUrl}/conversations`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      nickname: newConversation.nickname,
+      body: newConversation.message,
+    }),
+  }).then((res) => {
+    if (res.redirected) {
+      router.push(res.url.replace(baseUrl, window.location.href))
+    }
+  })
+}
+
 const Home: FC = () => {
   const router = useRouter()
+  const [newConversation, setNewConversation] = useState({
+    nickname: '',
+    message: '',
+  })
+
   const { data: conversationsData, error: conversationsError } =
     useSWR(`${baseUrl}/conversations/${userId}`, fetcher)
 
@@ -28,6 +49,10 @@ const Home: FC = () => {
       })
     }
   }, [conversationsError, conversationsData])
+
+  useEffect(() => {
+    postNewConversation(newConversation, router)
+  }, [newConversation, router])
 
   if (pageLoading(conversationsError, conversationsData)) {
     return <></>
@@ -41,7 +66,7 @@ const Home: FC = () => {
 
   return (
     <>
-      <Drawer>
+      <Drawer onSend={setNewConversation}>
         <ul className="overflow-auto h-screen max-w-2xl container">
           <h2 className="ml-2 mb-2 text-gray-600 text-lg my-2">
             Chats
