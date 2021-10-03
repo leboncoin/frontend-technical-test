@@ -10,6 +10,7 @@ const Drawer: FC<DrawerProps> = ({ children, onSend }) => {
   return (
     <div className="rounded-lg shadow bg-base-200 drawer drawer-end">
       <input
+        aria-hidden="true"
         id="my-drawer-4"
         type="checkbox"
         className="drawer-toggle"
@@ -21,15 +22,16 @@ const Drawer: FC<DrawerProps> = ({ children, onSend }) => {
           htmlFor="my-drawer-4"
         ></SendButton>
       </div>
-      <div className="drawer-side">
+      <aside className="drawer-side">
         <label
+          aria-hidden="true"
           htmlFor="my-drawer-4"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 overflow-y-auto w-4/5 bg-base-100 text-base-content">
+        <div className="menu p-4 overflow-y-auto w-4/5 bg-base-100 text-base-content">
           <ConversationSender onSend={onSend}></ConversationSender>
-        </ul>
-      </div>
+        </div>
+      </aside>
     </div>
   )
 }

@@ -70,9 +70,9 @@ const Home: FC = () => {
     <>
       <Drawer onSend={setNewConversation}>
         <ul className="overflow-auto h-screen max-w-2xl container">
-          <h2 className="ml-2 mb-2 text-gray-600 text-lg my-2">
-            Chats
-          </h2>
+          <h1 className="ml-2 mb-2 text-gray-600 text-lg my-2">
+            Conversations en cours
+          </h1>
           {conversations.map((conversation) => {
             const friendId =
               conversation.recipientId !== userId

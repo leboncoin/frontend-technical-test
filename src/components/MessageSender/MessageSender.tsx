@@ -1,6 +1,11 @@
 /* eslint react/display-name: 0 */
 
-import { useState, forwardRef, useImperativeHandle } from 'react'
+import {
+  useState,
+  forwardRef,
+  useImperativeHandle,
+  ForwardRefRenderFunction,
+} from 'react'
 import { SyntheticEvent } from 'react'
 import SendButton from '../SendButton'
 
@@ -8,7 +13,14 @@ type MessageSenderProps = {
   onSend: (message: string) => void
 }
 
-const MessageSender = ({ onSend }, ref) => {
+export type MessageSenderHandle = {
+  reset: () => void
+}
+
+const MessageSender: ForwardRefRenderFunction<
+  MessageSenderHandle,
+  MessageSenderProps
+> = ({ onSend }, ref) => {
   const [message, setMessage] = useState('')
   useImperativeHandle(ref, () => ({
     reset() {
@@ -28,13 +40,14 @@ const MessageSender = ({ onSend }, ref) => {
     >
       <input
         data-testid="message-input"
-        aria-placeholder="Ecrire un message"
+        aria-placeholder="rédigez votre message ici"
         placeholder="message"
         className="py-2 mx-3 pl-5 block w-full rounded-full bg-gray-100 outline-none focus:text-gray-700"
         type="text"
         name="message"
         value={message}
         autoComplete="off"
+        autoFocus
         onChange={(e) => setMessage(e.target.value)}
       />
 

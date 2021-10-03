@@ -14,6 +14,7 @@ const SendButton: FC<SendButtonProps> = ({
   return (
     <>
       <label
+        aria-hidden="true"
         data-testid="send-button"
         htmlFor={htmlFor}
         className={`btn btn-primary drawer-button  btn-circle btn-lg ${className}`}

@@ -56,7 +56,7 @@ const ConversationButton: FC<ConversationButtonProps> = ({
               src={friendData.avatar || anonymousPicture}
               width="60"
               height="60"
-              alt="username"
+              alt="avatar de ton ami(e)"
             ></Image>
             <div className="w-full pb-2">
               <div className="flex justify-between">

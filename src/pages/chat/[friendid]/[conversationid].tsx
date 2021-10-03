@@ -1,4 +1,5 @@
 import MessageSender from '../../../components/MessageSender/MessageSender'
+import { MessageSenderHandle } from '../../../components/MessageSender/MessageSender'
 import { Message } from '../../../components/Message'
 import { userId, baseUrl } from '../../../constants'
 import useSWR, { SWRConfig } from 'swr'
@@ -50,7 +51,7 @@ const Chat = () => {
   const router = useRouter()
   const { conversationid, friendid } = router.query
 
-  const messageSenderRef = useRef<any>()
+  const messageSenderRef = useRef<MessageSenderHandle>(null)
 
   const [newMessage, setNewMessage] = useState(null)
 
@@ -94,7 +95,7 @@ const Chat = () => {
           src={friendData.avatar || anonymousPicture}
           width="60"
           height="60"
-          alt="username"
+          alt="avatar de ton ami(e)"
         ></Image>
         <span className="block ml-2 font-bold text-base text-gray-600">
           {friendData.nickname}
