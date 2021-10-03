@@ -5,7 +5,6 @@ import useSWR from 'swr'
 import ConversationButton from '../components/ConversationButton/ConversationButton'
 import toast from 'react-hot-toast'
 import { useEffect, useState } from 'react'
-
 import '../styles/Home.module.css'
 import Drawer from '../components/Drawer'
 

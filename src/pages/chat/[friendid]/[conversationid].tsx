@@ -7,6 +7,8 @@ import toast from 'react-hot-toast'
 import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import anonymousPicture from '../../../../public/anonymous.jpg'
+import { User as Friend } from '../../../types/user'
+import { Message as MessageType } from '../../../types/message'
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
@@ -52,11 +54,10 @@ const Chat = () => {
 
   const [newMessage, setNewMessage] = useState(null)
 
-  const { data: messages, error: messageError } = useSWR(
-    `${baseUrl}/messages/${conversationid}`,
-    fetcher,
-  )
-  const { data: friendData, error: friendError } = useSWR(
+  const { data: messages, error: messageError } = useSWR<
+    MessageType[]
+  >(`${baseUrl}/messages/${conversationid}`, fetcher)
+  const { data: friendData, error: friendError } = useSWR<Friend>(
     `${baseUrl}/users/${friendid}`,
     fetcher,
   )

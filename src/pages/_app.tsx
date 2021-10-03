@@ -3,25 +3,12 @@ import Layout from '../components/Layout'
 import { getLoggedUserId } from '../utils/getLoggedUserId'
 import '../styles/globals.css'
 import 'tailwindcss/tailwind.css'
-import { SWRConfig } from 'swr'
-import toast, { Toaster } from 'react-hot-toast'
-
-// Default way to get a logged user
-export const loggedUserId = getLoggedUserId()
+import { Toaster } from 'react-hot-toast'
+import CustomSWRConfig from '../components/CustomSWRConfig'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <SWRConfig
-      value={{
-        refreshInterval: 1000,
-        onError: () => {
-          toast.error(
-            'petite erreur reseau, tiens bon ça va revenir',
-            { duration: 5000, id: 'app' },
-          )
-        },
-      }}
-    >
+    <CustomSWRConfig>
       <Layout>
         <Component {...pageProps} />
       </Layout>
@@ -30,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           duration: 1500,
         }}
       />
-    </SWRConfig>
+    </CustomSWRConfig>
   )
 }
 
