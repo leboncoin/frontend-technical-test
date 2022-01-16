@@ -1,0 +1,7 @@
+.user {
+  display: flex;
+}
+
+.avatar {
+  margin-right: 0.8rem;
+}

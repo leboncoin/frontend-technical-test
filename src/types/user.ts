@@ -1,4 +1,4 @@
-export interface User {
+export type User = {
   id: number
   nickname: string
   token: string

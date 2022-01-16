@@ -1,4 +1,4 @@
-export interface Conversation {
+export type Conversation = {
   id: number
   recipientId: number
   recipientNickname: string

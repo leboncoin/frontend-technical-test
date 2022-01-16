@@ -1,0 +1,5 @@
+.next/
+build
+dist
+.npm
+.node_modules
