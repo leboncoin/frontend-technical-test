@@ -4,7 +4,7 @@ import Head from 'next/head'
 
 import CardUser from '@Components/carUser/CardUser'
 import CustomAppBar from '@Components/customAppBar/CustomAppBar'
-import { UseUsers } from '@Hooks/UseUsers'
+import { useUsers } from '@Hooks/UseUsers'
 import { User } from '@Types/user'
 
 import styles from './styles.module.css'
@@ -13,7 +13,7 @@ import styles from './styles.module.css'
 // import Logo from '../assets/lbc-logo.webp'
 
 const Home: VFC = () => {
-  const { isLoading, getUsers } = UseUsers()
+  const { isLoading, getUsers } = useUsers()
   const [users, setUsers] = useState<User[]>([])
 
   useEffect(() => {

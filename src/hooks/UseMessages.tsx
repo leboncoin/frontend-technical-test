@@ -6,16 +6,13 @@ import { Message } from '@Types/message'
 type UseMessagesType = {
   isLoading: boolean
   getMessages: (conversationID: string) => Promise<Message[]>
-  deleteMessage: (messageID: string) => Promise<void>
-  addMessage: (message: NewMessage, conversationID: number) => Promise<boolean>
+  deleteMessage: (messageID: number) => Promise<void>
+  addMessage: (message: NewMessage) => Promise<Message>
 }
 
-type NewMessage = {
-  body: string
-  timestamp: number
-}
+export type NewMessage = Omit<Message, 'id'>
 
-export const UseMessages = (): UseMessagesType => {
+export const useMessages = (): UseMessagesType => {
   const [isLoading, setisLoading] = useState(false)
 
   const getMessages = useCallback(async (conversationID: string): Promise<Message[]> => {
@@ -36,29 +33,31 @@ export const UseMessages = (): UseMessagesType => {
     }
   }, [])
 
-  const addMessage = useCallback(async (message: NewMessage, conversationID: number): Promise<boolean> => {
+  const addMessage = useCallback(async (message: NewMessage): Promise<Message> => {
+    const { conversationId } = message
+
     try {
       setisLoading(true)
-      await axios({
+      const res = await axios({
         method: 'post',
-        url: `http://localhost:3005/messages/${conversationID}`,
+        url: `http://localhost:3005/messages/${conversationId}`,
         data: message,
       })
 
-      return true
+      return res.data as Message
     } catch (err) {
       console.error(err)
 
-      return false
+      return {} as Message
     } finally {
       setisLoading(false)
     }
   }, [])
 
-  const deleteMessage = useCallback(async (messageID: string): Promise<void> => {
+  const deleteMessage = useCallback(async (messageID: number): Promise<void> => {
     try {
       await axios({
-        method: 'delete',
+        method: 'DELETE',
         url: `http://localhost:3005/messages/${messageID}`,
       })
     } catch (err) {

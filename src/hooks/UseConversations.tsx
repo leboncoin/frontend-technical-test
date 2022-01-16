@@ -7,7 +7,7 @@ type UseConversationType = {
   getConversations: (userId: string) => Promise<Conversation[]>
 }
 
-export const UseConversations = (): UseConversationType => {
+export const useConversations = (): UseConversationType => {
   const [isLoading, setisLoading] = useState(false)
 
   const getConversations = useCallback(async (userId: string): Promise<Conversation[]> => {

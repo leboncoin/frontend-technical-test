@@ -8,7 +8,7 @@ type UseUsersType = {
   getUser: (userId: number) => Promise<User>
 }
 
-export const UseUsers = (): UseUsersType => {
+export const useUsers = (): UseUsersType => {
   const [isLoading, setisLoading] = useState(false)
 
   const getUsers = useCallback(async (): Promise<User[]> => {

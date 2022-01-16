@@ -4,13 +4,13 @@ import { useRouter } from 'next/router'
 
 import ConversationItem from '@Components/conversationItem/ConversationItem'
 import CustomAppBar from '@Components/customAppBar/CustomAppBar'
-import { UseConversations } from '@Hooks/UseConversations'
+import { useConversations } from '@Hooks/UseConversations'
 import { Conversation } from '@Types/conversation'
 
 const UserPage: VFC = () => {
   const router = useRouter()
   const { uID } = router.query
-  const { isLoading, getConversations } = UseConversations()
+  const { isLoading, getConversations } = useConversations()
 
   const [conversations, setConversations] = useState<Conversation[]>([])
 

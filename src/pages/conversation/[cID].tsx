@@ -1,23 +1,23 @@
 import { useEffect, useState, VFC } from 'react'
-import { Chip, Typography } from '@mui/material'
+import { useForm } from 'react-hook-form'
+import { Input } from '@mui/material'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { getLoggedUserId } from 'src/utils/getLoggedUserId'
 
 import CustomAppBar from '@Components/customAppBar/CustomAppBar'
-import { UseMessages } from '@Hooks/UseMessages'
+import MessageBubble from '@Components/messageBubble/MessageBubble'
+import { NewMessage, useMessages } from '@Hooks/UseMessages'
 import { Message } from '@Types/message'
-
-import { loggedUserId } from '../_app'
 
 import styles from './styles.module.css'
 
 const ConversationPage: VFC = () => {
   const router = useRouter()
   const { cID } = router.query
-
   const [messages, setMessages] = useState<Message[]>([])
-
-  const { isLoading, getMessages } = UseMessages()
+  const { isLoading, getMessages, addMessage } = useMessages()
+  const { register, handleSubmit } = useForm()
 
   useEffect(() => {
     async function fetchMessages() {
@@ -26,26 +26,16 @@ const ConversationPage: VFC = () => {
     fetchMessages()
   }, [cID])
 
-  const messageBubbles = (message: Message) => {
-    const { body, authorId, conversationId, id, timestamp } = message
+  const onSubmit = async (data) => {
+    const newMessage: NewMessage = {
+      conversationId: parseInt(cID.toString(), 10),
+      body: data.message,
+      timestamp: +new Date(),
+      authorId: getLoggedUserId(),
+    }
 
-    const date = new Date(timestamp * 1000)
-    const day = date.getDate()
-    const month = date.getMonth() + 1
-    const year = date.getFullYear()
-    const hours = date.getHours()
-    const minutes = `0${date.getMinutes()}`
-    const seconds = `0${date.getSeconds()}`
-    const formattedTime = `${day}/${month}/${year} à ${hours}:${minutes.substr(-2)}:${seconds.substr(-2)}`
-
-    const isUserAuthor = loggedUserId === authorId
-
-    return (
-      <li className={isUserAuthor ? styles.messageSend : styles.messageReceived}>
-        <Typography>{formattedTime}</Typography>
-        <Chip color={isUserAuthor ? 'primary' : 'secondary'} label={body} />
-      </li>
-    )
+    const addedMessage = await addMessage(newMessage)
+    setMessages([...messages, addedMessage])
   }
 
   return (
@@ -57,7 +47,20 @@ const ConversationPage: VFC = () => {
       </Head>
       <CustomAppBar text="" isBackButton />
 
-      {!isLoading && <ul className={styles.conversationList}>{messages.map((message) => messageBubbles(message))}</ul>}
+      {!isLoading && (
+        <>
+          <ul className={styles.conversationList}>
+            {messages.map((message) => (
+              <MessageBubble key={message.id} message={message} />
+            ))}
+          </ul>
+
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Input required id="message" {...register('message', { required: true })} />
+            <input type="submit" />
+          </form>
+        </>
+      )}
     </>
   )
 }

@@ -2,15 +2,3 @@
   display: flex;
   flex-direction: column;
 }
-
-.messageReceived {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 1rem;
-}
-
-.messageSend {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
-}
