@@ -1,16 +1,16 @@
 import { VFC } from 'react'
 
-import CardUserItem from '@Components/carUser/CardUserItem'
+import CardUser from '@Components/carUser/CardUser'
 import { Conversation } from '@Types/conversation'
 
 type ConversationItemProps = { conversation: Conversation }
 
 const ConversationItem: VFC<ConversationItemProps> = ({ conversation }) => {
-  const { recipientNickname } = conversation
+  const { recipientNickname, id } = conversation
 
   return (
     <div>
-      <CardUserItem name={recipientNickname} />
+      <CardUser name={recipientNickname} href={`/conversation/${id}`} />
     </div>
   )
 }

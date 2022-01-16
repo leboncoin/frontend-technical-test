@@ -1,21 +1,30 @@
 import { HTMLAttributes, VFC } from 'react'
 import { Card } from '@mui/material'
-import Link from 'next/link'
-
-import { User } from '@Types/user'
+import { useRouter } from 'next/router'
 
 import CardUserItem from './CardUserItem'
 
-type CardUserProps = { user: User; message?: string }
+type CardUserProps = {
+  name: string
+  href: string
+  message?: string
+}
 
-const CardUser: VFC<CardUserProps & HTMLAttributes<HTMLDivElement>> = ({ user, message, ...rest }) => (
-  <Card key={user.id} variant="outlined" {...rest}>
-    <Link href={`/user/${user.id}`}>
-      <a>
-        <CardUserItem name={user.nickname} message={message} />
+const CardUser: VFC<CardUserProps & HTMLAttributes<HTMLDivElement>> = ({ name, message, href, ...rest }) => {
+  const router = useRouter()
+
+  const goToUserPage = (e) => {
+    e.preventDefault()
+    router.push(href)
+  }
+
+  return (
+    <Card variant="outlined" {...rest}>
+      <a href={href} onClick={goToUserPage}>
+        <CardUserItem name={name} message={message} />
       </a>
-    </Link>
-  </Card>
-)
+    </Card>
+  )
+}
 
 export default CardUser

@@ -1,0 +1,16 @@
+.main {
+  padding: 1rem;
+}
+
+.skeleton {
+  margin-bottom: 1rem;
+}
+
+.userList {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.card {
+  margin-bottom: 1rem;
+}

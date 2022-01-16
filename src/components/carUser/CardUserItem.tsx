@@ -5,7 +5,10 @@ import CustomAvatar from '@Components/customAvatar/CustomAvatar'
 
 import styles from './styles.module.css'
 
-type CardUserItemProps = { name: string; message?: string }
+type CardUserItemProps = {
+  name: string
+  message?: string
+}
 
 const CardUserItem: VFC<CardUserItemProps> = ({ name, message }) => (
   <CardContent className={styles.user}>
