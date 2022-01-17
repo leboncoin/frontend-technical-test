@@ -1,0 +1,27 @@
+.form {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding: 1rem;
+}
+
+.visuallyHidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  display: flex;
+}
+
+.inputMessage {
+  width: 100%;
+}

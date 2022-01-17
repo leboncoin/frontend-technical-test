@@ -1,15 +1,17 @@
 import { VFC } from 'react'
 import { Button, Chip, Typography } from '@mui/material'
-import { loggedUserId } from 'src/pages/_app'
 
 import { useMessages } from '@Hooks/UseMessages'
 import { Message } from '@Types/message'
 
 import styles from './styles.module.css'
 
-type MessageBubbleProps = { message: Message }
+type MessageBubbleProps = {
+  message: Message
+  loggedUserId: string
+}
 
-const MessageBubble: VFC<MessageBubbleProps> = ({ message }) => {
+const MessageBubble: VFC<MessageBubbleProps> = ({ message, loggedUserId }) => {
   const { body, authorId, id, timestamp } = message
 
   const { deleteMessage } = useMessages()
@@ -27,7 +29,7 @@ const MessageBubble: VFC<MessageBubbleProps> = ({ message }) => {
   const seconds = `0${date.getSeconds()}`
   const formattedTime = `${day}/${month}/${year} à ${hours}:${minutes.substr(-2)}:${seconds.substr(-2)}`
 
-  const isUserAuthor = loggedUserId === authorId
+  const isUserAuthor = loggedUserId === authorId.toString()
 
   return (
     <li className={isUserAuthor ? styles.messageSend : styles.messageReceived}>

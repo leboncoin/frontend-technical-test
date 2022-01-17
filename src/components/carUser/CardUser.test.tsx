@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react'
 
-import * as stories from './CardUser.stories'
+import { Default } from './CardUser.stories'
 
 describe('CardUser', () => {
   it('Should display CardUser', () => {
-    render(<stories.Default />)
+    render(<Default {...Default.args} />)
 
     expect(screen.getByText(/john doe/i)).toBeInTheDocument()
   })

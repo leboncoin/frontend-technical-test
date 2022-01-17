@@ -25,7 +25,7 @@ const CustomAvatar: VFC<CustomAvatarProps & HTMLAttributes<HTMLDivElement>> = ({
   }
 
   return (
-    <Avatar sx={{ bgcolor: stringToColor(name) }} {...rest}>
+    <Avatar sx={{ bgcolor: stringToColor(name) }} {...rest} aria-hidden>
       {name.split('')[0]}
     </Avatar>
   )

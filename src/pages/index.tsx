@@ -30,7 +30,7 @@ const Home: VFC = () => {
         <meta name="description" content="Frontend exercise for developpers who want to join us on leboncoin.fr" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
       </Head>
-      <CustomAppBar text="Bienvenue" />
+      <CustomAppBar title="Bienvenue" />
       <div className={styles.main}>
         <Typography>Choisir votre compte :</Typography>
         {isLoading && (

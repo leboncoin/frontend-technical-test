@@ -4,11 +4,11 @@ import { AppBar, IconButton, Toolbar, Typography } from '@mui/material'
 import router from 'next/router'
 
 type CustomAppBarProps = {
-  text: string
+  title: string
   isBackButton?: boolean
 }
 
-const CustomAppBar: VFC<CustomAppBarProps> = ({ text, isBackButton = false }) => (
+const CustomAppBar: VFC<CustomAppBarProps> = ({ title, isBackButton = false }) => (
   <AppBar position="static">
     <Toolbar>
       {isBackButton && (
@@ -16,7 +16,7 @@ const CustomAppBar: VFC<CustomAppBarProps> = ({ text, isBackButton = false }) =>
           size="large"
           edge="start"
           color="inherit"
-          aria-label="menu"
+          aria-label="back"
           sx={{ mr: 2 }}
           onClick={() => router.back()}
         >
@@ -25,7 +25,7 @@ const CustomAppBar: VFC<CustomAppBarProps> = ({ text, isBackButton = false }) =>
       )}
 
       <Typography component="h1" sx={{ flexGrow: 1 }}>
-        {text}
+        {title}
       </Typography>
     </Toolbar>
   </AppBar>
