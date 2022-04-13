@@ -14,7 +14,7 @@ const rootStyles = css`
   display: grid;
   grid-template:
     "conversationHeader" min-content
-    "conversationDetail"
+    "conversationDetail" 1fr
     "sendMessageForm" min-content;
   min-height: 100vh;
   max-width: 1080px;
@@ -54,7 +54,7 @@ const ConversationPage = ({ conversation }: ConversationPageProps) => {
         <ConversationDetail conversation={conversation} />
       </div>
       <div className={sendMessageFormrStyles}>
-        <SendMessageForm />
+        <SendMessageForm conversationId={conversation.id} />
       </div>
     </div>
   )
