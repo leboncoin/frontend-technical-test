@@ -5,3 +5,8 @@ export interface Message {
   timestamp: number
   body: string
 }
+
+export interface FormattedMessage extends Message {
+  authorName: string
+  isMyself: boolean
+}
