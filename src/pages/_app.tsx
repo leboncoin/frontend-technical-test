@@ -8,7 +8,6 @@ import styles from '../styles/Home.module.css'
 axios.defaults.baseURL = 'http://localhost:3005';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const year = new Date().getFullYear()
 
   return (
     <div className={styles.container}>
@@ -20,10 +19,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <main className={styles.main}>
         <Component {...pageProps} />
       </main>
-
-      <footer className={styles.footer}>
-        &copy; leboncoin - {year}
-      </footer>
     </div>
   )
 }

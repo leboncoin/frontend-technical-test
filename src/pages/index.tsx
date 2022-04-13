@@ -1,18 +1,19 @@
 import type { FC } from 'react'
-import Image from 'next/image'
-import Logo from '../assets/lbc-logo.webp'
 import ListConversations from '../components/ListConversations'
 import HelloUser from '../components/HelloUser'
+import styles from '../styles/Home.module.css'
 
 const Home: FC = () => {
+  const year = new Date().getFullYear()
+
   return (
     <div>
-      <Image src={Logo} alt="Leboncoin's logo" width={400} height={125} />
-
       <HelloUser />
-
-      <h2>Your conversations</h2>
       <ListConversations />
+
+      <footer className={styles.footer}>
+        &copy; leboncoin - {year}
+      </footer>
     </div>
   )
 }

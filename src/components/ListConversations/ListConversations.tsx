@@ -1,6 +1,21 @@
 import { getLoggedUserId } from '../../utils/getLoggedUserId';
 import { useFetchConversationsOfUser } from '../../utils/requests';
 import ItemConversation from '../ItemConversation';
+import { css } from '@emotion/css';
+
+const titleStyles = css`
+  text-align: center;
+`
+
+const listStyles = css`
+  max-width: 1080px;
+  margin: auto;
+`
+
+const itemStyles = css`
+  list-style-type: none;
+  margin-bottom: 20px;
+`
 
 const ListConversations = () => {
   const userId = getLoggedUserId();
@@ -21,11 +36,16 @@ const ListConversations = () => {
   }
 
   return (
-    <div>
-      {conversations.map(conversation => (
-        <ItemConversation conversation={conversation} key={conversation.id} />
-      ))}
-    </div>
+    <>
+      <h2 className={titleStyles}>Your conversations</h2>
+      <ul className={listStyles}>
+        {conversations.map(conversation => (
+          <li className={itemStyles}>
+            <ItemConversation conversation={conversation} key={conversation.id} />
+          </li>
+        ))}
+      </ul>
+    </>
   )
 }
 

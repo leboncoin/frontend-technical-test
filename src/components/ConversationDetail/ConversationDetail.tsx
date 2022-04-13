@@ -23,6 +23,10 @@ const ConversationDetail = ({ conversation }: ConversationProps) => {
     )
   }
 
+  if (!messages.length) {
+    return <p>No messages</p>;
+  }
+
   const formattedMessages = messages.map(message => ({
     ...message,
     authorName: message.authorId === conversation.recipientId ? conversation.recipientNickname : conversation.senderNickname,
