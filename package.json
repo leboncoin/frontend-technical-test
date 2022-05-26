@@ -29,7 +29,7 @@
     "eslint-config-next": "^12.1.6",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
-    "json-server": "^0.16.3",
+    "json-server": "^0.17.0",
     "typescript": "^4.7.2"
   }
 }
