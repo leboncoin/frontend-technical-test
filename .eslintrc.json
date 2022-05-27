@@ -1,0 +1,31 @@
+{
+  "env": {
+    "browser": false,
+    "es6": true,
+    "node": true
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  // Even if we use React, they don't have to warn us saying that you're using a variable that isn't defined
+  "globals": { "react": "readonly" },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".css"],
+        "paths": ["./src"]
+      }
+    }
+  },
+  "rules": {
+    // Unused variables warning but we can use "_" instead
+    "no-unused-vars": [1, { "args": "after-used", "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "error"
+  }
+}
