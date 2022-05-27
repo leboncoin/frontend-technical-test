@@ -15,13 +15,13 @@ const Home: FC = () => {
       </Head>
 
       <main className={styles.main}>
-        <Image src={Logo} alt="Leboncoin's logo" width={400} height={125} />
+        <Image src={Logo} alt="Leboncoin Frontend Team" width={400} height={125} layout="fixed" />
         <h1 className={styles.title}>
           Welcome !
         </h1>
 
         <p className={styles.description}>
-          This test is based on a <a href="https://nextjs.org/docs/getting-started" target="_blank" rel="noopener noreferrer">Next.js</a> application.<br />
+          This test is based on a <a title="Next.js documentation" href="https://nextjs.org/docs/getting-started" target="_blank" rel="noopener noreferrer">Next.js</a> application.<br />
           Fork the repository and use the <code className={styles.code}>main</code> branch as your starting point.
           <br /><br />
 
@@ -46,7 +46,7 @@ const Home: FC = () => {
             <h2>API Server</h2>
             <p>
               Start the API server on port <code className={styles.code}>3005</code> by running<br /><code className={styles.code}>npm run start-server</code>.<br/>
-              Find the swagger definitions in <code className={styles.code}>docs/api-swagger.yml</code> or <a href="https://leboncoin.tech/frontend-technical-test/" target="_blank" rel="noopener noreferrer">here</a>.
+              Find the swagger definitions in <code className={styles.code}>docs/api-swagger.yml</code> or <a title="API Swagger documentation" href="https://leboncoin.tech/frontend-technical-test/" target="_blank" rel="noopener noreferrer">the online documentation</a>.
             </p>
           </article>
 
