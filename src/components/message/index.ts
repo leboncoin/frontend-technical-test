@@ -1,0 +1,1 @@
+export {List as MessageComponent} from './list/list'

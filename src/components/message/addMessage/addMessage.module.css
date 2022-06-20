@@ -1,0 +1,22 @@
+.send_message {
+    height: 60px;
+    border: 1px solid #e7ebee;
+    background: #fff;
+    width: 100%;
+    clear: both;
+    justify-content: space-between;
+}
+.form_inside {
+    display: flex;
+}
+.send_message_input {
+    background: #fff;
+    margin: 21px 0 0 21px;
+    border: none;
+    padding: 0;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400px;
+    color: #aab8c2;
+    width: 80%;
+}
