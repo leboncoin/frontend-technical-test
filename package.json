@@ -9,12 +9,13 @@
     "start-server": "json-server --watch src/server/db.json --routes src/server/routes.json --middlewares src/server/middleware/conversations.js --port 3005",
     "test": "jest",
     "lint": "next lint",
-    "lint-fix":"next lint --fix"
+    "lint-fix": "next lint --fix"
   },
   "engines": {
     "node": ">=16.15.0"
   },
   "dependencies": {
+    "moment": "^2.29.3",
     "next": "^12.1.6",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

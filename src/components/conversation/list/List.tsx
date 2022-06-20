@@ -14,9 +14,9 @@ export const List : FC<ListProps> = ({ loggedUserId }) => {
     <div className={styles.conversationsList}>
         <div className={styles.container}>
           {
-            conversations.map((conversation,i)=>
+            conversations.length ? conversations.map((conversation,i)=>
                 <Card key={`conversation-${i}`} conversation={conversation} loggedUserId={loggedUserId} />
-              )
+              ) : <div>No conversations to display</div>
           }
         </div>
     </div>
