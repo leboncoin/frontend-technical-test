@@ -1,0 +1,38 @@
+.conversationsList {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.conversationsList > .container {
+    width: 100%;
+    max-width: 1024px;
+}
+.listItem {
+    height: 70px;
+    border-bottom: 1px solid #e7ebee;
+    background-color: #fff;
+    margin: 20px 0;
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+    -webkit-box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.34); 
+    box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.34);
+    cursor: pointer;
+}
+.listItem img {
+    border-radius: 50%;
+}
+.listItem .contact {
+    display: block;
+    font-weight: 600;
+    font-size: 15px;
+    color: #597a96;
+    margin: 15px;
+}
+.listItem .date {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 400;
+    color: #aab8c2;
+    margin-left: 15px;
+}
