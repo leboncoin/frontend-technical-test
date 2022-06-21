@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import axios from 'axios'
 
 export const useConversation = (userId:number) => {
     
@@ -9,10 +10,8 @@ export const useConversation = (userId:number) => {
     },[userId])
 
     const getConversations = (userId:number) => {
-        
-        fetch(`${process.env.NEXT_API_BASE_URL}/conversations/${userId}`)
-                .then(response => response.json())
-                .then(data => setConversations(data))
+
+        axios.get(`/conversations/${userId}`).then(response => setConversations(response.data))
     }
 
     return { conversations }

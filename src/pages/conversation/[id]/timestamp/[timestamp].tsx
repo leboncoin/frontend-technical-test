@@ -9,7 +9,6 @@ interface conversationProps {
 }
 
 const Conversation: FC<conversationProps> = ({conversationId,lastMessageTimestamp}) => {
-	console.log(lastMessageTimestamp);
   return (
     <div>
       <MessageComponent conversationId={conversationId} loggedUserId={loggedUserId} lastMessageTimestamp={lastMessageTimestamp}/>

@@ -2,12 +2,11 @@ import moment from "moment";
 
 export const formatDate = (timestamp:number) => {
   return (
-    moment.unix(timestamp).format('LL')
+    moment.unix(timestamp).format('LLL')
   )
 }
 
 export const fromNow = (timestamp:number) => {
-    console.log(timestamp) 
     return (
       moment.unix(timestamp).fromNow()
     )
