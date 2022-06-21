@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.container > .inside {
+    width: 100%;
+    max-width: 1024px;
+    background:#fff;
+}
+.head {
+    border-bottom: 1px solid #000;
+    padding: 15px;
+    background:#eeeeee;
+}
+.list {
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 30px 0;
+    height: calc(100vh - 200px);
+}
