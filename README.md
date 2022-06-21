@@ -1,3 +1,9 @@
+# Important :
+Create .env.local in the root of folder and append :
+
+HOSTNAME=localhost
+PORT=3005
+NEXT_API_BASE_URL=http://$HOSTNAME:$PORT
 # Context :
 
 At leboncoin, our users can share messages about a transaction, or ask for informations about any products.
