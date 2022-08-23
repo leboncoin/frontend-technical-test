@@ -5,3 +5,9 @@ export interface Message {
   timestamp: number
   body: string
 }
+
+export interface MessageInputValues {
+  body: string,
+  authorId: number,
+  conversationId: number,
+}

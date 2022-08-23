@@ -1,0 +1,60 @@
+.conversationContainer {
+    min-height: 100vh;
+    padding: 0 0.5rem;
+}
+
+.pageHeader {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border-bottom: 2px solid #000;
+}
+
+.footer {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: 2px solid #000;
+}
+
+.content {
+    overflow-y: auto;
+    padding: 74px 0 82px;
+}
+
+ul.messagesList,
+ul.messagesList li,
+ul.messagesList ul li {
+   margin:0;
+   padding: 0;
+   text-indent: 0;
+   list-style-type: none;
+}
+
+ul.messagesList {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+ul.messagesList li.messageContainer {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    padding: 1rem 0;
+}
+
+ul.messagesList li.messageContainer.fromMe {
+    align-items: flex-end;
+}
+
+ul.messagesList li.messageContainer .recipientNickname {
+    color: #888;
+}
+
+.footer .inputGroup {
+    display: flex;
+}

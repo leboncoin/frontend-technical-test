@@ -1,0 +1,40 @@
+.conversationCard {
+    display: flex;
+    flex-flow: row nowrap;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    cursor: pointer;
+}
+
+.iconContainer {
+    padding: 0 .25rem;
+    flex-basis: 15%;
+    align-self: center;
+    text-align: center;
+}
+
+.icon {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: #f00;
+}
+
+.details {
+    padding: 0 .25rem;
+}
+
+.nickname {
+    color: #000;
+    margin-bottom: .5rem;
+}
+
+.date {
+    color: #888;
+}
+

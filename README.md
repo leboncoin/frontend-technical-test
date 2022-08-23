@@ -1,3 +1,7 @@
+# Process :
+
+For the design system I choosed antd, for the conversations and messages cards I made my with own CSS.
+
 # Context :
 
 At leboncoin, our users can share messages about a transaction, or ask for informations about any products.
