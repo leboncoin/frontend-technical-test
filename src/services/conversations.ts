@@ -1,27 +1,16 @@
 import { API_HOST } from './../utils/constants';
 import axios from 'axios';
-
-interface Conversation {
-  id: number;
-  senderId: number;
-  senderNickname: string;
-  recipientId: number;
-  recipientNickname: string;
-  lastMessageTimestamp: number;
-}
+import { Conversation } from 'src/types/conversation';
 
 export const getConversations = async (userId: number): Promise<Conversation[]> => {
-  const result = [];
-  
   if (!userId) {
     throw new Error('No userId provided');
   }
 
   try {
-    const response = await axios.get(`${API_HOST}${userId}`);
-    console.log(response);
+    const response = await axios.get<Conversation[]>(`${API_HOST}conversations/${userId}`);
+    return response.data
   } catch (error) {
     console.error(error);
   }
-  return result;
 };

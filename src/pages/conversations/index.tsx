@@ -1,13 +1,29 @@
-import React, { FC, useContext } from 'react'
-import { UserContext } from 'src/context/user.context'
+import ConversationList from '@/components/ConversationList/ConversationList';
+import { getConversations } from '@/services/conversations';
+import React, { FC, useContext, useEffect, useState } from 'react';
+import { UserContext } from 'src/context/user.context';
+import { Conversation } from 'src/types/conversation';
 
- const ConversationsPage: FC = () => {
-  const userId = useContext(UserContext)
-  console.log(userId)
+const ConversationsPage: FC = () => {
+  const userId = useContext(UserContext);
+  const [conversationList, setConversationList] = useState<Conversation[]>([]);
+
+  useEffect(() => {
+    const getConversationList = async () => {
+      const response = await getConversations(userId);
+      setConversationList(response);
+    };
+    getConversationList();
+  }, [userId]);
+
+console.log(conversationList)
   return (
-    <div className='h-auto'>index</div>
-  )
-}
+    <div className="w-full h-auto">
+      <div className="container flex justify-center mx-auto">
+        <ConversationList list={conversationList}/>
+      </div>
+    </div>
+  );
+};
 
-
-export default ConversationsPage
+export default ConversationsPage;
