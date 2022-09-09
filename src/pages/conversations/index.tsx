@@ -18,7 +18,7 @@ const ConversationsPage: FC = () => {
 
 console.log(conversationList)
   return (
-    <div className="w-full h-auto">
+    <div className="w-full h-auto p-10">
       <div className="container flex justify-center mx-auto">
         <ConversationList list={conversationList}/>
       </div>
