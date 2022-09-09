@@ -5,13 +5,13 @@ import { getYear } from '@/utils/functions';
 
 describe('Footer Component', () => {
     const year = getYear();
-    it('Display properly footer text with the good date', () => {
+    it('Display properly footer text', () => {
         render(<Footer />);
         expect(screen.getByText(/Lebontest/)).toBeInTheDocument()
     });
 
     it('Display the good date', () => {
         render(<Footer />);
-        expect(getYear().toBe(year))
+        expect(getYear()).toBe(year)
     })
 });
