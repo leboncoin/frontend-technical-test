@@ -1,5 +1,5 @@
 import React from 'react'
-import Footer from './Footer'
+import Footer from '../Footer'
 import { render, screen } from '@testing-library/react'
 import { getYear } from '@/utils/functions';
 
@@ -11,7 +11,6 @@ describe('Footer Component', () => {
     });
 
     it('Display the good date', () => {
-        render(<Footer />);
         expect(getYear()).toBe(year)
     })
 });

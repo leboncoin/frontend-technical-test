@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from './Header'
+import Header from '../Header'
 import { render, screen } from '@testing-library/react'
 
 describe('Header Compenent', () => {
