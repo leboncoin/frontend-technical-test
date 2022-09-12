@@ -11,6 +11,6 @@ export const getConversations = async (userId: number): Promise<Conversation[]> 
     const response = await axios.get<Conversation[]>(`${API_HOST}conversations/${userId}`);
     return response.data
   } catch (error) {
-    console.error(error);
+    throw new Error('Impossible to fetch conversation', error);
   }
 };

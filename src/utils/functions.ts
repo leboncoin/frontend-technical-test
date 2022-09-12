@@ -9,6 +9,11 @@ export function toDayAndMonth(timestamp: number) {
   })}`;
 }
 
+export function toDateString(timestamp: number) {
+  return new Date(timestamp * 1000).toLocaleString();
+}
+
+
 export function displayFirstLetter (value: string) : string {
   return value[0].toLocaleUpperCase()
 }

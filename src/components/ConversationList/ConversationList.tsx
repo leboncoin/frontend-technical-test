@@ -16,4 +16,4 @@ const ConversationList: FC<ConversationListProps> = ({ list }: ConversationListP
   );
 };
 
-export default ConversationList;
+export default React.memo(ConversationList);
