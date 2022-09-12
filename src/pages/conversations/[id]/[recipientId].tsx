@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { Message } from 'src/types/message';
 import { User } from 'src/types/user';
 import { getUser } from '@/services/user';
+import { ERROR_MESSAGE_2 } from '@/utils/constants';
 
 const ChatPage = () => {
   const router = useRouter();
@@ -22,31 +23,29 @@ const ChatPage = () => {
         };
         fetchMessagesList();
       } catch (e) {
-        setErrorMessage('Oups! Il semblerait que Laurent notre Sys-Admin se soit pris les pieds dans un cable, il va arranger ça rapidement!')
+        setErrorMessage(ERROR_MESSAGE_2);
       }
     }
   }, [id]);
 
   useEffect(() => {
     if (recipientId) {
-       try {
-         const fetchUser = async () => {
-           const response = await getUser(recipientId as string);
-           setRecipient(response[0]);
-         };
-         fetchUser();
-       } catch (e) {
-         setErrorMessage(
-           'Oups! Il semblerait que Laurent notre Sys-Admin se soit pris les pieds dans un cable, il va arranger ça rapidement!'
-         );
-       }
+      try {
+        const fetchUser = async () => {
+          const response = await getUser(recipientId as string);
+          setRecipient(response[0]);
+        };
+        fetchUser();
+      } catch (e) {
+        setErrorMessage(ERROR_MESSAGE_2);
+      }
     }
   }, [recipientId]);
 
-  if(errorMessage){
+  if (errorMessage) {
     return (
       <div className="flex items-center justify-center w-full h-screen">
-        <p className='font-bold text-orange-500'>{errorMessage}</p>
+        <p className="font-bold text-orange-500">{errorMessage}</p>
       </div>
     );
   }
