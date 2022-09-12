@@ -15,7 +15,6 @@ export const getUser = async (userId: string): Promise<User> => {
   }
 };
 
-
 export const getAllUsers = async (): Promise<User[]> => {
   try {
     const response = await axios.get<User[]>(`${API_HOST}users`);

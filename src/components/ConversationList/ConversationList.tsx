@@ -8,7 +8,7 @@ interface ConversationListProps {
 
 const ConversationList: FC<ConversationListProps> = ({ list }: ConversationListProps) => {
   return (
-    <div className="flex flex-col items-center w-full h-screen space-y-6">
+    <div className="flex flex-col items-center w-full h-screen p-6 space-y-6">
       {list.map((conversation: Conversation, index: number) => {
         return <ConversationCard key={index} conversation={conversation} />;
       })}
