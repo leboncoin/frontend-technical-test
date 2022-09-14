@@ -69,3 +69,14 @@ If you are out of ideas, here are some thoughts :
 - Our goal is to support everybody in the country, including people with disabilities. As a good citizen and a good developer, can you make sure the app is accessible for everyone ?
 
 - We all love to relax after a hard day’s work. It would be a shame if we didn’t feel confident enough about the upcoming automatic deployment. Are you sure everything has been tested thoroughly ?
+
+## Thoughts process
+
+- J'ai commencé par la partie listing des utilisateurs
+- Après avoir analysé l'API, je me suis dis que ça serait le plus simple pour commencer
+
+- En terme de librairies installés, j'ai décidé d'utiliser Material-UI pour les composants graphiques et Axios pour les requêtes
+-- Ce sont 2 librairies que je connais bien et que j'ai l'habitude d'utiliser
+
+- Ensuite je me suis rendu compte que j'avais besoin de l'utilisateur authentifié au plus tôt de l'application, donc j'ai décidé d'utiliser Redux pour et stocker l'utilisateur authentifié de l'app le plus rapidement possible PUIS de récupérer sa liste de conversations
+- 

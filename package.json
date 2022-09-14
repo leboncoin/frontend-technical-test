@@ -14,9 +14,18 @@
     "node": ">=16.15.0"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.5",
+    "@reduxjs/toolkit": "^1.8.5",
+    "@tanstack/react-query": "^4.3.4",
+    "axios": "^0.27.2",
+    "moment": "^2.29.4",
     "next": "^12.1.6",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-redux": "^8.0.2",
     "sharp": "^0.30.5"
   },
   "devDependencies": {
@@ -26,12 +35,36 @@
     "@types/node": "^17.0.35",
     "@types/react": "^18.0.9",
     "babel-jest": "^28.1.0",
-    "eslint": "^8.16.0",
+    "eslint": "8.16.0",
     "eslint-config-next": "^12.1.6",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
     "json-server": "^0.17.0",
     "typescript": "^4.7.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "@typescript-eslint/strict-boolean-expressions": [
+        2,
+        {
+          "allowString": false,
+          "allowNumber": false
+        }
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "indent": [
+        "error",
+        2
+      ]
+    }
   }
 }
