@@ -72,6 +72,8 @@ If you are out of ideas, here are some thoughts :
 
 ## Thoughts process
 
+Pour faire ce test technique, je me suis donné une strict limite de 4h, test fait le 14/09/2022
+
 - J'ai commencé par la partie listing des utilisateurs
 - Après avoir analysé l'API, je me suis dis que ça serait le plus simple pour commencer
 
@@ -79,4 +81,11 @@ If you are out of ideas, here are some thoughts :
 -- Ce sont 2 librairies que je connais bien et que j'ai l'habitude d'utiliser
 
 - Ensuite je me suis rendu compte que j'avais besoin de l'utilisateur authentifié au plus tôt de l'application, donc j'ai décidé d'utiliser Redux pour et stocker l'utilisateur authentifié de l'app le plus rapidement possible PUIS de récupérer sa liste de conversations
-- 
+
+- L'un des problème rencontré a été la gestion des requêtes inutiles pour les conversations, le but était de ne pas surcharger le serveur si beaucoup de personnes vont en même temps sur le site
+- Ensuite, j'ai commencé la séparation des différents composants dont j'avais besoin dans les listes des conversations et des messages
+- Puis, j'ai implémenté la librairie react-query qui permet d'optimiser les requêtes APIs en arrivant sur les pages, elle seule permet de corriger divers problèmes futures pour la surcharge des requêtes sur la page
+- Enfin, je me suis occupé de la responsivité. Material-UI avait déjà géré la majeure partie mais 2 problèmes subsistaient : les avatars sur la page principale et la date dans les messages qui s'affichait toujours
+-- Pour régler ça, j'ai utilisé des Breakpoints, une feature de Material-UI
+- Ensuite, j'ai utilisé un peu de temps bonus pour m'occuper de l'envoi de message, où j'ai désactivé les boutons d'envoi si un message était en cours d'envoi, pour éviter la surcharge côté serveur, mais il manque une concaténation automatique du message envoyé côté client.
+- L'idée aurait été de faire un append du message en local au lieu de faire un nouveau GET / pour éviter une requête réseau, je n'ai malheureusement pas eu le temps de le faire

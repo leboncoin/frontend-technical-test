@@ -23,8 +23,8 @@ export default function ConversationItem(props: ConversationItemProps) {
       onClick={selectConv}
       sx={{
         [theme.breakpoints.down("sm")]: {
-              width: "100%"
-            },
+          width: "100%"
+        },
         width: "50%"
       }}
     >
