@@ -20,6 +20,8 @@
     "sharp": "^0.30.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@testing-library/dom": "^8.13.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
@@ -28,6 +30,7 @@
     "babel-jest": "^28.1.0",
     "eslint": "^8.16.0",
     "eslint-config-next": "^12.1.6",
+    "husky": "^8.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
