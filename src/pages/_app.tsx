@@ -1,6 +1,8 @@
 import type { AppProps } from 'next/app';
+
 import { getLoggedUserId } from '@/utils/getLoggedUserId';
-import '@/styles/globals.css';
+
+import '@/shared/styles/globals.sass';
 
 // Default way to get a logged user
 export const loggedUserId = getLoggedUserId();
