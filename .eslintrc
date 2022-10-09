@@ -1,6 +1,13 @@
 {
-    "extends": ["next", "next/core-web-vitals"],
-    "plugins": ["plugin:@typescript-eslint/recommended", "prettier"],
+    "extends": [
+        "next",
+        "next/core-web-vitals",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:jsx-a11y/recommended",
+        "prettier"
+    ],
+    "plugins": ["@typescript-eslint", "jsx-a11y"],
     "rules": {
         "no-var": "error",
         "prefer-const": "error",
