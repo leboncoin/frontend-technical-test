@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import Logo from '@/assets/lbc-logo.webp';
+import Logo from '@/shared/assets/lbc-logo.webp';
 import styles from '@/shared/styles/Home.module.sass';
 
 import colors from '@/shared/styles/variables/colors.module.sass';

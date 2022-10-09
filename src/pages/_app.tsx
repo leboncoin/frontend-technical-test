@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 
-import { getLoggedUserId } from '@/utils/getLoggedUserId';
+import { getLoggedUserId } from '@/d_users/utils/getLoggedUserId';
 
 import '@/shared/styles/globals.sass';
 
