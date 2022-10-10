@@ -2,19 +2,12 @@ import type { FC } from 'react';
 
 import Head from 'next/head';
 import Image from 'next/image';
+
 import Logo from '@/shared/assets/lbc-logo.webp';
+import MessageList from '@/d_messages/list-messages/components/MessageList/MessageList';
+
 import styles from '@/shared/styles/Home.module.sass';
-import MessageItem from '@/d_messages/list-messages/components/MessageItem';
-
 import colors from '@/shared/styles/variables/colors.module.sass';
-
-const messageInfo = {
-    id: 1,
-    conversationId: 1,
-    timestamp: 1625637849,
-    authorId: 1,
-    body: "Bonjour c'est le premier message de la première conversation",
-};
 
 const Home: FC = () => {
     const year = new Date().getFullYear();
@@ -41,7 +34,7 @@ const Home: FC = () => {
                     Welcome !
                 </h1>
 
-                <MessageItem content={messageInfo.body} isSender />
+                <MessageList />
 
                 <p className={styles.description}>
                     This test is based on a{' '}

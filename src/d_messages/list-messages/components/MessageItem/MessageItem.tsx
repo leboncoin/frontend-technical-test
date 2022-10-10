@@ -3,22 +3,25 @@ import Picture from '@/shared/design-systems/Picture';
 
 import styles from './MessageItem.module.sass';
 
-type MessageItemProps = {
+export type MessageItemProps = {
+    id?: number;
     picture: string;
     nickname: string;
     content: string;
-    isSender: boolean;
+    loggedIsSender: boolean;
 };
 
 const MessageItem: FC<MessageItemProps> = ({
     picture,
     nickname,
     content,
-    isSender,
+    loggedIsSender,
 }: MessageItemProps) => (
-    <div className={styles.messageItem}>
-        {!isSender && <Picture src={picture} alt={nickname} className={styles.pictureSpace} />}
-        <p className={[styles.content, isSender ? styles.isSender : ''].join(' ')}>{content}</p>
+    <div className={[styles.messageItem, loggedIsSender ? styles.loggedIsSender : ''].join(' ')}>
+        {!loggedIsSender && (
+            <Picture src={picture} alt={nickname} className={styles.pictureSpace} />
+        )}
+        <p className={styles.content}>{content}</p>
     </div>
 );
 
