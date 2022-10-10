@@ -5,6 +5,7 @@ import { Message } from '../types/Message';
 type MessageContextProps = {
     messages: Message[];
     getMessages?: (messages: Message[]) => void;
+    sendMessage?: (message: Message) => void;
 };
 
 export const MessageContext = createContext<MessageContextProps>({
@@ -21,9 +22,17 @@ export const MessageProvider = ({ children }) => {
         });
     };
 
+    const sendMessage = (message: Message) => {
+        dispatch({
+            type: MessageActionType.SEND,
+            payload: message,
+        });
+    };
+
     const value: MessageContextProps = {
         messages: state.messages,
         getMessages,
+        sendMessage,
     };
 
     return <MessageContext.Provider value={value}>{children}</MessageContext.Provider>;
