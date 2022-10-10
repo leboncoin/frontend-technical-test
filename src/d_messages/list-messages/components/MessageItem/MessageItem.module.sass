@@ -1,0 +1,22 @@
+@use 'src/shared/styles/variables/colors.module.sass' as colors
+@use 'src/shared/styles/variables/spaces.module.sass' as spaces
+
+.messageItem
+    display: flex
+    align-items: center
+    gap: spaces.$space-s
+
+.pictureSpace
+    flex: 1
+
+.content
+    flex: 6
+    border-radius: spaces.$space-s
+    padding: spaces.$space-s
+    background-color: colors.$secondary
+    color: colors.$white
+
+.isSender
+    background-color: colors.$white
+    color: colors.$black
+

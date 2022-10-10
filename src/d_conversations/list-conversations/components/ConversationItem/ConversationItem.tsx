@@ -27,7 +27,7 @@ const ConversationItem: FC<ConversationItemProps> = ({
         onClick={onClick}
         data-testid="conversation-item"
     >
-        <Picture picture={picture} alt={nickname} className={styles.pictureSpace} />
+        <Picture src={picture} alt={nickname} className={styles.pictureSpace} />
 
         <div className={styles.nicknameDate}>
             <h3 className={styles.nickname}>{nickname}</h3>
