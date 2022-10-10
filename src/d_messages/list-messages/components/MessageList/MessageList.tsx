@@ -1,8 +1,10 @@
-import styles from './MessageList.module.sass';
+import { FC } from 'react';
+
+import useMessagesToDisplay from '../../hooks/useMessagesToDisplay';
 
 import MessageItem from '../MessageItem';
 
-import useMessagesToDisplay from '../../hooks/useMessagesToDisplay';
+import styles from './MessageList.module.sass';
 
 const MessageList = () => {
     const { messagesToDisplay } = useMessagesToDisplay();
