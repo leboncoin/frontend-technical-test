@@ -1,18 +1,19 @@
 import type { FC } from 'react';
+
 import Head from 'next/head';
 import Image from 'next/image';
 import Logo from '@/shared/assets/lbc-logo.webp';
 import styles from '@/shared/styles/Home.module.sass';
+import MessageItem from '@/d_messages/list-messages/components/MessageItem';
 
 import colors from '@/shared/styles/variables/colors.module.sass';
-import ConversationList from '@/d_conversations/list-conversations/components/ConversationList';
 
-const conversationInfos = {
+const messageInfo = {
     id: 1,
-    nickname: 'Jeremie',
-    picture: 'https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_960_720.jpg',
-    date: 'April 24',
-    selected: true,
+    conversationId: 1,
+    timestamp: 1625637849,
+    authorId: 1,
+    body: "Bonjour c'est le premier message de la première conversation",
 };
 
 const Home: FC = () => {
@@ -40,7 +41,7 @@ const Home: FC = () => {
                     Welcome !
                 </h1>
 
-                <ConversationList />
+                <MessageItem content={messageInfo.body} isSender />
 
                 <p className={styles.description}>
                     This test is based on a{' '}
