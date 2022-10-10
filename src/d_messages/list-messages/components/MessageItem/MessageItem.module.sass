@@ -2,21 +2,29 @@
 @use 'src/shared/styles/variables/spaces.module.sass' as spaces
 
 .messageItem
+    align-self: flex-start
     display: flex
     align-items: center
     gap: spaces.$space-s
+    width: 20rem
+
+    &.loggedIsSender
+        align-self: flex-end
+
+        .content
+            background-color: colors.$white
+            color: colors.$black
 
 .pictureSpace
     flex: 1
 
 .content
+    align-self: flex-start
     flex: 6
     border-radius: spaces.$space-s
     padding: spaces.$space-s
     background-color: colors.$secondary
     color: colors.$white
 
-.isSender
-    background-color: colors.$white
-    color: colors.$black
+
 
