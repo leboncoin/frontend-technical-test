@@ -1,0 +1,26 @@
+@use 'src/shared/styles/variables/spaces.module.sass' as spaces
+@use 'src/shared/styles/variables/colors.module.sass' as colors
+@use 'src/shared/styles/variables/fonts.module.sass' as fonts
+
+.conversationItem
+    display: flex
+    align-items: center
+    gap: 1rem
+    padding: spaces.$space-s
+    background-color: colors.$primary
+    color: colors.$white
+
+.pictureSpace
+    flex: 1
+
+.nicknameDate
+    flex: 4
+
+.nickname
+    font-size: fonts.$font-s
+
+.date
+    color: colors.$white-transparent
+
+.selected
+    background-color: colors.$primary-transparent
