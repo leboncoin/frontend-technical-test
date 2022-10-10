@@ -4,14 +4,14 @@ import Image from 'next/image';
 import styles from './Picture.module.sass';
 
 type PictureProps = {
-    picture: string;
+    src: string;
     alt: string;
-    className: string;
+    className?: string;
 };
 
-const Picture: FC<PictureProps> = ({ picture, alt, className }: PictureProps) => (
+const Picture: FC<PictureProps> = ({ src, alt, className }: PictureProps) => (
     <div className={[styles.picture, className].join(' ')}>
-        <Image src={picture} alt={alt} layout="fill" objectFit="cover" />
+        <Image src={src} alt={alt} layout="fill" objectFit="cover" />
     </div>
 );
 
