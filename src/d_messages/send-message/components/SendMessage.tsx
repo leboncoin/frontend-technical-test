@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 
 import useMessages from '@/d_messages/list-messages/hooks/useMessages';
-import useLoggedUser from '@/d_users/connected-user/hooks/useLoggedUser';
+import useLoggedUser from '@/d_users/get-connected-user/hooks/useLoggedUser';
 
 import styles from './SendMessage.module.sass';
 

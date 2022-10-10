@@ -1,6 +1,6 @@
 import useConversations from '@/d_conversations/list-conversations/hooks/useConversations';
 import useMessages from './useMessages';
-import useLoggedUser from '@/d_users/connected-user/hooks/useLoggedUser';
+import useLoggedUser from '@/d_users/get-connected-user/hooks/useLoggedUser';
 
 import type { MessageItemProps } from '../components/MessageItem/MessageItem';
 
