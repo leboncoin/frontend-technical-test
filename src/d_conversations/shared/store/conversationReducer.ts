@@ -1,7 +1,7 @@
 import type { Conversation } from '../types/Conversation';
 
 export enum ConversationActionType {
-    GET,
+    GET = 'GET_CONVERSATIONS',
 }
 
 interface ConversationState {
