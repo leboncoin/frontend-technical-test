@@ -19,7 +19,7 @@ export const ConversationProvider = ({ children }) => {
 
     const getConversations = (conversations: Conversation[]) => {
         dispatch({
-            type: ConversationActionType.GET,
+            type: ConversationActionType.GET_ALL,
             payload: conversations,
         });
     };

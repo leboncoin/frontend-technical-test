@@ -1,47 +1,38 @@
 import type { Conversation } from '../types/Conversation';
 
 export enum ConversationActionType {
-    GET = 'GET_CONVERSATIONS',
+    GET_ALL = 'GET_CONVERSATIONS',
+    GET_CURRENT = 'GET_CURRENT_CONVERSATION',
 }
 
 interface ConversationState {
     conversations: Conversation[];
+    currentConversationId: number;
 }
 
 interface ConversationAction {
     type: ConversationActionType;
-    payload: Conversation[];
+    payload: Conversation[] | number;
 }
 
 export const initialState = {
-    conversations: [
-        {
-            id: 1,
-            recipientId: 2,
-            recipientNickname: 'Jeremie',
-            senderId: 1,
-            senderNickname: 'Thibaut',
-            lastMessageTimestamp: 1625637849,
-        },
-        {
-            id: 2,
-            recipientId: 3,
-            recipientNickname: 'Patrick',
-            senderId: 1,
-            senderNickname: 'Thibaut',
-            lastMessageTimestamp: 1620284667,
-        },
-    ],
+    conversations: [],
+    currentConversationId: null,
 };
 
 const conversationReducer = (state: ConversationState, action: ConversationAction) => {
     const { type, payload } = action;
 
     switch (type) {
-        case ConversationActionType.GET:
+        case ConversationActionType.GET_ALL:
             return {
                 ...state,
                 conversations: payload as Conversation[],
+            };
+        case ConversationActionType.GET_CURRENT:
+            return {
+                ...state,
+                currentConversationId: payload as number,
             };
 
         default:

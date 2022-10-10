@@ -17,7 +17,7 @@ export const MessageProvider = ({ children }) => {
 
     const getMessages = (messages: Message[]) => {
         dispatch({
-            type: MessageActionType.GET,
+            type: MessageActionType.GET_ALL,
             payload: messages,
         });
     };
