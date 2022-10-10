@@ -5,6 +5,15 @@ import Logo from '@/shared/assets/lbc-logo.webp';
 import styles from '@/shared/styles/Home.module.sass';
 
 import colors from '@/shared/styles/variables/colors.module.sass';
+import ConversationItem from '@/d_conversations/list-conversations/components/ConversationItem';
+
+const conversationInfos = {
+    id: 1,
+    nickname: 'Jeremie',
+    picture: 'https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_960_720.jpg',
+    date: 'April 24',
+    selected: true,
+};
 
 const Home: FC = () => {
     const year = new Date().getFullYear();
@@ -18,6 +27,8 @@ const Home: FC = () => {
                     content="Frontend exercise for developpers who want to join us on leboncoin.fr"
                 ></meta>
             </Head>
+
+            <ConversationItem {...conversationInfos} />
 
             <main className={styles.main}>
                 <Image
