@@ -5,7 +5,7 @@ import Logo from '@/shared/assets/lbc-logo.webp';
 import styles from '@/shared/styles/Home.module.sass';
 
 import colors from '@/shared/styles/variables/colors.module.sass';
-import ConversationItem from '@/d_conversations/list-conversations/components/ConversationItem';
+import ConversationList from '@/d_conversations/list-conversations/components/ConversationList';
 
 const conversationInfos = {
     id: 1,
@@ -28,8 +28,6 @@ const Home: FC = () => {
                 ></meta>
             </Head>
 
-            <ConversationItem {...conversationInfos} />
-
             <main className={styles.main}>
                 <Image
                     src={Logo}
@@ -41,6 +39,8 @@ const Home: FC = () => {
                 <h1 className={styles.title} style={{ color: colors.tertiary }}>
                     Welcome !
                 </h1>
+
+                <ConversationList />
 
                 <p className={styles.description}>
                     This test is based on a{' '}
