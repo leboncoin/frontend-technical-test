@@ -7,7 +7,7 @@ import styles from './ConversationItem.module.sass';
 export type ConversationItemProps = {
     nickname: string;
     picture: string;
-    date: string;
+    date: number;
     selected: boolean;
     onClick: () => void;
 };
