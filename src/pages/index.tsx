@@ -8,6 +8,7 @@ import MessageList from '@/d_messages/list-messages/components/MessageList/Messa
 
 import styles from '@/shared/styles/Home.module.sass';
 import colors from '@/shared/styles/variables/colors.module.sass';
+import SendMessage from '@/d_messages/send-message/components/SendMessage';
 
 const Home: FC = () => {
     const year = new Date().getFullYear();
@@ -35,6 +36,7 @@ const Home: FC = () => {
                 </h1>
 
                 <MessageList />
+                <SendMessage />
 
                 <p className={styles.description}>
                     This test is based on a{' '}

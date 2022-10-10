@@ -2,6 +2,7 @@ import type { Message } from '../types/Message';
 
 export enum MessageActionType {
     GET = 'GET_MESSAGES',
+    SEND = 'SEND_MESSAGES',
 }
 
 interface MessageState {
@@ -10,7 +11,7 @@ interface MessageState {
 
 interface MessageAction {
     type: MessageActionType;
-    payload: Message[];
+    payload: Message[] | Message;
 }
 
 export const initialState = {
@@ -48,7 +49,11 @@ const messageReducer = (state: MessageState, action: MessageAction) => {
                 ...state,
                 messages: payload as Message[],
             };
-
+        case MessageActionType.SEND:
+            return {
+                ...state,
+                messages: [...state.messages, payload as Message],
+            };
         default:
             throw new Error(`No case for type ${type} in messageReducer.`);
     }

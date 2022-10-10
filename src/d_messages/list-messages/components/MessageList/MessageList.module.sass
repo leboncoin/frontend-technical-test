@@ -1,4 +1,11 @@
+@use 'src/shared/styles/variables/spaces.module.sass' as spaces
+@use 'src/shared/styles/variables/colors.module.sass' as colors
+
 .messageList
     display: flex
     flex-direction: column
+    gap: spaces.$space-s
+    padding: spaces.$space-m
     width: 100%
+    height: 100%
+    background-color: colors.$tertiary
