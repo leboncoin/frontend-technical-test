@@ -17,6 +17,7 @@ const ConversationList: FC<ConversationListProps> = ({ className }: Conversation
             {conversations.map(({ id, recipientNickname, lastMessageTimestamp }) => (
                 <ConversationItem
                     key={id}
+                    id={id}
                     nickname={recipientNickname}
                     date={lastMessageTimestamp}
                 />
