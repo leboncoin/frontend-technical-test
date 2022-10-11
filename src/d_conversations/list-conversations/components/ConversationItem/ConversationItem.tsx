@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useCallback, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import useConversations from '../../hooks/useConversations';
@@ -6,6 +6,8 @@ import useConversations from '../../hooks/useConversations';
 import Picture from '@/shared/design-systems/Picture';
 
 import styles from './ConversationItem.module.sass';
+import DeleteButton from '@/shared/design-systems/DeleteButton';
+import callAPI from '@/shared/http/callAPI';
 
 export type ConversationItemProps = {
     id: number;
@@ -21,22 +23,44 @@ const ConversationItem: FC<ConversationItemProps> = ({
     picture,
     date,
 }: ConversationItemProps) => {
+    const [openFeedback, setOpenFeedback] = useState(false);
     const router = useRouter();
-    const { currentConversationId } = useConversations();
+    const { currentConversationId, conversations } = useConversations();
+    const stateRef = useRef<boolean>();
+
+    stateRef.current = openFeedback;
 
     const selected = id === currentConversationId;
 
-    function onClick() {
+    const selectConversation = () => {
         router.push(`/messages/${id}`);
-    }
+    };
+
+    const closeFeedback = () => {
+        setOpenFeedback(false);
+        return stateRef.current;
+    };
+
+    const removeConversation = () => {
+        callAPI
+            .delete(`/conversation/${id}`)
+            .then(() => {
+                const previousConversation = conversations[conversations.length - 2];
+
+                router.push(`/messages/${previousConversation.id}`);
+            })
+            .catch(() => {
+                setOpenFeedback(true);
+            });
+    };
 
     return (
         <div
             className={[styles.conversationItem, selected ? styles.selected : ''].join(' ')}
             role="link"
             tabIndex={0}
-            onKeyUp={onClick}
-            onClick={onClick}
+            onKeyDown={selectConversation}
+            onClick={selectConversation}
             aria-current={selected}
             data-testid="conversation-item"
         >
@@ -46,6 +70,14 @@ const ConversationItem: FC<ConversationItemProps> = ({
                 <h3 className={styles.nickname}>{nickname}</h3>
                 <p className={styles.date}>{date}</p>
             </div>
+
+            <DeleteButton
+                onClick={removeConversation}
+                isFeedbackOpen={openFeedback}
+                closeFeedback={closeFeedback}
+                feedbackText={"Cette conversation n'a pas pu être supprimée"}
+                className={styles.deleteButton}
+            />
         </div>
     );
 };

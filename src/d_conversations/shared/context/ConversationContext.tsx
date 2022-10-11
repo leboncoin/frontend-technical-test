@@ -10,6 +10,7 @@ type ConversationContextProps = {
     currentConversationId: number;
     getConversations?: (conversations: Conversation[]) => void;
     getCurrentConversation?: (conversationId: number) => void;
+    deleteConversation?: (conversationId: number) => void;
 };
 
 export const ConversationContext = createContext<ConversationContextProps>({
@@ -34,11 +35,19 @@ export const ConversationProvider = ({ children }) => {
         });
     };
 
+    const deleteConversation = (conversationId: number) => {
+        dispatch({
+            type: ConversationActionType.DELETE,
+            payload: conversationId,
+        });
+    };
+
     const value: ConversationContextProps = {
         conversations: state.conversations,
         currentConversationId: state.currentConversationId,
         getConversations,
         getCurrentConversation,
+        deleteConversation,
     };
 
     return <ConversationContext.Provider value={value}>{children}</ConversationContext.Provider>;

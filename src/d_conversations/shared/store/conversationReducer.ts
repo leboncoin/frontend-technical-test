@@ -3,6 +3,7 @@ import type { Conversation } from '../types/Conversation';
 export enum ConversationActionType {
     GET_ALL = 'GET_CONVERSATIONS',
     GET_CURRENT = 'GET_CURRENT_CONVERSATION',
+    DELETE = 'DELETE_CONVERSATION',
 }
 
 interface ConversationState {
@@ -33,6 +34,13 @@ const conversationReducer = (state: ConversationState, action: ConversationActio
             return {
                 ...state,
                 currentConversationId: payload as number,
+            };
+        case ConversationActionType.DELETE:
+            return {
+                ...state,
+                conversations: state.conversations.filter(
+                    (conversation) => conversation.id !== (payload as number)
+                ),
             };
 
         default:
