@@ -1,12 +1,13 @@
 @use 'src/shared/styles/variables/colors.module.sass' as colors
 @use 'src/shared/styles/variables/spaces.module.sass' as spaces
+@use 'src/shared/styles/mixins/breakpoints-mixins.module.sass' as breakpoints
 
 .messageItem
     align-self: flex-start
     display: flex
     align-items: center
     gap: spaces.$space-s
-    width: 20rem
+    width: 90%
 
     &.loggedIsSender
         align-self: flex-end
@@ -14,6 +15,9 @@
         .content
             background-color: colors.$white
             color: colors.$black
+
+    @include breakpoints.desktop
+        width: 20rem
 
 .pictureSpace
     flex: 1
