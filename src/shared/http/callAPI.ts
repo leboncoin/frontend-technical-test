@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { baseURL } from '../constants';
 
-const fetcher = axios.create({
+const callAPI = axios.create({
     baseURL,
 });
 
-export default fetcher;
+export default callAPI;
