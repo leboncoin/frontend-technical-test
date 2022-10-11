@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps = (context) => {
                 props: {
                     conversations,
                     users,
-                    currentConversationId: id ?? null,
+                    currentConversationId: parseInt(id as string) ?? null,
                 },
             };
         }

@@ -33,9 +33,7 @@ describe('ConversationItem', () => {
         expect(date).toBeVisible();
     });
 
-    it('should be clickable', async () => {
-        await userEvent.click(conversationItem);
-
-        expect(conversationInfo.onClick).toHaveBeenCalled();
+    it('should be able to be selected', async () => {
+        expect(conversationItem).toHaveAttribute('aria-current');
     });
 });
