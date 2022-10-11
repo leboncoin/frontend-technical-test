@@ -1,4 +1,4 @@
-import { loggedUser } from '@/d_users/connected-user/tests/fixtures';
+import { loggedUser } from '@/d_users/get-connected-user/tests/fixtures';
 
 // Default way to use a logged user
 // Feel free to update the user ID for your tests

@@ -1,19 +1,19 @@
 import useConversations from '@/d_conversations/list-conversations/hooks/useConversations';
 import useMessages from './useMessages';
-import useLoggedUser from '@/d_users/connected-user/hooks/useLoggedUser';
+import useLoggedUser from '@/d_users/get-connected-user/hooks/useLoggedUser';
 
 import type { MessageItemProps } from '../components/MessageItem/MessageItem';
 
 const useMessagesToDisplay = () => {
     const { messages } = useMessages();
-    const { conversations } = useConversations();
+    const { conversations, currentConversationId } = useConversations();
     const { loggedUser } = useLoggedUser();
 
-    const currentConversation = conversations.find(({ id }) => id === messages[0].conversationId);
+    const currentConversation = conversations.find(({ id }) => id === currentConversationId);
 
-    const messagesToDisplay: MessageItemProps[] = messages.map(({ id, body, authorId }) => ({
+    const messagesToDisplay: MessageItemProps[] = messages?.map(({ id, body, authorId }) => ({
         id,
-        nickname: currentConversation.recipientNickname,
+        nickname: currentConversation?.recipientNickname,
         content: body,
         loggedIsSender: loggedUser.id === authorId,
     }));

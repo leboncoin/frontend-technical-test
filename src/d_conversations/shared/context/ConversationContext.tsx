@@ -7,11 +7,14 @@ import { Conversation } from '../types/Conversation';
 
 type ConversationContextProps = {
     conversations: Conversation[];
+    currentConversationId: number;
     getConversations?: (conversations: Conversation[]) => void;
+    getCurrentConversation?: (conversationId: number) => void;
 };
 
 export const ConversationContext = createContext<ConversationContextProps>({
     conversations: initialState.conversations,
+    currentConversationId: initialState.currentConversationId,
 });
 
 export const ConversationProvider = ({ children }) => {
@@ -19,14 +22,23 @@ export const ConversationProvider = ({ children }) => {
 
     const getConversations = (conversations: Conversation[]) => {
         dispatch({
-            type: ConversationActionType.GET,
+            type: ConversationActionType.GET_ALL,
             payload: conversations,
+        });
+    };
+
+    const getCurrentConversation = (conversationId: number) => {
+        dispatch({
+            type: ConversationActionType.GET_CURRENT,
+            payload: conversationId,
         });
     };
 
     const value: ConversationContextProps = {
         conversations: state.conversations,
+        currentConversationId: state.currentConversationId,
         getConversations,
+        getCurrentConversation,
     };
 
     return <ConversationContext.Provider value={value}>{children}</ConversationContext.Provider>;
