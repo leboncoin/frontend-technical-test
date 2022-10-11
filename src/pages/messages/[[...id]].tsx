@@ -39,9 +39,9 @@ export const MessagesApp: FC<MessagesAppProps> = ({
             getCurrentConversation(currentConversationId);
             getMessages(data);
         }
-    }, [conversations, currentConversationId, users, data]);
+    }, [data]);
 
-    return <ConversationsMessages />;
+    return data && <ConversationsMessages />;
 };
 
 export const getServerSideProps: GetServerSideProps = (context) => {
