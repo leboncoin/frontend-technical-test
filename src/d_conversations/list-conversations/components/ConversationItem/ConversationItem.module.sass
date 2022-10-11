@@ -3,6 +3,7 @@
 @use 'src/shared/styles/variables/fonts.module.sass' as fonts
 
 .conversationItem
+    position: relative
     display: flex
     align-items: center
     gap: spaces.$space-s
@@ -25,3 +26,8 @@
 
 .selected
     background-color: colors.$secondary
+
+.deleteButton
+    position: absolute
+    top: 0
+    right: spaces.$space-xs
