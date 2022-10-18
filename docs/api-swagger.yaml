@@ -66,6 +66,12 @@ paths:
             properties:
               recipientId:
                 type: integer
+              recipientNickname:
+                type: integer
+              senderId:
+                type: integer
+              senderNickname:
+                type: integer
       responses:
         '200':
           description: Success
