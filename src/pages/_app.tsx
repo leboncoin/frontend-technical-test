@@ -1,12 +1,25 @@
 import type { AppProps } from 'next/app'
-import { getLoggedUserId } from '../utils/getLoggedUserId'
+import { StoreProvider } from '../store/store'
+import { AuthLayer } from '../components/AuthLayer'
+
+import Layout from '../components/Layout'
 import '../styles/globals.css'
 
-// Default way to get a logged user
-export const loggedUserId = getLoggedUserId()
+export const apiUrl = 'http://localhost:3005'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <Layout>
+      <StoreProvider>
+        {
+          // Display reload button when identification failed
+          <AuthLayer>
+            <Component {...pageProps} />
+          </AuthLayer>
+        }
+      </StoreProvider>
+    </Layout>
+  )
 }
 
 export default MyApp
