@@ -15,7 +15,7 @@ const Home: FC = () => {
       </Head>
 
       <main className={styles.main}>
-        <Image src={Logo} alt="Leboncoin Frontend Team" width={400} height={125} layout="fixed" />
+        <Image src={Logo} alt="Leboncoin Frontend Team" width={400} height={125} />
         <h1 className={styles.title}>
           Welcome !
         </h1>
