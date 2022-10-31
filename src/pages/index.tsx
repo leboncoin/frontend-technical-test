@@ -1,66 +1,72 @@
 import type { FC } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
+
+import { Title } from '../components/Title.styled'
+import { Card } from '../components/Card.styled'
+import { Code } from '../components/Code.styled'
+import { Container, Main, CardList } from '../components/Containers.styled'
+import { Description } from '../components/Description.styled'
+import { Footer } from '../components/Footer.styled'
+
 import Logo from '../assets/lbc-logo.webp'
-import styles from '../styles/Home.module.css'
 
 const Home: FC = () => {
   const year = new Date().getFullYear()
 
   return (
-    <div className={styles.container}>
+    <Container>
       <Head>
         <title>Frontend Technical test - Leboncoin</title>
         <meta name="description" content="Frontend exercise for developpers who want to join us on leboncoin.fr"></meta>
       </Head>
 
-      <main className={styles.main}>
+      <Main>
         <Image src={Logo} alt="Leboncoin Frontend Team" width={400} height={125} />
-        <h1 className={styles.title}>
-          Welcome !
-        </h1>
 
-        <p className={styles.description}>
+        <Title> Welcome !</Title>
+
+        <Description>
           This test is based on a <a title="Next.js documentation" href="https://nextjs.org/docs/getting-started" target="_blank" rel="noopener noreferrer">Next.js</a> application.<br />
-          Fork the repository and use the <code className={styles.code}>main</code> branch as your starting point.
+          Fork the repository and use the <Code>main</Code> branch as your starting point.
           <br /><br />
 
           Get started by reading{' '}
-          <code className={styles.code}>README.md</code> and editing <code className={styles.code}>src/pages/index.js</code>
+          <Code>README.md</Code> and editing <Code>src/pages/index.js</Code>
           <br />
           Once you are done, send the repository link to your HR contact.
-        </p>
+        </Description>
 
-        <div className={styles.grid}>
-          <article className={styles.card}>
+        <CardList>
+          <Card>
             <h2>Design</h2>
             <p>Feel free to create any design you want for this exercise. Let your creativity talks !</p>
-          </article>
+          </Card>
 
-          <article className={styles.card}>
+          <Card>
             <h2>Libraries</h2>
             <p>Feel free to use any library you want. Only Next.js / React are required.</p>
-          </article>
+          </Card>
 
-          <article className={styles.card}>
+          <Card>
             <h2>API Server</h2>
             <p>
-              Start the API server on port <code className={styles.code}>3005</code> by running<br /><code className={styles.code}>npm run start-server</code>.<br/>
-              Find the swagger definitions in <code className={styles.code}>docs/api-swagger.yml</code> or <a title="API Swagger documentation" href="https://leboncoin.tech/frontend-technical-test/" target="_blank" rel="noopener noreferrer">the online documentation</a>.
+              Start the API server on port <Code>3005</Code> by running<br /><Code>npm run start-server</Code>.<br/>
+              Find the swagger definitions in <Code>docs/api-swagger.yml</Code> or <a title="API Swagger documentation" href="https://leboncoin.tech/frontend-technical-test/" target="_blank" rel="noopener noreferrer">the online documentation</a>.
             </p>
-          </article>
+          </Card>
 
-          <article className={styles.card}>
+          <Card>
             <h2>Timing</h2>
             <p>We recommend 4 hours for this test. You are free to spend more (or less) time, let us know how much time did you spend.</p>
-          </article>
-        </div>
-      </main>
+          </Card>
+        </CardList>
+      </Main>
 
-      <footer className={styles.footer}>
+      <Footer>
         &copy; leboncoin - {year}
-      </footer>
-    </div>
+      </Footer>
+    </Container>
   )
 }
 
