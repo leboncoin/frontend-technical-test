@@ -1,9 +1,13 @@
 module.exports = {
   i18n: {
-    locales: ['en-US'],
-    defaultLocale: 'en-US',
+    locales: ['fr'],
+    defaultLocale: 'fr',
   },
   eslint: {
     ignoreDuringBuilds: true,
-  }
+  },
+  compiler: {
+    removeConsole: true,
+    styledComponents: true,
+  },
 }
