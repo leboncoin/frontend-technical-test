@@ -7,7 +7,7 @@ The interface needs to work on both desktop & mobile devices.
 
 In addition to your code, a README explaining your thought process and your choices would be appreciated.
 
-# Exercice :
+# Exercise :
 
 - Display a list of all the conversations
 - Allow the user to select a conversation
