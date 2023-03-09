@@ -7,7 +7,6 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   compiler: {
-    removeConsole: true,
     styledComponents: true,
   },
 }
