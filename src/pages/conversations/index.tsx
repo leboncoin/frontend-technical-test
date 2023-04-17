@@ -2,7 +2,26 @@ import { NextPage } from "next";
 
 import { getLoggedUserId } from '../../utils/getLoggedUserId'
 
-const ConversationsPage : NextPage = () => <div >Conversation</div>
+import ConversationCard from '../../components/ConversationCard/'
+
+interface IConversation {
+    id: number;
+    recipientId: number;
+    recipientNickname: string;
+    senderId: number;
+    senderNickname: string;
+    lastMessageTimestamp: number;
+}
+
+
+
+const ConversationsPage : NextPage<{ conversations: IConversation[]}> = ({conversations}) => 
+    (<section>
+        <h1 >Conversations</h1>
+        <section>
+            {conversations.map(({id, recipientId, recipientNickname, senderId, senderNickname, lastMessageTimestamp}) => (<ConversationCard key={id} id={id} recipientNickname={recipientNickname} senderNickname={senderNickname}/>))}
+        </section>
+    </section>)
 
 export default ConversationsPage
 
