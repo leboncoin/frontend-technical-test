@@ -1,19 +1,21 @@
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
 
-import { getLoggedUserId } from '../utils/getLoggedUserId'
+import { getLoggedUserId } from "@Utils/getLoggedUserId";
 
-import CssBaseline from '../components/CssBaseline'
+import CssBaseline from "@Components/CssBaseline";
 
-import '../styles/globals.css'
+import "@Styles/globals.css";
 
 // Default way to get a logged user
-export const loggedUserId = getLoggedUserId()
+export const loggedUserId = getLoggedUserId();
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return (<>
-  <CssBaseline />
-  <Component {...pageProps} />
-  </>)
+  return (
+    <>
+      <CssBaseline />
+      <Component {...pageProps} />
+    </>
+  );
 }
 
-export default MyApp
+export default MyApp;

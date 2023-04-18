@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 
-import { getLoggedUserId } from "../../utils/getLoggedUserId";
+import { getLoggedUserId } from "@Utils/getLoggedUserId";
 
-import ConversationCard from "../../components/ConversationCard/";
-import Container from "../../components/Container";
+import ConversationCard from "@Components/ConversationCard/";
+import Container from "@Components/Container";
 
 interface IConversation {
   id: number;
