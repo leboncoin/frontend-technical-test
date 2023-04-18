@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import Logo from "@assets/lbc-logo.webp";
+import Logo from "@Assets/lbc-logo.webp";
 import styles from "@Styles/Home.module.css";
 
 const Home = (): ReactElement => {

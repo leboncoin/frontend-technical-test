@@ -1,9 +1,21 @@
 import { NextPage } from "next";
 
 import { getLoggedUserId } from "@Utils/getLoggedUserId";
+import { getLastMessageTimeStandFormated } from "@Utils/date";
 
 import ConversationCard from "@Components/ConversationCard/";
 import Container from "@Components/Container";
+
+const formatter = new Intl.DateTimeFormat("fr-FR", {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+  second: "numeric",
+  hour12: false,
+});
 
 interface IConversation {
   id: number;
@@ -28,14 +40,20 @@ const ConversationsPage: NextPage<{ conversations: IConversation[] }> = ({
           senderId,
           senderNickname,
           lastMessageTimestamp,
-        }) => (
-          <ConversationCard
-            key={id}
-            id={id}
-            recipientNickname={recipientNickname}
-            senderNickname={senderNickname}
-          />
-        )
+        }) => {
+          return (
+            <ConversationCard
+              key={id}
+              id={id}
+              recipientNickname={recipientNickname}
+              senderNickname={senderNickname}
+              lastMessageTimestamp={getLastMessageTimeStandFormated(
+                lastMessageTimestamp
+              )}
+              onCardClick={() => console.log("cardId", id)}
+            />
+          );
+        }
       )}
     </section>
   </Container>
