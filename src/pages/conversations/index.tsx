@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { getLoggedUserId } from "../../utils/getLoggedUserId";
 
 import ConversationCard from "../../components/ConversationCard/";
+import Container from "../../components/Container";
 
 interface IConversation {
   id: number;
@@ -16,7 +17,7 @@ interface IConversation {
 const ConversationsPage: NextPage<{ conversations: IConversation[] }> = ({
   conversations,
 }) => (
-  <section>
+  <Container>
     <h1>Conversations</h1>
     <section>
       {conversations.map(
@@ -37,7 +38,7 @@ const ConversationsPage: NextPage<{ conversations: IConversation[] }> = ({
         )
       )}
     </section>
-  </section>
+  </Container>
 );
 
 export default ConversationsPage;
