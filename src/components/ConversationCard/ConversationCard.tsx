@@ -68,7 +68,7 @@ export const ConversationCard: React.FC<IConversationCardProps> = ({
             sx={{ padding: "0 0 0 1rem", paddingBottom: "0!important" }}
           >
             <Typography component="p" variant="body2" noWrap>
-              orem ipsum dolor sit amet, consectetur adipiscing elit.
+              lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </Typography>
           </CardContent>
         </Box>
