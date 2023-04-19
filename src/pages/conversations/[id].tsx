@@ -17,7 +17,7 @@ import Toolbar from "@Components/Toolbar";
 import Logo from "@Assets/lbc-logo.webp";
 
 const ConversationPage: NextPage<{}> = ({}) => {
-  return <Chat />;
+  return <Chat messages={[]} />;
 };
 
 export default ConversationPage;

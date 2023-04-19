@@ -1,48 +1,22 @@
 import { NextPage } from "next";
-import { useRouter } from "next/router";
+
 import Image from "next/image";
-import AddIcon from "@mui/icons-material/Add";
-import ChatIcon from "@mui/icons-material/Chat";
+import { dehydrate, QueryClient } from "react-query";
+
+import { getConversationsByUserId } from "@Api/conversations";
+import { getUsers } from "@Api/users";
 
 import { getLoggedUserId } from "@Utils/getLoggedUserId";
-import { getLastMessageTimeStandFormated } from "@Utils/date";
 
-import Box from "@Components/Box";
-import ConversationCard from "@Components/ConversationCard/";
-import IconButton from "@Components/IconButton";
+import Conversations from "@Containers/Conversations";
+
 import AppBar from "@Components/AppBar";
 import Toolbar from "@Components/Toolbar";
+import Box from "@Components/Box";
 
 import Logo from "@Assets/lbc-logo.webp";
 
-interface IConversation {
-  id: number;
-  recipientId: number;
-  recipientNickname: string;
-  senderId: number;
-  senderNickname: string;
-  lastMessageTimestamp: number;
-}
-
-const ConversationsPage: NextPage<{
-  conversations: IConversation[];
-  messages: any[];
-}> = ({ conversations, messages }) => {
-  const router = useRouter();
-  const navToConversation = (id: number) => () => {
-    router.push(`/conversations/${id}`);
-  };
-  const openAddConversationModal = () => console.log("openModal");
-
-  const handleDeleteConversation = (id: number) => async () => {
-    return await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_HOST}/conversation/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
-  };
-
+const ConversationsPage: NextPage = () => {
   return (
     <>
       <AppBar>
@@ -50,60 +24,8 @@ const ConversationsPage: NextPage<{
           <Image src={Logo} alt="Leboncoin Frontend Team" width={100} />
         </Toolbar>
       </AppBar>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              p: "0 1rem",
-            }}
-          >
-            <h1>
-              <ChatIcon /> Conversations
-            </h1>
-            <IconButton
-              onClick={openAddConversationModal}
-              sx={{
-                backgroundColor: "success.light",
-                "&:hover": {
-                  backgroundColor: "success.main",
-                },
-              }}
-            >
-              <AddIcon sx={{ color: "common.white" }} />
-            </IconButton>
-          </Box>
-
-          <section>
-            {conversations.map(
-              ({
-                id,
-                recipientId,
-                recipientNickname,
-                senderId,
-                senderNickname,
-                lastMessageTimestamp,
-              }) => {
-                return (
-                  <ConversationCard
-                    key={id}
-                    id={id}
-                    recipientNickname={recipientNickname}
-                    senderNickname={senderNickname}
-                    lastMessageTimestamp={getLastMessageTimeStandFormated(
-                      lastMessageTimestamp
-                    )}
-                    onCardClick={navToConversation(id)}
-                    onDeleteClick={handleDeleteConversation(id)}
-                  />
-                );
-              }
-            )}
-          </section>
-        </Box>
+      <Box pt={8}>
+        <Conversations />
       </Box>
     </>
   );
@@ -114,22 +36,17 @@ export default ConversationsPage;
 export async function getServerSideProps() {
   const loggedUserId = getLoggedUserId();
 
-  const resConversations = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_HOST}/conversations/${loggedUserId}`
-  );
-  const conversations = await resConversations.json();
+  const queryClient = new QueryClient();
 
-  const resMessages = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_HOST}/messages/1`
+  await queryClient.prefetchQuery("conversations", () =>
+    getConversationsByUserId(loggedUserId)
   );
-  const messages = await resMessages.json();
 
-  console.log("conversations", conversations);
+  await queryClient.prefetchQuery("users", getUsers);
 
   return {
     props: {
-      conversations,
-      messages,
+      dehydratedState: dehydrate(queryClient),
     },
   };
 }
