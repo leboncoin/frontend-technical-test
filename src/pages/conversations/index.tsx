@@ -1,12 +1,11 @@
 import { NextPage } from "next";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import AddIcon from "@mui/icons-material/Add";
 import ChatIcon from "@mui/icons-material/Chat";
 
 import { getLoggedUserId } from "@Utils/getLoggedUserId";
 import { getLastMessageTimeStandFormated } from "@Utils/date";
-
-import Chat from "@Components/Chat";
 
 import Box from "@Components/Box";
 import ConversationCard from "@Components/ConversationCard/";
@@ -29,11 +28,20 @@ const ConversationsPage: NextPage<{
   conversations: IConversation[];
   messages: any[];
 }> = ({ conversations, messages }) => {
+  const router = useRouter();
+  const navToConversation = (id: number) => () => {
+    router.push(`/conversations/${id}`);
+  };
   const openAddConversationModal = () => console.log("openModal");
-  const handleDeleteConversation = (id: number) => async () =>
-    await fetch(`${process.env.NEXT_PUBLIC_SERVER_HOST}/conversation/${id}`, {
-      method: "DELETE",
-    });
+
+  const handleDeleteConversation = (id: number) => async () => {
+    return await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_HOST}/conversation/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
+  };
 
   return (
     <>
@@ -88,14 +96,14 @@ const ConversationsPage: NextPage<{
                     lastMessageTimestamp={getLastMessageTimeStandFormated(
                       lastMessageTimestamp
                     )}
-                    onCardClick={handleDeleteConversation(id)}
+                    onCardClick={navToConversation(id)}
+                    onDeleteClick={handleDeleteConversation(id)}
                   />
                 );
               }
             )}
           </section>
         </Box>
-        <Chat messages={messages} />
       </Box>
     </>
   );
@@ -103,7 +111,7 @@ const ConversationsPage: NextPage<{
 
 export default ConversationsPage;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const loggedUserId = getLoggedUserId();
 
   const resConversations = await fetch(

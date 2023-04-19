@@ -7,6 +7,7 @@ import CardMedia from "@Components/CardMedia";
 import IconButton from "@Components/IconButton";
 import Typography from "@Components/Typography";
 import { CardActions } from "@mui/material";
+import React, { MouseEventHandler } from "react";
 
 interface IConversationCardProps {
   id: number;
@@ -14,6 +15,7 @@ interface IConversationCardProps {
   senderNickname: string;
   lastMessageTimestamp: string;
   onCardClick: (id: number) => void;
+  onDeleteClick: (id: number) => void;
 }
 export const ConversationCard: React.FC<IConversationCardProps> = ({
   id,
@@ -21,8 +23,16 @@ export const ConversationCard: React.FC<IConversationCardProps> = ({
   senderNickname,
   lastMessageTimestamp,
   onCardClick,
+  onDeleteClick,
 }) => {
-  const handleCardClick = () => onCardClick(id);
+  const handleCardClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onCardClick(id);
+  };
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onDeleteClick(id);
+  };
 
   return (
     <Card
@@ -82,7 +92,7 @@ export const ConversationCard: React.FC<IConversationCardProps> = ({
               {lastMessageTimestamp}
             </Typography>
             <CardActions sx={{ justifyContent: "center" }}>
-              <IconButton>
+              <IconButton onClick={handleDeleteClick}>
                 <DeleteIcon
                   sx={{
                     "&:hover": {
