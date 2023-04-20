@@ -7,7 +7,6 @@ import CardMedia from "@Components/CardMedia";
 import IconButton from "@Components/IconButton";
 import Typography from "@Components/Typography";
 import { CardActions } from "@mui/material";
-import React, { MouseEventHandler } from "react";
 
 interface IConversationCardProps {
   id: number;
@@ -64,7 +63,7 @@ export const ConversationCard: React.FC<IConversationCardProps> = ({
       <Box sx={{ display: "flex", flexDirection: "row", flex: "1" }}>
         <Box
           sx={{
-            flex: "10",
+            flex: "4",
           }}
         >
           <CardContent
@@ -89,9 +88,9 @@ export const ConversationCard: React.FC<IConversationCardProps> = ({
               variant="caption"
               sx={{ color: "grey.500", textAlign: "right" }}
             >
-              {lastMessageTimestamp}
+              {lastMessageTimestamp || "0 message"}
             </Typography>
-            <CardActions sx={{ justifyContent: "center" }}>
+            <CardActions sx={{ justifyContent: "end" }}>
               <IconButton onClick={handleDeleteClick}>
                 <DeleteIcon
                   sx={{

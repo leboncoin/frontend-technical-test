@@ -6,15 +6,17 @@ import AddIcon from "@mui/icons-material/Add";
 import ChatIcon from "@mui/icons-material/Chat";
 
 import { getConversationsByUserId } from "@Api/conversations";
+import { getUsers } from "@Api/users";
 
 import { getLastMessageTimeStandFormated } from "@Utils/date";
+
+import { useUserId } from "@Containers/User/user-context";
 
 import Box from "@Components/Box";
 import ConversationCard from "@Components/ConversationCard/";
 import IconButton from "@Components/IconButton";
 
 import ModalNewConversation from "./ModalNewConversation";
-import { getUsers } from "@Api/users";
 
 export const Conversations: React.FC = () => {
   const router = useRouter();
@@ -40,6 +42,15 @@ export const Conversations: React.FC = () => {
       }
     );
   };
+
+  const userId = useUserId();
+  const userWithConv = conversations.reduce((acc, curr) => {
+    if (curr.senderId === userId || curr.recipientId === userId) {
+      const id = curr.senderId !== userId ? curr.senderId : curr.recipientId;
+      return acc.includes(id) ? acc : [...acc, id];
+    }
+    return acc;
+  }, []);
 
   return (
     <>
@@ -73,9 +84,7 @@ export const Conversations: React.FC = () => {
           {conversations.map(
             ({
               id,
-              recipientId,
               recipientNickname,
-              senderId,
               senderNickname,
               lastMessageTimestamp,
             }) => {
@@ -99,7 +108,9 @@ export const Conversations: React.FC = () => {
       <ModalNewConversation
         open={addConversationModalOpen}
         handleClose={closeAddConversationModal}
-        userOptions={users}
+        userOptions={users.filter(
+          ({ id }) => !userWithConv.includes(id) && id !== userId
+        )}
       />
     </>
   );

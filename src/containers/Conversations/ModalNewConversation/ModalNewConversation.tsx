@@ -1,6 +1,7 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient, useQuery } from "react-query";
 
 import { addConversation } from "@Api/conversations";
+import { getUsers } from "@Api/users";
 
 import { useUserId } from "@Containers/User/user-context";
 
@@ -19,6 +20,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
+import type { Conversation } from "@Types/conversation";
+
 interface User {
   id: number;
   nickname: string;
@@ -36,9 +39,21 @@ export const ModalNewConversation: React.FC<ModalNewConversationProps> = ({
   userOptions,
 }) => {
   const userId = useUserId();
-  const mutationConversation = useMutation((recipientId: number) =>
-    addConversation(userId, recipientId)
-  );
+  const queryClient = useQueryClient();
+  const { data: users } = useQuery("users", getUsers);
+  const mutationConversation = useMutation((recipientId: number) => {
+    const recipientNickname = users.filter((user) => user.id === recipientId)[0]
+      .nickname;
+    const senderNickname = users.filter((user) => user.id === userId)[0]
+      .nickname;
+    return addConversation({
+      senderId: userId,
+      recipientId,
+      recipientNickname,
+      senderNickname,
+      lastMessageTimestamp: null,
+    });
+  });
 
   const onAddConversation = (event: React.FormEvent) => {
     event.preventDefault();
@@ -46,7 +61,21 @@ export const ModalNewConversation: React.FC<ModalNewConversationProps> = ({
     const recipiendId = formData.get("select-user");
 
     mutationConversation.mutate(
-      recipiendId ? parseFloat(recipiendId.toString()) : null
+      recipiendId ? parseFloat(recipiendId.toString()) : null,
+      {
+        onSuccess: async (newConv: Conversation) => {
+          await queryClient.cancelQueries("conversations");
+          const previousConversations =
+            queryClient.getQueryData("conversations");
+          queryClient.setQueryData("conversations", (old: Conversation[]) => [
+            ...old,
+            newConv,
+          ]);
+
+          return previousConversations;
+        },
+        onSettled: handleClose,
+      }
     );
   };
 
