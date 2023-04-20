@@ -1,4 +1,5 @@
 export const getLastMessageTimeStandFormated = (timeStamp: number) => {
+  if (!timeStamp) return;
   const lastMessageDate = new Date(timeStamp);
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());

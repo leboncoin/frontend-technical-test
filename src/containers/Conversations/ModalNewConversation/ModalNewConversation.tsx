@@ -1,5 +1,9 @@
 import { useMutation } from "react-query";
 
+import { addConversation } from "@Api/conversations";
+
+import { useUserId } from "@Containers/User/user-context";
+
 import {
   Dialog,
   DialogActions,
@@ -14,8 +18,6 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { addConversation } from "@Api/conversations";
-import React from "react";
 
 interface User {
   id: number;
@@ -33,16 +35,19 @@ export const ModalNewConversation: React.FC<ModalNewConversationProps> = ({
   handleClose,
   userOptions,
 }) => {
+  const userId = useUserId();
   const mutationConversation = useMutation((recipientId: number) =>
-    addConversation(1, recipientId)
+    addConversation(userId, recipientId)
   );
 
-  const onAddConversation = (event: any) => {
+  const onAddConversation = (event: React.FormEvent) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.target as HTMLFormElement);
     const recipiendId = formData.get("select-user");
 
-    mutationConversation.mutate(recipiendId);
+    mutationConversation.mutate(
+      recipiendId ? parseFloat(recipiendId.toString()) : null
+    );
   };
 
   return (
