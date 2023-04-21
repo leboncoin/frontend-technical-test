@@ -28,7 +28,7 @@ export const Message: React.FC<MessageProps> = ({
       <Box>
         <Typography
           sx={{
-            backgroundColor: `${color}.light`,
+            backgroundColor: `${color}.main`,
             borderRadius: 3,
             p: 2,
             mb: 0.5,

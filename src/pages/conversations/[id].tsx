@@ -30,7 +30,7 @@ const ConversationPage: NextPage<ConversationPageProps> = ({
   const handleClose = () => setOpen(false);
   return (
     <>
-      <AppBar>
+      <AppBar sx={{ backgroundColor: "common.white" }}>
         <Toolbar
           sx={{
             p: "1rem 24px",

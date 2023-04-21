@@ -24,7 +24,7 @@ const ConversationsPage: NextPage = () => {
   const handleClose = () => setOpen(false);
   return (
     <>
-      <AppBar>
+      <AppBar sx={{ backgroundColor: "common.white" }}>
         <Toolbar sx={{ p: "1rem 24px" }}>
           <Image src={Logo} alt="Leboncoin Frontend Team" width={100} />
         </Toolbar>

@@ -3,11 +3,9 @@ import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { useState } from "react";
 
 import { UserProvider } from "@Containers/User/user-context";
-import {
-  NotificationProvider,
-  useNotification,
-} from "@Containers/Notification/notification-context";
+import { NotificationProvider } from "@Containers/Notification/notification-context";
 
+import LBCThemeProvider from "@Components/ThemeProvider";
 import CssBaseline from "@Components/CssBaseline";
 
 import "@Styles/globals.css";
@@ -18,12 +16,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <NotificationProvider>
-          <UserProvider>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </UserProvider>
-        </NotificationProvider>
+        <LBCThemeProvider>
+          <NotificationProvider>
+            <UserProvider>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </UserProvider>
+          </NotificationProvider>
+        </LBCThemeProvider>
       </Hydrate>
     </QueryClientProvider>
   );

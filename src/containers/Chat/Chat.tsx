@@ -144,6 +144,8 @@ export const Chat: React.FC<ChatProps> = ({ conversationId }) => {
               justifyContent: "center",
               position: "relative",
               width: "100%",
+              color: "common.white",
+              fontWeight: "600",
             }}
           >
             {isSmallDevice && (
@@ -169,7 +171,7 @@ export const Chat: React.FC<ChatProps> = ({ conversationId }) => {
               <Message
                 key={id}
                 author={author}
-                color={authorId == userId ? "primary" : "secondary"}
+                color={authorId != userId ? "primary" : "secondary"}
                 timestamp={formatTimestamp(timestamp)}
                 align={authorId == userId ? "end" : "start"}
               >
@@ -183,7 +185,7 @@ export const Chat: React.FC<ChatProps> = ({ conversationId }) => {
         component="form"
         ref={messageFormRef}
         onSubmit={onAddMessage}
-        sx={{ display: "flex", p: 2, backgroundColor: "primary.dark" }}
+        sx={{ display: "flex", p: 2, backgroundColor: "secondary.main" }}
       >
         <TextField
           label="Nouveau message"
