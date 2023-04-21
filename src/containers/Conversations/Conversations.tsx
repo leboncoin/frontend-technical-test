@@ -11,7 +11,7 @@ import {
 } from "@Api/conversations";
 import { getUsers } from "@Api/users";
 
-import { getLastMessageTimeStandFormated } from "@Utils/date";
+import { formatTimestamp } from "@Utils/date";
 
 import { useUserId } from "@Containers/User/user-context";
 import { useNotification } from "@Containers/Notification/notification-context";
@@ -52,13 +52,6 @@ export const Conversations: React.FC = () => {
   const closeAddConversationModal = () => setAddOpenConversation(false);
 
   const userId = useUserId();
-  const userWithConv = conversations.reduce((acc, curr) => {
-    if (curr.senderId === userId || curr.recipientId === userId) {
-      const id = curr.senderId !== userId ? curr.senderId : curr.recipientId;
-      return acc.includes(id) ? acc : [...acc, id];
-    }
-    return acc;
-  }, []);
 
   return (
     <>
@@ -110,9 +103,7 @@ export const Conversations: React.FC = () => {
                         ? recipientNickname
                         : senderNickname
                     }
-                    lastMessageTimestamp={getLastMessageTimeStandFormated(
-                      lastMessageTimestamp
-                    )}
+                    lastMessageTimestamp={formatTimestamp(lastMessageTimestamp)}
                     onCardClick={navToConversation(id)}
                     onDeleteClick={onDeleteConversation(id)}
                   />

@@ -1,3 +1,5 @@
+import type { SxProps } from "@mui/material";
+
 import Avatar from "@mui/material/Avatar";
 export default Avatar;
 
@@ -18,10 +20,11 @@ export function stringToColor(string: string) {
   return color;
 }
 
-export function stringAvatar(name: string) {
+export function stringAvatar(name: string, sx?: SxProps) {
   return {
     sx: {
       bgcolor: stringToColor(name),
+      ...sx,
     },
     children: `${name.split(" ")[0][0]}`,
   };

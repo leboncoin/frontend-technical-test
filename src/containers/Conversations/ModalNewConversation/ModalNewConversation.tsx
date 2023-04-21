@@ -113,7 +113,7 @@ export const ModalNewConversation: React.FC<ModalNewConversationProps> = ({
               >
                 {userOptions.map(({ id, nickname }) => (
                   <MenuItem key={id} sx={{ padding: 2 }} value={id}>
-                    <Avatar {...stringAvatar(nickname)} sx={{ mr: 2 }} />
+                    <Avatar {...stringAvatar(nickname, { mr: 2 })} />
                     {nickname}
                   </MenuItem>
                 ))}

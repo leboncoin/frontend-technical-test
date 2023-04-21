@@ -1,4 +1,4 @@
-export const getLastMessageTimeStandFormated = (timeStamp: number) => {
+export const formatTimestamp = (timeStamp: number) => {
   if (!timeStamp) return;
   const lastMessageDate = new Date(timeStamp);
   const now = new Date();
@@ -7,8 +7,15 @@ export const getLastMessageTimeStandFormated = (timeStamp: number) => {
     "fr-FR",
     lastMessageDate >= today
       ? { hour: "numeric", minute: "numeric", hour12: false }
-      : { day: "numeric", month: "numeric", year: "numeric" }
+      : {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          hour12: false,
+        }
   );
 
-  return formatter.format(lastMessageDate);
+  return formatter.format(lastMessageDate).replace(":", "h").replace(",", " à");
 };

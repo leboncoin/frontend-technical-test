@@ -1,43 +1,47 @@
 import { NextPage } from "next";
-import Image from "next/image";
-import AddIcon from "@mui/icons-material/Add";
-import ChatIcon from "@mui/icons-material/Chat";
+
+import { dehydrate, QueryClient } from "react-query";
+
+import { getConversationsByUserId } from "@Api/conversations";
+import { getUsers } from "@Api/users";
+import { getMessagesByConversationId } from "@Api/messages";
 
 import { getLoggedUserId } from "@Utils/getLoggedUserId";
-import { getLastMessageTimeStandFormated } from "@Utils/date";
 
 import Chat from "@Containers/Chat";
 
-import Box from "@Components/Box";
-import ConversationCard from "@Components/ConversationCard/";
-import IconButton from "@Components/IconButton";
-import AppBar from "@Components/AppBar";
-import Toolbar from "@Components/Toolbar";
-
-import Logo from "@Assets/lbc-logo.webp";
-
-const ConversationPage: NextPage<{}> = ({}) => {
-  return <Chat messages={[]} />;
+interface ConversationPageProps {
+  conversationId: number;
+}
+const ConversationPage: NextPage<ConversationPageProps> = ({
+  conversationId,
+}) => {
+  return <Chat conversationId={conversationId} />;
 };
 
 export default ConversationPage;
 
-export async function getServerSideProps() {
-  //   const loggedUserId = getLoggedUserId();
+export async function getServerSideProps(ctx) {
+  const conversationId = ctx.query.id;
 
-  //   const resConversations = await fetch(
-  //     `${process.env.NEXT_PUBLIC_SERVER_HOST}/conversations/${loggedUserId}`
-  //   );
-  //   const conversations = await resConversations.json();
+  const loggedUserId = getLoggedUserId();
 
-  //   const resMessages = await fetch(
-  //     `${process.env.NEXT_PUBLIC_SERVER_HOST}/messages/1`
-  //   );
-  //   const messages = await resMessages.json();
+  const queryClient = new QueryClient();
 
-  //   console.log("conversations", conversations);
+  await queryClient.prefetchQuery("conversations", () =>
+    getConversationsByUserId(loggedUserId)
+  );
+
+  await queryClient.prefetchQuery("users", getUsers);
+
+  await queryClient.prefetchQuery(["messages", conversationId], () =>
+    getMessagesByConversationId(conversationId)
+  );
 
   return {
-    props: {},
+    props: {
+      dehydratedState: dehydrate(queryClient),
+      conversationId,
+    },
   };
 }

@@ -1,45 +1,69 @@
+import { useQuery } from "react-query";
+
+import { getMessagesByConversationId } from "@Api/messages";
+import { getUsers } from "@Api/users";
+
+import { formatTimestamp } from "@Utils/date";
+
+import { useUserId } from "@Containers/User/user-context";
+
 import AppBar from "@Components/AppBar";
 import Box from "@Components/Box";
+import Avatar, { stringAvatar } from "@Components/Avatar";
 import Button from "@Components/Button";
 import Toolbar from "@Components/Toolbar";
-import Typography from "@Components/Typography";
+import Message from "@Components/Message";
+import { getConversationsByUserId } from "@Api/conversations";
 
-interface Message {
-  id: number;
-  conversationId: number;
-  timestamp: number;
-  authorId: number;
-  body: string;
-}
 interface ChatProps {
-  messages: Message[];
+  conversationId: number;
 }
 
-export const Chat: React.FC<ChatProps> = ({ messages }) => {
-  const sendMessage = async () => {
-    const messageBody = { body: "test message", timestamp: Date.now() };
-    return await fetch(`${process.env.NEXT_PUBLIC_SERVER_HOST}/messages/1`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(messageBody),
-    });
-  };
+export const Chat: React.FC<ChatProps> = ({ conversationId }) => {
+  const userId = useUserId();
+  const { data: messages = [] } = useQuery(["messages", conversationId], () =>
+    getMessagesByConversationId(conversationId)
+  );
+  const { data: users } = useQuery("users", getUsers);
+  const { data: conversations } = useQuery("conversations", () =>
+    getConversationsByUserId(userId)
+  );
+  const conversation = conversations.filter(
+    ({ id }) => conversationId == id
+  )[0];
+
+  const nickname =
+    conversation.recipientId !== userId
+      ? conversation.recipientNickname
+      : conversation.senderNickname;
   return (
     <Box>
       <AppBar color="primary" position="static" sx={{ width: "100%" }}>
-        <Toolbar></Toolbar>
+        <Toolbar>
+          <Avatar {...stringAvatar(nickname, { mr: 2 })} />
+          {nickname}
+        </Toolbar>
       </AppBar>
       <Box>
-        {messages.map(({ id, conversationId, timestamp, authorId, body }) => (
-          <Typography key={id}>{body}</Typography>
-        ))}
+        {messages.map(({ id, timestamp, authorId, body }) => {
+          const author = users.filter(({ id }) => authorId === id)[0].nickname;
+          return (
+            <Message
+              key={id}
+              author={author}
+              color={authorId == userId ? "primary" : "secondary"}
+              timestamp={formatTimestamp(timestamp)}
+              align={authorId == userId ? "end" : "start"}
+            >
+              <>{body}</>
+            </Message>
+          );
+        })}
       </Box>
 
-      <Button color="primary" variant="contained" onClick={sendMessage}>
+      {/* <Button color="primary" variant="contained" onClick={sendMessage}>
         Envoyer
-      </Button>
+      </Button> */}
     </Box>
   );
 };
