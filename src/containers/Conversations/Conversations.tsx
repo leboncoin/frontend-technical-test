@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { useQuery, useMutation } from "react-query";
-
+import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import ChatIcon from "@mui/icons-material/Chat";
 
@@ -19,8 +18,6 @@ import { useNotification } from "@Containers/Notification/notification-context";
 import Box from "@Components/Box";
 import ConversationCard from "@Components/ConversationCard/";
 import IconButton from "@Components/IconButton";
-import Snackbar from "@Components/Snackbar";
-import Alert from "@Components/Alert";
 
 import ModalNewConversation from "./ModalNewConversation";
 
@@ -34,9 +31,13 @@ export const Conversations: React.FC<ConversationsProps> = ({
   const navToConversation = (id: number) => () => {
     router.push(`/conversations/${id}`);
   };
-  const [open, setOpen] = useNotification();
+
+  const [, setOpen] = useNotification();
   const handleOpenNotification = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  const [addConversationModalOpen, setAddOpenConversation] = useState(false);
+  const openAddConversationModal = () => setAddOpenConversation(true);
+  const closeAddConversationModal = () => setAddOpenConversation(false);
 
   const { data: conversations } = useQuery("conversations", () =>
     getConversationsByUserId(1)
@@ -51,10 +52,6 @@ export const Conversations: React.FC<ConversationsProps> = ({
     mutationDeleteConversation.mutate(id, {
       onError: handleOpenNotification,
     });
-
-  const [addConversationModalOpen, setAddOpenConversation] = useState(false);
-  const openAddConversationModal = () => setAddOpenConversation(true);
-  const closeAddConversationModal = () => setAddOpenConversation(false);
 
   const userId = useUserId();
 
@@ -133,11 +130,6 @@ export const Conversations: React.FC<ConversationsProps> = ({
         handleClose={closeAddConversationModal}
         userOptions={users.filter(({ id }) => id !== userId)}
       />
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Une erreur est survenue !
-        </Alert>
-      </Snackbar>
     </>
   );
 };

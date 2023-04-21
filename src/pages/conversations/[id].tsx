@@ -10,10 +10,13 @@ import { getLoggedUserId } from "@Utils/getLoggedUserId";
 
 import Conversations from "@Containers/Conversations";
 import Chat from "@Containers/Chat";
+import { useNotification } from "@Containers/Notification/notification-context";
 
 import Grid from "@Components/Grid";
 import AppBar from "@Components/AppBar";
 import Toolbar from "@Components/Toolbar";
+import Snackbar from "@Components/Snackbar";
+import Alert from "@Components/Alert";
 
 import Logo from "@Assets/lbc-logo.webp";
 
@@ -23,13 +26,14 @@ interface ConversationPageProps {
 const ConversationPage: NextPage<ConversationPageProps> = ({
   conversationId,
 }) => {
+  const [open, setOpen] = useNotification();
+  const handleClose = () => setOpen(false);
   return (
     <>
       <AppBar>
         <Toolbar
           sx={{
             p: "1rem 24px",
-            justifyContent: "center",
           }}
         >
           <Image src={Logo} alt="Leboncoin Frontend Team" width={100} />
@@ -43,6 +47,11 @@ const ConversationPage: NextPage<ConversationPageProps> = ({
           <Chat conversationId={conversationId} />
         </Grid>
       </Grid>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          Une erreur est survenue !
+        </Alert>
+      </Snackbar>
     </>
   );
 };
