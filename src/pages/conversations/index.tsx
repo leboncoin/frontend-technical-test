@@ -19,7 +19,7 @@ const ConversationsPage: NextPage = () => {
   return (
     <>
       <AppBar>
-        <Toolbar sx={{ p: "1rem 24px" }}>
+        <Toolbar sx={{ p: "1rem 24px", justifyContent: "center" }}>
           <Image src={Logo} alt="Leboncoin Frontend Team" width={100} />
         </Toolbar>
       </AppBar>

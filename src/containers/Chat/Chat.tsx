@@ -1,5 +1,9 @@
+import { useRouter } from "next/router";
 import React, { useRef, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 import { getMessagesByConversationId, addMessage } from "@Api/messages";
 import { getUsers } from "@Api/users";
@@ -17,6 +21,7 @@ import Button from "@Components/Button";
 import Toolbar from "@Components/Toolbar";
 import Message from "@Components/Message";
 import TextField from "@Components/TextField";
+import IconButton from "@Components/IconButton";
 
 import type { Message as TMessage } from "@Types/message";
 
@@ -103,6 +108,11 @@ export const Chat: React.FC<ChatProps> = ({ conversationId }) => {
     });
   };
 
+  const theme = useTheme();
+  const isSmallDevice = useMediaQuery(theme.breakpoints.down("lg"));
+  const router = useRouter();
+  const navToConversations = () => router.push("/conversations");
+
   return (
     <Box
       sx={{
@@ -129,7 +139,21 @@ export const Chat: React.FC<ChatProps> = ({ conversationId }) => {
             alignItems: "center",
           }}
         >
-          <Toolbar>
+          <Toolbar
+            sx={{
+              justifyContent: "center",
+              position: "relative",
+              width: "100%",
+            }}
+          >
+            {isSmallDevice && (
+              <IconButton
+                onClick={navToConversations}
+                sx={{ position: "absolute", left: "8px" }}
+              >
+                <ArrowBackIosNewIcon sx={{ color: "common.white" }} />
+              </IconButton>
+            )}
             <Avatar {...stringAvatar(nickname, { mr: 2 })} />
             {nickname}
           </Toolbar>

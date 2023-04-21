@@ -24,7 +24,12 @@ import Alert from "@Components/Alert";
 
 import ModalNewConversation from "./ModalNewConversation";
 
-export const Conversations: React.FC = () => {
+interface ConversationsProps {
+  conversationId?: number;
+}
+export const Conversations: React.FC<ConversationsProps> = ({
+  conversationId,
+}) => {
   const router = useRouter();
   const navToConversation = (id: number) => () => {
     router.push(`/conversations/${id}`);
@@ -55,13 +60,23 @@ export const Conversations: React.FC = () => {
 
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          minheight: "100%",
+          height: "calc(100vh - 64px)",
+          overflowY: "scroll",
+          flex: 1,
+        }}
+      >
         <Box
           sx={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
+
             p: "0 1rem",
           }}
         >
@@ -97,13 +112,14 @@ export const Conversations: React.FC = () => {
                 return (
                   <ConversationCard
                     key={id}
+                    isSelected={id == conversationId}
                     id={id}
                     nickname={
                       recipientId !== userId
                         ? recipientNickname
                         : senderNickname
                     }
-                    lastMessageTimestamp={formatTimestamp(lastMessageTimestamp)}
+                    messageTimestamp={formatTimestamp(lastMessageTimestamp)}
                     onCardClick={navToConversation(id)}
                     onDeleteClick={onDeleteConversation(id)}
                   />

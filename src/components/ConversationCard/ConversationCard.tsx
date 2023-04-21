@@ -11,14 +11,16 @@ import Avatar, { stringAvatar } from "@Components/Avatar";
 interface IConversationCardProps {
   id: number;
   nickname: string;
-  lastMessageTimestamp: string;
+  messageTimestamp: string;
+  isSelected: boolean;
   onCardClick: (id: number) => void;
   onDeleteClick: (id: number) => void;
 }
 export const ConversationCard: React.FC<IConversationCardProps> = ({
   id,
   nickname,
-  lastMessageTimestamp,
+  messageTimestamp,
+  isSelected,
   onCardClick,
   onDeleteClick,
 }) => {
@@ -40,6 +42,7 @@ export const ConversationCard: React.FC<IConversationCardProps> = ({
         alignItems: "center",
         borderBottom: "1px solid",
         borderColor: "grey.200",
+        backgroundColor: isSelected ? "grey.200" : "none",
         boxShadow: "none",
         borderRadius: "none",
         p: 2,
@@ -68,7 +71,7 @@ export const ConversationCard: React.FC<IConversationCardProps> = ({
             variant="caption"
             sx={{ color: "grey.500" }}
           >
-            {lastMessageTimestamp || "0 message"}
+            {messageTimestamp || "0 message"}
           </Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: "end" }}>
