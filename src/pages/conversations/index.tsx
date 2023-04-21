@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-
 import Image from "next/image";
 import { dehydrate, QueryClient } from "react-query";
 

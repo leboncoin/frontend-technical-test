@@ -41,8 +41,8 @@ export const Message: React.FC<MessageProps> = ({
           <Typography
             paragraph
             variant="caption"
-            textAlign="left"
-            sx={{ width: "100%" }}
+            textAlign={align === "start" ? "left" : "right"}
+            sx={{ width: "100%", mb: 0 }}
           >
             {timestamp}
           </Typography>
