@@ -1,20 +1,26 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 
 import AddIcon from "@mui/icons-material/Add";
 import ChatIcon from "@mui/icons-material/Chat";
 
-import { getConversationsByUserId } from "@Api/conversations";
+import {
+  getConversationsByUserId,
+  deleteConversation,
+} from "@Api/conversations";
 import { getUsers } from "@Api/users";
 
 import { getLastMessageTimeStandFormated } from "@Utils/date";
 
 import { useUserId } from "@Containers/User/user-context";
+import { useNotification } from "@Containers/Notification/notification-context";
 
 import Box from "@Components/Box";
 import ConversationCard from "@Components/ConversationCard/";
 import IconButton from "@Components/IconButton";
+import Snackbar from "@Components/Snackbar";
+import Alert from "@Components/Alert";
 
 import ModalNewConversation from "./ModalNewConversation";
 
@@ -23,6 +29,9 @@ export const Conversations: React.FC = () => {
   const navToConversation = (id: number) => () => {
     router.push(`/conversations/${id}`);
   };
+  const [open, setOpen] = useNotification();
+  const handleOpenNotification = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const { data: conversations } = useQuery("conversations", () =>
     getConversationsByUserId(1)
@@ -30,18 +39,17 @@ export const Conversations: React.FC = () => {
 
   const { data: users } = useQuery("users", getUsers);
 
+  const mutationDeleteConversation = useMutation((id: number) =>
+    deleteConversation(id)
+  );
+  const onDeleteConversation = (id: number) => () =>
+    mutationDeleteConversation.mutate(id, {
+      onError: handleOpenNotification,
+    });
+
   const [addConversationModalOpen, setAddOpenConversation] = useState(false);
   const openAddConversationModal = () => setAddOpenConversation(true);
   const closeAddConversationModal = () => setAddOpenConversation(false);
-
-  const handleDeleteConversation = (id: number) => async () => {
-    return await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_HOST}/conversation/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
-  };
 
   const userId = useUserId();
   const userWithConv = conversations.reduce((acc, curr) => {
@@ -98,7 +106,7 @@ export const Conversations: React.FC = () => {
                     lastMessageTimestamp
                   )}
                   onCardClick={navToConversation(id)}
-                  onDeleteClick={handleDeleteConversation(id)}
+                  onDeleteClick={onDeleteConversation(id)}
                 />
               );
             }
@@ -112,6 +120,11 @@ export const Conversations: React.FC = () => {
           ({ id }) => !userWithConv.includes(id) && id !== userId
         )}
       />
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          Une erreur est survenue !
+        </Alert>
+      </Snackbar>
     </>
   );
 };

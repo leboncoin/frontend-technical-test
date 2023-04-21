@@ -3,6 +3,10 @@ import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { useState } from "react";
 
 import { UserProvider } from "@Containers/User/user-context";
+import {
+  NotificationProvider,
+  useNotification,
+} from "@Containers/Notification/notification-context";
 
 import CssBaseline from "@Components/CssBaseline";
 
@@ -14,10 +18,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <UserProvider>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </UserProvider>
+        <NotificationProvider>
+          <UserProvider>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </UserProvider>
+        </NotificationProvider>
       </Hydrate>
     </QueryClientProvider>
   );

@@ -63,6 +63,14 @@
       "senderNickname": "Thibaut",
       "lastMessageTimestamp": null,
       "id": 8
+    },
+    {
+      "senderId": 1,
+      "recipientId": 3,
+      "recipientNickname": "Patrick",
+      "senderNickname": "Thibaut",
+      "lastMessageTimestamp": null,
+      "id": 9
     }
   ],
   "messages": [

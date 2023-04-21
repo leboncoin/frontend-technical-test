@@ -4,6 +4,7 @@ import { addConversation } from "@Api/conversations";
 import { getUsers } from "@Api/users";
 
 import { useUserId } from "@Containers/User/user-context";
+import { useNotification } from "@Containers/Notification/notification-context";
 
 import {
   Dialog,
@@ -39,6 +40,9 @@ export const ModalNewConversation: React.FC<ModalNewConversationProps> = ({
   userOptions,
 }) => {
   const userId = useUserId();
+  const [, setOpenNotification] = useNotification();
+  const handleOpenNotification = () => setOpenNotification(true);
+
   const queryClient = useQueryClient();
   const { data: users } = useQuery("users", getUsers);
   const mutationConversation = useMutation((recipientId: number) => {
@@ -74,6 +78,7 @@ export const ModalNewConversation: React.FC<ModalNewConversationProps> = ({
 
           return previousConversations;
         },
+        onError: handleOpenNotification,
         onSettled: handleClose,
       }
     );
