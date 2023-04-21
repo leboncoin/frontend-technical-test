@@ -9,68 +9,36 @@
       "lastMessageTimestamp": 1625637849
     },
     {
+      "id": 2,
+      "recipientId": 3,
+      "recipientNickname": "Patrick",
       "senderId": 1,
-      "recipientId": 4,
-      "recipientNickname": "Elodie",
       "senderNickname": "Thibaut",
-      "lastMessageTimestamp": null,
-      "id": 2
+      "lastMessageTimestamp": 1620284667
     },
     {
-      "senderId": 1,
-      "recipientId": 4,
-      "recipientNickname": "Elodie",
-      "senderNickname": "Thibaut",
-      "lastMessageTimestamp": null,
-      "id": 3
-    },
-    {
-      "senderId": 1,
-      "recipientId": 4,
-      "recipientNickname": "Elodie",
-      "senderNickname": "Thibaut",
-      "lastMessageTimestamp": null,
-      "id": 4
-    },
-    {
-      "senderId": 1,
-      "recipientId": 4,
-      "recipientNickname": "Elodie",
-      "senderNickname": "Thibaut",
-      "lastMessageTimestamp": null,
-      "id": 5
-    },
-    {
-      "senderId": 1,
-      "recipientId": 4,
-      "recipientNickname": "Elodie",
-      "senderNickname": "Thibaut",
-      "lastMessageTimestamp": null,
-      "id": 6
-    },
-    {
-      "senderId": 1,
-      "recipientId": 4,
-      "recipientNickname": "Elodie",
-      "senderNickname": "Thibaut",
-      "lastMessageTimestamp": null,
-      "id": 7
-    },
-    {
-      "senderId": 1,
-      "recipientId": 4,
-      "recipientNickname": "Elodie",
-      "senderNickname": "Thibaut",
-      "lastMessageTimestamp": null,
-      "id": 8
+      "id": 3,
+      "recipientId": 1,
+      "recipientNickname": "Thibaut",
+      "senderId": 4,
+      "senderNickname": "Elodie",
+      "lastMessageTimestamp": 1625648667
     },
     {
       "senderId": 1,
       "recipientId": 3,
       "recipientNickname": "Patrick",
       "senderNickname": "Thibaut",
-      "lastMessageTimestamp": null,
-      "id": 9
+      "lastMessageTimestamp": 1682077914606,
+      "id": 4
+    },
+    {
+      "senderId": 1,
+      "recipientId": 2,
+      "recipientNickname": "Jeremie",
+      "senderNickname": "Thibaut",
+      "lastMessageTimestamp": 1682078113781,
+      "id": 5
     }
   ],
   "messages": [

@@ -89,36 +89,42 @@ export const Conversations: React.FC = () => {
         </Box>
 
         <Box>
-          {conversations.map(
-            ({
-              id,
-              recipientNickname,
-              senderNickname,
-              lastMessageTimestamp,
-            }) => {
-              return (
-                <ConversationCard
-                  key={id}
-                  id={id}
-                  recipientNickname={recipientNickname}
-                  senderNickname={senderNickname}
-                  lastMessageTimestamp={getLastMessageTimeStandFormated(
-                    lastMessageTimestamp
-                  )}
-                  onCardClick={navToConversation(id)}
-                  onDeleteClick={onDeleteConversation(id)}
-                />
-              );
-            }
-          )}
+          {conversations
+            .sort((a, b) =>
+              a.lastMessageTimestamp >= b.lastMessageTimestamp ? -1 : 1
+            )
+            .map(
+              ({
+                id,
+                recipientId,
+                recipientNickname,
+                senderNickname,
+                lastMessageTimestamp,
+              }) => {
+                return (
+                  <ConversationCard
+                    key={id}
+                    id={id}
+                    nickname={
+                      recipientId !== userId
+                        ? recipientNickname
+                        : senderNickname
+                    }
+                    lastMessageTimestamp={getLastMessageTimeStandFormated(
+                      lastMessageTimestamp
+                    )}
+                    onCardClick={navToConversation(id)}
+                    onDeleteClick={onDeleteConversation(id)}
+                  />
+                );
+              }
+            )}
         </Box>
       </Box>
       <ModalNewConversation
         open={addConversationModalOpen}
         handleClose={closeAddConversationModal}
-        userOptions={users.filter(
-          ({ id }) => !userWithConv.includes(id) && id !== userId
-        )}
+        userOptions={users.filter(({ id }) => id !== userId)}
       />
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>

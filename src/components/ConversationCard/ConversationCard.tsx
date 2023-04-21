@@ -3,23 +3,21 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Card from "@Components/Card";
 import Box from "@Components/Box";
 import CardContent from "@Components/CardContent";
-import CardMedia from "@Components/CardMedia";
+import CardActions from "@Components/CardActions";
 import IconButton from "@Components/IconButton";
 import Typography from "@Components/Typography";
-import { CardActions } from "@mui/material";
+import Avatar, { stringAvatar } from "@Components/Avatar";
 
 interface IConversationCardProps {
   id: number;
-  recipientNickname: string;
-  senderNickname: string;
+  nickname: string;
   lastMessageTimestamp: string;
   onCardClick: (id: number) => void;
   onDeleteClick: (id: number) => void;
 }
 export const ConversationCard: React.FC<IConversationCardProps> = ({
   id,
-  recipientNickname,
-  senderNickname,
+  nickname,
   lastMessageTimestamp,
   onCardClick,
   onDeleteClick,
@@ -39,6 +37,7 @@ export const ConversationCard: React.FC<IConversationCardProps> = ({
       sx={{
         boxSizing: "borderBox",
         display: "flex",
+        alignItems: "center",
         borderBottom: "1px solid",
         borderColor: "grey.200",
         boxShadow: "none",
@@ -54,55 +53,35 @@ export const ConversationCard: React.FC<IConversationCardProps> = ({
         },
       }}
     >
-      <CardMedia
-        component="img"
-        sx={{ width: 50, height: 50, borderRadius: "50%" }}
-        image={`https://i.pravatar.cc/50?img=${id}`}
-        alt={`randomn picsum ${id}`}
-      />
-      <Box sx={{ display: "flex", flexDirection: "row", flex: "1" }}>
-        <Box
-          sx={{
-            flex: "4",
-          }}
+      <CardContent>
+        <Avatar {...stringAvatar(nickname)} />
+      </CardContent>
+      <Box sx={{ display: "flex", justifyContent: "space-between", flex: "1" }}>
+        <CardContent
+          sx={{ padding: "0 0 0 1rem", paddingBottom: "0!important" }}
         >
-          <CardContent
-            sx={{ padding: "0 0 0 1rem", paddingBottom: "0!important" }}
+          <Typography component="div" variant="h5">
+            {nickname}
+          </Typography>
+          <Typography
+            component="div"
+            variant="caption"
+            sx={{ color: "grey.500" }}
           >
-            <Typography component="div" variant="h5">
-              {recipientNickname}
-            </Typography>
-          </CardContent>
-          <CardContent
-            sx={{ padding: "0 0 0 1rem", paddingBottom: "0!important" }}
-          >
-            <Typography component="p" variant="body2" noWrap>
-              lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </Typography>
-          </CardContent>
-        </Box>
-        <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
-          <CardContent sx={{ padding: "0 1rem" }}>
-            <Typography
-              component="div"
-              variant="caption"
-              sx={{ color: "grey.500", textAlign: "right" }}
-            >
-              {lastMessageTimestamp || "0 message"}
-            </Typography>
-            <CardActions sx={{ justifyContent: "end" }}>
-              <IconButton onClick={handleDeleteClick}>
-                <DeleteIcon
-                  sx={{
-                    "&:hover": {
-                      color: "error.main",
-                    },
-                  }}
-                />
-              </IconButton>
-            </CardActions>
-          </CardContent>
-        </Box>
+            {lastMessageTimestamp || "0 message"}
+          </Typography>
+        </CardContent>
+        <CardActions sx={{ justifyContent: "end" }}>
+          <IconButton onClick={handleDeleteClick}>
+            <DeleteIcon
+              sx={{
+                "&:hover": {
+                  color: "error.main",
+                },
+              }}
+            />
+          </IconButton>
+        </CardActions>
       </Box>
     </Card>
   );

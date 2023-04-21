@@ -14,7 +14,7 @@ import {
 } from "@Components/Dialog";
 import Button from "@Components/Button";
 import Box from "@Components/Box";
-import Avatar from "@Components/Avatar";
+import Avatar, { stringAvatar } from "@Components/Avatar";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
@@ -55,7 +55,7 @@ export const ModalNewConversation: React.FC<ModalNewConversationProps> = ({
       recipientId,
       recipientNickname,
       senderNickname,
-      lastMessageTimestamp: null,
+      lastMessageTimestamp: Date.now(),
     });
   });
 
@@ -113,10 +113,7 @@ export const ModalNewConversation: React.FC<ModalNewConversationProps> = ({
               >
                 {userOptions.map(({ id, nickname }) => (
                   <MenuItem key={id} sx={{ padding: 2 }} value={id}>
-                    <Avatar
-                      src={`https://i.pravatar.cc/50?img=${id}`}
-                      sx={{ mr: 2 }}
-                    ></Avatar>
+                    <Avatar {...stringAvatar(nickname)} sx={{ mr: 2 }} />
                     {nickname}
                   </MenuItem>
                 ))}
