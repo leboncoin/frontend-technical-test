@@ -23,22 +23,6 @@
       "senderId": 4,
       "senderNickname": "Elodie",
       "lastMessageTimestamp": 1625648667
-    },
-    {
-      "senderId": 1,
-      "recipientId": 3,
-      "recipientNickname": "Patrick",
-      "senderNickname": "Thibaut",
-      "lastMessageTimestamp": 1682077914606,
-      "id": 4
-    },
-    {
-      "senderId": 1,
-      "recipientId": 2,
-      "recipientNickname": "Jeremie",
-      "senderNickname": "Thibaut",
-      "lastMessageTimestamp": 1682078113781,
-      "id": 5
     }
   ],
   "messages": [
@@ -69,27 +53,6 @@
       "timestamp": 1620284667,
       "authorId": 2,
       "body": "Bonjour c'est le premier message de la seconde conversation"
-    },
-    {
-      "body": "fsdfsdfsdf",
-      "authorId": 1,
-      "timestamp": 1682102527110,
-      "conversationId": "15",
-      "id": 5
-    },
-    {
-      "body": "fsdfsdf",
-      "authorId": 1,
-      "timestamp": 1682102536997,
-      "conversationId": "15",
-      "id": 6
-    },
-    {
-      "body": "dsqdqsdqsdqsdqs",
-      "authorId": 1,
-      "timestamp": 1682102577363,
-      "conversationId": "15",
-      "id": 7
     }
   ],
   "users": [
