@@ -8,7 +8,6 @@ import { getUsers } from "@Api/users";
 import { getLoggedUserId } from "@Utils/getLoggedUserId";
 
 import Conversations from "@Containers/Conversations";
-
 import { useNotification } from "@Containers/Notification/notification-context";
 
 import AppBar from "@Components/AppBar";
