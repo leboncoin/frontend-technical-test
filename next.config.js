@@ -1,7 +1,7 @@
 module.exports = {
   i18n: {
-    locales: ['fr'],
-    defaultLocale: 'fr',
+    locales: ["fr"],
+    defaultLocale: "fr",
   },
   eslint: {
     ignoreDuringBuilds: true,
@@ -9,4 +9,13 @@ module.exports = {
   compiler: {
     styledComponents: true,
   },
-}
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/conversations",
+        permanent: true,
+      },
+    ];
+  },
+};
