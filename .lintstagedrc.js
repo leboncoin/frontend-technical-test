@@ -6,10 +6,9 @@ const buildEslintCommand = (filenames) =>
     .join(' --file ')}`
 
 const buildPrettierCommand = (filenames) =>
-  `prettier ${filenames.map((f) => path.relative(process.cwd(), f))} --write`
+  `prettier ${filenames.join(' ')} --write`
 
 module.exports = {
-  '*.{ts,tsx}': () => 'type-check',
   '*.{js,jsx,ts,tsx}': [buildEslintCommand, buildPrettierCommand],
   '*.{md|json|html}': [buildPrettierCommand],
 }
