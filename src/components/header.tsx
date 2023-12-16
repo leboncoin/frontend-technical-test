@@ -14,6 +14,7 @@ export default function Header() {
             alt="Leboncoin Frontend Team"
             width={140}
             height={44}
+            priority
           />
         </Link>
 
