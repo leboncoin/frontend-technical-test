@@ -4,6 +4,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
+import Head from 'next/head'
 import { useState } from 'react'
 
 import { getLoggedUserId } from '@/utils/getLoggedUserId'
@@ -16,11 +17,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <HydrationBoundary state={pageProps.dehydratedState}>
-        <Component {...pageProps} />
-      </HydrationBoundary>
-    </QueryClientProvider>
+    <>
+      <Head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </Head>
+
+      <QueryClientProvider client={queryClient}>
+        <HydrationBoundary state={pageProps.dehydratedState}>
+          <Component {...pageProps} />
+        </HydrationBoundary>
+      </QueryClientProvider>
+    </>
   )
 }
 
