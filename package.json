@@ -22,10 +22,12 @@
     "@next/font": "^13.1.6",
     "@tanstack/react-query": "^5.14.0",
     "@types/react-dom": "^18.0.11",
+    "clsx": "^2.0.0",
     "next": "^13.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.0",
+    "tailwind-merge": "^2.1.0"
   },
   "devDependencies": {
     "@tanstack/react-query-devtools": "^5.14.0",
