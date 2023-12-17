@@ -64,6 +64,11 @@ export default function Conversation({
               key={message.id}
               messageBody={message.body}
               isLoggedUser={userId === message.authorId}
+              senderName={
+                userId === message.authorId
+                  ? undefined
+                  : notLoggedUserParticipantName
+              }
             />
           ))}
         </div>
