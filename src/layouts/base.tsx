@@ -1,13 +1,17 @@
 import { ReactNode } from 'react'
 import Head from 'next/head'
+import { type ClassValue } from 'clsx'
 
 import Header from '@/components/header'
 
+import { cn } from '@/utils/cn'
+
 interface BaseLayoutProps {
   children?: ReactNode
+  className?: ClassValue
 }
 
-export default function BaseLayout({ children }: BaseLayoutProps) {
+export default function BaseLayout({ children, className }: BaseLayoutProps) {
   const year = new Date().getFullYear()
 
   return (
@@ -23,7 +27,9 @@ export default function BaseLayout({ children }: BaseLayoutProps) {
 
       <Header />
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
+      <main
+        className={cn('mx-auto w-full max-w-5xl flex-1 px-4 py-8', className)}
+      >
         {children}
       </main>
 
