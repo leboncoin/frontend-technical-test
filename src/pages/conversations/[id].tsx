@@ -10,6 +10,7 @@ import { getConversation } from '@/api/index'
 import { Message } from '@/types/message'
 import { getLoggedUserId } from '@/utils/getLoggedUserId'
 import sentIcon from '@/assets/sent.svg'
+import { formatLastMessageDateAndTime } from '@/utils/formatters'
 
 export default function Conversation({
   conversationId,
@@ -29,6 +30,12 @@ export default function Conversation({
     )
   }
 
+  const lastMessageTimestamp: number = messages[messages.length - 1]?.timestamp
+  const [lastMessageDate, lastMessageTime] =
+    formatLastMessageDateAndTime(lastMessageTimestamp)
+
+  const hasMessages = !!messages.length
+
   return (
     <Layout className="flex items-stretch">
       <div className="flex w-full flex-col gap-4">
@@ -41,7 +48,11 @@ export default function Conversation({
 
         <div className="flex justify-between bg-grey-300 px-2 py-4">
           <span>Jane Doe - You</span>
-          <span>Last message today at 2:45</span>
+          {hasMessages && (
+            <span>
+              Last message {lastMessageDate} at {lastMessageTime}
+            </span>
+          )}
         </div>
 
         <div className="flex flex-1 flex-col justify-end gap-2">
