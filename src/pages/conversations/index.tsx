@@ -5,12 +5,11 @@ import Card from '@/components/conversation-card'
 
 import { getConversations } from '@/api/index'
 import { getLoggedUserId } from '@/utils/getLoggedUserId'
-import { Conversation } from '@/types/conversation'
 
 export default function Conversations() {
   const userId = getLoggedUserId()
 
-  const { data: conversations, isLoading } = useQuery<Conversation[]>({
+  const { data: conversations, isLoading } = useQuery({
     queryKey: ['conversations', userId],
     queryFn: () => getConversations(userId),
   })

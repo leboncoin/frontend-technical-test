@@ -9,5 +9,5 @@ export function formatLastMessageDateAndTime(timestamp?: number) {
     minute: '2-digit',
   }).format(timestamp)
 
-  return [lastMessageDate, lastMessageTime]
+  return { date: lastMessageDate, time: lastMessageTime }
 }

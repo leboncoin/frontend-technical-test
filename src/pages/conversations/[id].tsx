@@ -6,20 +6,20 @@ import Image from 'next/image'
 import Layout from '@/layouts/base'
 import MessageRow from '@/components/message-row'
 
-import { getConversation } from '@/api/index'
-import { Message } from '@/types/message'
+import { getMessages, getConversations } from '@/api/index'
+import { Conversation } from '@/types/conversation'
 import { getLoggedUserId } from '@/utils/getLoggedUserId'
 import sentIcon from '@/assets/sent.svg'
 import { formatLastMessageDateAndTime } from '@/utils/formatters'
 
 export default function Conversation({
-  conversationId,
+  conversation,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const userId = getLoggedUserId()
 
-  const { data: messages, isLoading } = useQuery<Message[]>({
-    queryKey: ['conversation', userId, conversationId],
-    queryFn: () => getConversation(conversationId),
+  const { data: messages, isLoading } = useQuery({
+    queryKey: ['conversation', userId, conversation.id],
+    queryFn: () => getMessages(conversation.id),
   })
 
   if (isLoading) {
@@ -30,11 +30,13 @@ export default function Conversation({
     )
   }
 
-  const lastMessageTimestamp: number = messages[messages.length - 1]?.timestamp
-  const [lastMessageDate, lastMessageTime] =
-    formatLastMessageDateAndTime(lastMessageTimestamp)
+  const lastMessageTimestamp = messages[messages.length - 1]?.timestamp
+  const lastMessageTimeData = formatLastMessageDateAndTime(lastMessageTimestamp)
 
-  const hasMessages = !!messages.length
+  const notLoggedUserParticipantName =
+    conversation.recipientId === userId
+      ? conversation.senderNickname
+      : conversation.recipientNickname
 
   return (
     <Layout className="flex items-stretch">
@@ -47,10 +49,11 @@ export default function Conversation({
         </Link>
 
         <div className="flex justify-between bg-grey-300 px-2 py-4">
-          <span>Jane Doe - You</span>
-          {hasMessages && (
+          <span>{notLoggedUserParticipantName} - You</span>
+          {lastMessageTimeData && (
             <span>
-              Last message {lastMessageDate} at {lastMessageTime}
+              Last message {lastMessageTimeData.date} at{' '}
+              {lastMessageTimeData.time}
             </span>
           )}
         </div>
@@ -89,15 +92,26 @@ export async function getServerSideProps({
 
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery({
-    queryKey: ['conversation', userId, id],
-    queryFn: () => getConversation(parsedId),
-  })
+  const [conversations] = await Promise.all([
+    getConversations(userId),
+    queryClient.prefetchQuery({
+      queryKey: ['conversation', userId, id],
+      queryFn: () => getMessages(parsedId),
+    }),
+  ])
+
+  const conversation = conversations.find((conv) => conv.id === parsedId)
+
+  if (!conversation) {
+    return {
+      notFound: true,
+    }
+  }
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      conversationId: parsedId,
+      conversation,
     },
   }
 }
