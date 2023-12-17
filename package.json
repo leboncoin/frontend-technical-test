@@ -26,8 +26,10 @@
     "next": "^13.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.49.2",
     "sharp": "^0.33.0",
-    "tailwind-merge": "^2.1.0"
+    "tailwind-merge": "^2.1.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@tanstack/react-query-devtools": "^5.14.0",

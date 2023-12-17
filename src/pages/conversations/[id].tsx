@@ -1,15 +1,14 @@
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 
 import Layout from '@/layouts/base'
 import MessageRow from '@/components/message-row'
+import MessageForm from '@/components/message-form'
 
 import { getMessages, getConversations } from '@/api/index'
 import { Conversation } from '@/types/conversation'
 import { getLoggedUserId } from '@/utils/getLoggedUserId'
-import sentIcon from '@/assets/sent.svg'
 import { formatLastMessageDateAndTime } from '@/utils/formatters'
 
 export default function Conversation({
@@ -73,16 +72,7 @@ export default function Conversation({
           ))}
         </div>
 
-        <form className="mt-4 flex items-center gap-4 rounded-2xl border border-grey-300 px-4 py-2 focus-within:border-grey-500">
-          <textarea
-            rows={3}
-            className="flex-1 rounded-2xl px-4 outline-none"
-            placeholder="Send message"
-          />
-          <button className="flex h-14 w-14 items-center justify-center rounded-2xl bg-grey-300 transition hover:bg-orange-600 disabled:opacity-70 disabled:hover:bg-grey-300">
-            <Image src={sentIcon} height={24} width={24} alt="send message" />
-          </button>
-        </form>
+        <MessageForm authorId={userId} conversationId={conversation.id} />
       </div>
     </Layout>
   )
