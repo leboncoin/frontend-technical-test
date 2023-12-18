@@ -59,6 +59,15 @@ export default function Conversations() {
 export async function getServerSideProps() {
   const userId = getLoggedUserId()
 
+  if (!userId) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({

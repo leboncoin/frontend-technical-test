@@ -83,6 +83,15 @@ export async function getServerSideProps({
 }: GetServerSidePropsContext<{ id: string }>) {
   const userId = getLoggedUserId()
 
+  if (!userId) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+
   const parsedId = Number(id)
 
   const queryClient = new QueryClient()
