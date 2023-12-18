@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { within, expect } from '@storybook/test'
 
 import MessageRow from '@/components/message-row'
 
@@ -17,11 +18,25 @@ export const LoggedUserMessage: Story = {
   args: {
     isLoggedUser: true,
   },
+  play: ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+
+    expect(
+      canvas.getByText(
+        /lorem ipsum dolor sit amet, consectetur adipiscing elit\./i
+      )
+    ).toBeInTheDocument()
+  },
 }
 
 export const NotLoggedUserMessage: Story = {
   args: {
     isLoggedUser: false,
     senderName: 'John',
+  },
+  play: ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+
+    expect(canvas.getByText(/john/i)).toBeInTheDocument()
   },
 }

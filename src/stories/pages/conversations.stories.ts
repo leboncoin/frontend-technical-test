@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { rest } from 'msw'
+import { within, expect } from '@storybook/test'
 
 import Conversations from '@/pages/conversations'
 
@@ -27,6 +28,14 @@ export const Default: Story = {
       ],
     },
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+
+    const list = await canvas.findByRole('list')
+    const listScope = within(list)
+
+    expect(listScope.getAllByRole('link')).toHaveLength(4)
+  },
 }
 
 export const Empty: Story = {
@@ -39,6 +48,15 @@ export const Empty: Story = {
       ],
     },
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+
+    const emptyMessage = await canvas.findByRole('heading', {
+      name: /no messages yet\.\.\./i,
+    })
+
+    expect(emptyMessage).toBeInTheDocument()
+  },
 }
 
 export const Loading: Story = {
@@ -50,5 +68,14 @@ export const Loading: Story = {
         }),
       ],
     },
+  },
+  play: ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+
+    const loadingMessage = canvas.getByRole('heading', {
+      name: /loading\.\.\./i,
+    })
+
+    expect(loadingMessage).toBeInTheDocument()
   },
 }
