@@ -1,3 +1,6 @@
+> [!NOTE]  
+> The solution rationale can be found in [`./docs/rationale.md`](./docs/rationale.md)
+
 # Context :
 
 At leboncoin, our users can share messages about a transaction, or ask for informations about any products.
