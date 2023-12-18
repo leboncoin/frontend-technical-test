@@ -7,13 +7,15 @@ import MessageRow from '@/components/message-row'
 import MessageForm from '@/components/message-form'
 
 import { getMessages, getConversations } from '@/api/index'
-import { Conversation } from '@/types/conversation'
 import { getLoggedUserId } from '@/utils/getLoggedUserId'
 import { formatLastMessageDateAndTime } from '@/utils/formatters'
 
 export default function Conversation({
   conversation,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: Omit<
+  InferGetServerSidePropsType<typeof getServerSideProps>,
+  'dehydratedState'
+>) {
   const userId = getLoggedUserId()
 
   const { data: messages, isLoading } = useQuery({

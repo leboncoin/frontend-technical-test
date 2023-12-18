@@ -21,7 +21,8 @@
       "@/layouts/*": ["./src/layouts/*"],
       "@/assets/*": ["./src/assets/*"],
       "@/api/*": ["./src/api/*"],
-      "@/types/*": ["./src/types/*"]
+      "@/types/*": ["./src/types/*"],
+      "@/mocks/*": ["./src/mocks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
