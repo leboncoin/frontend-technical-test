@@ -1,9 +1,9 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
   description: Simple API for frontend technical test - leboncoin
   version: 1.0.0
   title: Frontend technical test
-host: "localhost:3005"
+host: 'localhost:3005'
 basePath: /
 tags:
   - name: conversations
@@ -15,12 +15,12 @@ tags:
 schemes:
   - http
 paths:
-  "/conversations/{userId}":
+  '/conversations/{userId}':
     get:
       tags:
         - conversations
       summary: Get all conversations for one user
-      description: ""
+      description: ''
       operationId: getConversationsByUserId
       produces:
         - application/json
@@ -31,21 +31,21 @@ paths:
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Success
           schema:
             type: array
             items:
-              $ref: "#/definitions/Conversation"
-        "404":
+              $ref: '#/definitions/Conversation'
+        '404':
           description: No conversations found
-        "503":
+        '503':
           description: Unavailable
     post:
       tags:
         - conversations
       summary: Create a new Conversation
-      description: ""
+      description: ''
       operationId: addConversation
       consumes:
         - application/json
@@ -67,23 +67,23 @@ paths:
               recipientId:
                 type: integer
       responses:
-        "200":
+        '200':
           description: Success
           schema:
             type: object
             properties:
               id:
                 type: integer
-        "400":
+        '400':
           description: Invalid input
-        "503":
+        '503':
           description: Unavailable
-  "/conversation/{conversationId}":
+  '/conversation/{conversationId}':
     delete:
       tags:
         - conversations
       summary: Delete one conversation
-      description: ""
+      description: ''
       operationId: deleteConversationById
       produces:
         - application/json
@@ -94,16 +94,16 @@ paths:
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Success
-        "503":
+        '503':
           description: Unavailable
-  "/messages/{conversationId}":
+  '/messages/{conversationId}':
     get:
       tags:
         - messages
       summary: Get all messages for one conversation
-      description: ""
+      description: ''
       operationId: getMessagesByConversationId
       produces:
         - application/json
@@ -114,21 +114,21 @@ paths:
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Success
           schema:
             type: array
             items:
-              $ref: "#/definitions/Message"
-        "404":
+              $ref: '#/definitions/Message'
+        '404':
           description: No messages found
-        "503":
+        '503':
           description: Unavailable
     post:
       tags:
         - messages
       summary: Create a new message in conversation
-      description: ""
+      description: ''
       operationId: addMessageInConversation
       consumes:
         - application/json
@@ -151,23 +151,23 @@ paths:
               timestamp:
                 type: integer
       responses:
-        "200":
+        '200':
           description: Success
           schema:
             type: object
             properties:
               id:
                 type: integer
-        "400":
+        '400':
           description: Invalid input
-        "503":
+        '503':
           description: Unavailable
-  "/message/{messageId}":
+  '/message/{messageId}':
     delete:
       tags:
         - messages
       summary: Delete one message
-      description: ""
+      description: ''
       operationId: deleteMessage
       produces:
         - application/json
@@ -178,36 +178,36 @@ paths:
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Success
-        "401":
+        '401':
           description: Bad Token
-        "503":
+        '503':
           description: Unavailable
   /users:
     get:
       tags:
         - users
       summary: get all users
-      description: ""
+      description: ''
       operationId: getUsers
       produces:
         - application/json
       responses:
-        "200":
+        '200':
           description: Success
           schema:
             type: array
             items:
-              $ref: "#/definitions/User"
-        "503":
+              $ref: '#/definitions/User'
+        '503':
           description: Unavailable
-  "/user/{userId}":
+  '/user/{userId}':
     get:
       tags:
         - users
       summary: get specific user
-      description: ""
+      description: ''
       operationId: getUser
       produces:
         - application/json
@@ -218,11 +218,11 @@ paths:
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/User"
-        "503":
+            $ref: '#/definitions/User'
+        '503':
           description: Unavailable
 definitions:
   Conversation:
