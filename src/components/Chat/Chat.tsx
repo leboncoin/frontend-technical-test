@@ -9,7 +9,6 @@ import {
   ProfileImage,
 } from "./chatStyledComponents";
 import Messages from "../Messages/Messages";
-
 import ProfilePic from "../../assets/img-profilepic.jpg";
 
 function Chat({ messages }) {

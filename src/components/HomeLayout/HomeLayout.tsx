@@ -2,8 +2,7 @@ import React, { ReactElement } from "react";
 
 import { Conversation } from "../../types/conversation";
 import Conversations from "../Conversations/Conversations";
-import { Container } from "./homeLayoutStyledComponents";
-import Header from "../Header/Header";
+import { Layout } from "./homeLayoutStyledComponents";
 
 interface Props {
   conversations: Conversation[];
@@ -11,10 +10,9 @@ interface Props {
 
 function HomeLayout({ conversations }: Props): ReactElement {
   return (
-    <Container>
-      <Header></Header>
+    <Layout>
       <Conversations conversations={conversations} />
-    </Container>
+    </Layout>
   );
 }
 
