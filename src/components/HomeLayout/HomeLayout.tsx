@@ -1,7 +1,8 @@
 import React, { ReactElement } from "react";
-import { Container } from "./styledComponents";
+
 import { Conversation } from "../../types/conversation";
 import Conversations from "../Conversations/Conversations";
+import { Container } from "./homeLayoutStyledComponents";
 
 interface Props {
   conversations: Conversation[];
