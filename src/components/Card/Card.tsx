@@ -10,19 +10,27 @@ import {
 import { Conversation } from "../../types/conversation";
 
 import Profile from "../../assets/img-profilepic.jpg";
+import { getLoggedUserId } from "../../utils/getLoggedUserId";
+import { getDateFormattedFromTimestamp } from "../../utils/getDateFormattedFromTimestamp";
 
 interface Props {
   conversation: Conversation;
 }
 
 function Card({ conversation }: Props) {
+  const userId = getLoggedUserId();
   return (
     <Container href={`/conversation/${conversation.id}`}>
       <ProfilePic src={Profile} />
       <CardInformations>
-        <CardName>{conversation.recipientNickname}</CardName>
-        <MessagePreview>Hey, what's going on?</MessagePreview>
-        <CardDate>🕓 Today | 9:30 PM</CardDate>
+        <CardName>
+          {userId === conversation.recipientId
+            ? conversation.senderNickname
+            : conversation.recipientNickname}
+        </CardName>
+        <CardDate>
+          🕓 {getDateFormattedFromTimestamp(conversation.lastMessageTimestamp)}
+        </CardDate>
       </CardInformations>
     </Container>
   );

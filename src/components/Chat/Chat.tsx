@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ConversationContainer,
   ConversationHeaderContainer,
@@ -12,6 +12,12 @@ import Messages from "../Messages/Messages";
 import ProfilePic from "../../assets/img-profilepic.jpg";
 
 function Chat({ messages }) {
+  const [message, setMessage] = useState<string>("");
+
+  const handleSendMessage = () => {
+    console.log(message);
+  };
+
   return (
     <ConversationContainer>
       <ConversationHeaderContainer>
@@ -22,7 +28,16 @@ function Chat({ messages }) {
         <Messages messages={messages} />
       </MessagesContainer>
       <InputContainer>
-        <Input placeholder="Type your message here ..." />
+        <Input
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              return handleSendMessage();
+            }
+          }}
+          placeholder="Type your message here ..."
+        />
       </InputContainer>
     </ConversationContainer>
   );
