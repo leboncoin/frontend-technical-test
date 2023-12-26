@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 
-export const Container = styled.div`
+export const Container = styled(Link)`
   display: flex;
   align-items: center;
   margin: 0.5rem;
@@ -9,6 +10,7 @@ export const Container = styled.div`
   border: 1px solid lightgrey;
   width: 100%;
   padding: 1.2rem;
+  color: white;
   &:hover {
     transition: background-color 0.3s ease-in-out;
     cursor: pointer;

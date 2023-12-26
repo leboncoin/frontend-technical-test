@@ -17,7 +17,7 @@ interface Props {
 
 function Card({ conversation }: Props) {
   return (
-    <Container>
+    <Container href={`/conversation/${conversation.id}`}>
       <ProfilePic src={Profile} />
       <CardInformations>
         <CardName>{conversation.recipientNickname}</CardName>
