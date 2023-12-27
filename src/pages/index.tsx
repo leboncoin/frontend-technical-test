@@ -1,7 +1,6 @@
 import type { ReactElement } from "react";
 import HomeLayout from "../components/HomeLayout/HomeLayout";
-
-import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
+import type { GetServerSideProps } from "next";
 import { getLoggedUserId } from "../utils/getLoggedUserId";
 import { Conversation } from "../types/conversation";
 import { get } from "../api";

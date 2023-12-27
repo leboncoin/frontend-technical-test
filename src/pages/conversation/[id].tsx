@@ -17,8 +17,6 @@ function Conversation({ messages, conversation }: Props) {
 export const getServerSideProps = (async (context) => {
   const { id: conversationId } = context.query;
 
-  // const messages: Message[] = await get(`messages/${conversationId}`);
-
   const [messages, conversation] = await getAll([
     `messages/${conversationId}`,
     `conversation/${conversationId}`,

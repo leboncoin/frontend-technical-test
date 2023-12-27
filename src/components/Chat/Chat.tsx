@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   ConversationContainer,
   ConversationHeaderContainer,
@@ -12,6 +12,8 @@ import { Message } from "../../types/message";
 import { Conversation } from "../../types/conversation";
 import { getLoggedUserId } from "../../utils/getLoggedUserId";
 import { ProfilePic } from "../Card/cardStyledComponents";
+import { postMessage } from "../../api/message";
+import { useRouter } from "next/router";
 
 interface Props {
   messages: Message[];
@@ -20,21 +22,32 @@ interface Props {
 
 function Chat({ messages, conversation }: Props) {
   const [message, setMessage] = useState<string>("");
+  const userId = getLoggedUserId();
+  const router = useRouter();
+  const chatContainer = useRef(null);
 
-  const handleSendMessage = () => {
-    console.log(message);
+  const handleSendMessage = async () => {
+    if (message) {
+      const res = await postMessage({
+        conversationId: conversation.id,
+        userId,
+        body: message,
+      });
+      if (res.length) {
+        setMessage("");
+        router.replace(router.asPath);
+        chatContainer.current.scrollTo({
+          top: chatContainer.current.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    }
   };
 
-  const userId = getLoggedUserId();
-  console.log("conversation", conversation);
-  const currentConversation = conversation[0];
-
   const displayName =
-    userId === currentConversation.recipientId
-      ? currentConversation.senderNickname
-      : currentConversation.recipientNickname;
-
-  console.log("Display Name:", displayName);
+    userId === conversation.recipientId
+      ? conversation.senderNickname
+      : conversation.recipientNickname;
 
   return (
     <ConversationContainer>
@@ -42,7 +55,7 @@ function Chat({ messages, conversation }: Props) {
         <ProfilePic>{displayName.charAt(0).toUpperCase()}</ProfilePic>
         <Name>{displayName}</Name>
       </ConversationHeaderContainer>
-      <MessagesContainer>
+      <MessagesContainer ref={chatContainer}>
         <Messages messages={messages} />
       </MessagesContainer>
       <InputContainer>

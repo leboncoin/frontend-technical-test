@@ -9,8 +9,8 @@ export const ConversationContainer = styled.div`
 `;
 
 export const MessagesContainer = styled.div`
+  overflow-y: scroll;
   flex-grow: 1;
-  overflow-y: auto;
   padding: 10px;
   display: flex;
   flex-direction: column;
