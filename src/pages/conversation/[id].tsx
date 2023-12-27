@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import React from "react";
 import Chat from "../../components/Chat/Chat";
 import { Message } from "../../types/message";
+import { get } from "../../api";
 
 interface Props {
   messages: Message[];
@@ -13,10 +14,8 @@ function Conversation({ messages }) {
 
 export const getServerSideProps = (async (context) => {
   const { id: conversationId } = context.query;
-  const res = await fetch(
-    `${process.env.NEXT_API_URL}messages/${conversationId}`
-  );
-  const messages = await res.json();
+
+  const messages: Message[] = await get(`messages/${conversationId}`);
 
   return {
     props: {

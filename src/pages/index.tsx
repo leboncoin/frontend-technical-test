@@ -4,6 +4,7 @@ import HomeLayout from "../components/HomeLayout/HomeLayout";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 import { getLoggedUserId } from "../utils/getLoggedUserId";
 import { Conversation } from "../types/conversation";
+import { get } from "../api";
 
 interface Props {
   conversations: Conversation[];
@@ -15,8 +16,8 @@ const Home = ({ conversations }: Props): ReactElement => {
 
 export const getServerSideProps = (async () => {
   const userId = getLoggedUserId();
-  const res = await fetch(`${process.env.NEXT_API_URL}conversations/${userId}`);
-  const conversations: Conversation[] = await res.json();
+
+  const conversations: Conversation[] = await get(`conversations/${userId}`);
 
   return { props: { conversations } };
 }) satisfies GetServerSideProps<Props>;
