@@ -39,10 +39,13 @@ Implement a login page redirection for non-logged users (current getLoggedUserId
 Establish default color variables for consistent styling across components.
 Explore WebSocket for real-time communication.
 Enhance accessibility for inclusivity.
+Having 100% code coverage.
 
 # Conclusion
 
 This project, while limited by time constraints, demonstrates key aspects of chat application development with a focus on user experience, technical problem-solving, and clean code practices.
+
+---
 
 # Context :
 
