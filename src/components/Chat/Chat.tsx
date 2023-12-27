@@ -10,8 +10,15 @@ import {
 } from "./chatStyledComponents";
 import Messages from "../Messages/Messages";
 import ProfilePic from "../../assets/img-profilepic.jpg";
+import { Message } from "../../types/message";
+import { Conversation } from "../../types/conversation";
 
-function Chat({ messages }) {
+interface Props {
+  messages: Message[];
+  conversation: Conversation;
+}
+
+function Chat({ messages, conversation }: Props) {
   const [message, setMessage] = useState<string>("");
 
   const handleSendMessage = () => {

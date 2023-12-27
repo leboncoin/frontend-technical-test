@@ -18,9 +18,6 @@ export const Logo = styled(Image)`
 export const Nav = styled.nav`
   display: flex;
   gap: 1rem;
-`;
-
-export const NavLinkWrapper = styled.a`
   color: white;
   text-decoration: none;
   font-size: 0.8rem;

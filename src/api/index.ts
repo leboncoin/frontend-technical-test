@@ -7,3 +7,11 @@ export const get = async (path: string) => {
   }
   return response.json();
 };
+
+export const getAll = async (paths: string[]) => {
+  const endpoint = process.env.NEXT_API_URL;
+  const urls = paths.map((path) => new URL(`${endpoint}${path}`));
+  const responses = await Promise.all(urls.map((url) => fetch(url)));
+  const jsons = await Promise.all(responses.map((response) => response.json()));
+  return jsons;
+};
