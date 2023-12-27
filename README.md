@@ -1,3 +1,49 @@
+# Leboncoin Technical Test - Chat Application
+
+# Introduction
+
+This project showcases a simple yet effective chat application, designed and implemented as a technical test for Leboncoin. The focus was on creating user-friendly UI/UX, mirroring the simplicity of popular chat systems.
+
+# Design
+
+Initial designs focused on simplicity, avoiding user disorientation with complex changes.
+Opted for separate pages for correspondents and conversations for clarity and focus on logic.
+
+# Development
+
+Created on a dedicated branch "test-antoine" to align with best practices in collaborative environments.
+Utilized Styled-components for clearer, more organized code. Despite more experience with SASS and Tailwind, the scoping feature of Styled-components was advantageous.
+Initial hard-coded implementation followed by dynamic data fetching.
+
+Middleware in conversations.js: Faced an issue where the middleware intercepted the conversation/:id route, resulting in an empty array response. Resolved by adding a check in the conditional statement to exclude requests containing senderId, thus preventing unintended interceptions.
+
+Persistent lastMessageTimestamp Update Issue: Encountered a bug where updates to lastMessageTimestamp in conversations were not reflected in real-time due to the static nature of the JSON database import. This requires server restarts to recognize updates in the JSON file, an issue that remains unresolved within the project's scope and time frame.
+
+# Technical Challenges and Solutions
+
+Implemented reusable API fetch functions for enhanced security, refactoring, and reusability.
+Utilized useRef for auto-scrolling to the latest message in the chat.
+
+# Version Control
+
+Regular, feature-specific commits for clear historical tracking.
+
+# UI Enhancements
+
+Simple profile pictures using correspondents' first name initials.
+Considered randomly generated backgrounds for each profile for personalization but prioritized time management.
+
+# Future Improvements
+
+Implement a login page redirection for non-logged users (current getLoggedUserId returns a hardcoded user).
+Establish default color variables for consistent styling across components.
+Explore WebSocket for real-time communication.
+Enhance accessibility for inclusivity.
+
+# Conclusion
+
+This project, while limited by time constraints, demonstrates key aspects of chat application development with a focus on user experience, technical problem-solving, and clean code practices.
+
 # Context :
 
 At leboncoin, our users can share messages about a transaction, or ask for informations about any products.
@@ -6,6 +52,8 @@ Your job is to create the interface to consult those messages.
 The interface needs to work on both desktop & mobile devices.
 
 In addition to your code, a README explaining your thought process and your choices would be appreciated.
+
+---
 
 # Exercise :
 

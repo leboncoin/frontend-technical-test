@@ -5,7 +5,7 @@ export const ConversationContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 30px;
-  height: 95vh;
+  height: 90vh;
 `;
 
 export const MessagesContainer = styled.div`

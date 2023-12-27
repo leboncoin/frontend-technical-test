@@ -11,7 +11,7 @@ export const postMessage = async ({
 }: MessageInput) => {
   try {
     const responses = await Promise.all([
-      fetch(`${process.env.NEXT_API_URL}messages/${conversationId}`, {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}messages/${conversationId}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -23,15 +23,18 @@ export const postMessage = async ({
           body,
         }),
       }),
-      fetch(`http://localhost:3005/conversation/${conversationId}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "PATCH",
-        body: JSON.stringify({
-          lastMessageTimestamp: new Date().getTime(),
-        }),
-      }),
+      fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}conversation/${conversationId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "PATCH",
+          body: JSON.stringify({
+            lastMessageTimestamp: new Date().getTime(),
+          }),
+        }
+      ),
     ]);
     const jsons = await Promise.all(
       responses.map((response) => response.json())

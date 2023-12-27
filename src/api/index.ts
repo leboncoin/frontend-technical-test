@@ -1,5 +1,5 @@
 export const get = async (path: string) => {
-  const endpoint = process.env.NEXT_API_URL;
+  const endpoint = process.env.NEXT_PUBLIC_API_URL;
   const url = new URL(`${endpoint}${path}`);
   try {
     const response = await fetch(url);
@@ -13,7 +13,7 @@ export const get = async (path: string) => {
 };
 
 export const getAll = async (paths: string[]) => {
-  const endpoint = process.env.NEXT_API_URL;
+  const endpoint = process.env.NEXT_PUBLIC_API_URL;
   const urls = paths.map((path) => new URL(`${endpoint}${path}`));
   try {
     const responses = await Promise.all(urls.map((url) => fetch(url)));

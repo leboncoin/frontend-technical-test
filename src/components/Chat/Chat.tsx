@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   ConversationContainer,
   ConversationHeaderContainer,
@@ -24,7 +24,13 @@ function Chat({ messages, conversation }: Props) {
   const [message, setMessage] = useState<string>("");
   const userId = getLoggedUserId();
   const router = useRouter();
-  const chatContainer = useRef(null);
+  const lastMessageRef = useRef(null);
+
+  useEffect(() => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   const handleSendMessage = async () => {
     if (message) {
@@ -36,10 +42,6 @@ function Chat({ messages, conversation }: Props) {
       if (res.length) {
         setMessage("");
         router.replace(router.asPath);
-        chatContainer.current.scrollTo({
-          top: chatContainer.current.scrollHeight,
-          behavior: "smooth",
-        });
       }
     }
   };
@@ -55,8 +57,9 @@ function Chat({ messages, conversation }: Props) {
         <ProfilePic>{displayName.charAt(0).toUpperCase()}</ProfilePic>
         <Name>{displayName}</Name>
       </ConversationHeaderContainer>
-      <MessagesContainer ref={chatContainer}>
+      <MessagesContainer>
         <Messages messages={messages} />
+        <div ref={lastMessageRef} />
       </MessagesContainer>
       <InputContainer>
         <Input
@@ -64,7 +67,7 @@ function Chat({ messages, conversation }: Props) {
           onChange={(e) => setMessage(e.target.value)}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
-              return handleSendMessage();
+              handleSendMessage();
             }
           }}
           placeholder="Type your message here ..."
