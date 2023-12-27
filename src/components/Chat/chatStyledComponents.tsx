@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Image from "next/image";
 
 export const ConversationContainer = styled.div`
   display: flex;
@@ -38,17 +37,8 @@ export const ConversationHeaderContainer = styled.div`
   border-bottom: 1px solid #ccc;
 `;
 
-export const ProfileImage = styled(Image)`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-`;
-
 export const Name = styled.span`
   font-size: 18px;
   font-weight: bold;
   color: rgba(26, 26, 27, 1);
-  margin-left: 20px;
 `;

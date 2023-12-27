@@ -6,12 +6,12 @@ import {
   InputContainer,
   MessagesContainer,
   Name,
-  ProfileImage,
 } from "./chatStyledComponents";
 import Messages from "../Messages/Messages";
-import ProfilePic from "../../assets/img-profilepic.jpg";
 import { Message } from "../../types/message";
 import { Conversation } from "../../types/conversation";
+import { getLoggedUserId } from "../../utils/getLoggedUserId";
+import { ProfilePic } from "../Card/cardStyledComponents";
 
 interface Props {
   messages: Message[];
@@ -25,11 +25,22 @@ function Chat({ messages, conversation }: Props) {
     console.log(message);
   };
 
+  const userId = getLoggedUserId();
+  console.log("conversation", conversation);
+  const currentConversation = conversation[0];
+
+  const displayName =
+    userId === currentConversation.recipientId
+      ? currentConversation.senderNickname
+      : currentConversation.recipientNickname;
+
+  console.log("Display Name:", displayName);
+
   return (
     <ConversationContainer>
       <ConversationHeaderContainer>
-        <ProfileImage src={ProfilePic} />
-        <Name>John Doe</Name>
+        <ProfilePic>{displayName.charAt(0).toUpperCase()}</ProfilePic>
+        <Name>{displayName}</Name>
       </ConversationHeaderContainer>
       <MessagesContainer>
         <Messages messages={messages} />

@@ -7,7 +7,7 @@ function Header() {
   return (
     <StyledHeader>
       <Link href="/" passHref>
-        <Logo src={Lbc} />
+        <Logo src={Lbc} alt="logo-leboncoin-frontend-orange-white" />
       </Link>
       <Nav>
         <Link href="/">Accueil</Link>

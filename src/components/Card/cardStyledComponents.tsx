@@ -1,37 +1,50 @@
 import styled from "styled-components";
-import Image from "next/image";
+
 import Link from "next/link";
 
 export const Container = styled(Link)`
+  cursor: pointer;
   display: flex;
   align-items: center;
   margin: 0.5rem;
+  position: relative;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.9);
   width: calc(100% + 8rem);
   padding: 1.2rem;
-  color: white;
-  transition: transform 0.1s ease-in-out, background-color 0.3s ease-in-out;
+  color: grey;
 
   &:hover {
-    background-color: rgba(220, 230, 255, 1);
-    box-shadow: 2.3px 2.3px 4.1px -7px rgba(0, 0, 0, 0.03),
-      5.4px 5.4px 9.4px -7px rgba(0, 0, 0, 0.044),
-      9.7px 9.7px 16.9px -7px rgba(0, 0, 0, 0.055),
-      16.1px 16.1px 28.1px -7px rgba(0, 0, 0, 0.065),
-      26.5px 26.5px 46.3px -7px rgba(0, 0, 0, 0.075),
-      46.2px 46.2px 80.9px -7px rgba(0, 0, 0, 0.088),
-      100px 100px 175px -7px rgba(0, 0, 0, 0.11);
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 4.5px 4.5px 3.6px rgba(0, 0, 0, 0.01),
+      12.5px 12.5px 10px rgba(0, 0, 0, 0.016),
+      30.1px 30.1px 24.1px rgba(0, 0, 0, 0.024),
+      100px 100px 80px rgba(0, 0, 0, 0.04);
+    &::after {
+      content: "→";
+      position: absolute;
+      right: 10px;
+      font-size: 1.5rem;
+    }
   }
 `;
 
-export const ProfilePic = styled(Image)`
+export const ProfilePic = styled.div`
   border-radius: 50%;
   width: 3rem;
   height: 3rem;
   margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(300deg, #ff6633, #b71e07, #cfe50b);
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
 `;
 
 export const CardInformations = styled.div`

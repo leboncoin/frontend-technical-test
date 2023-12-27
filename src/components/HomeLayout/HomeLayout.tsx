@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 
 import { Conversation } from "../../types/conversation";
 import Conversations from "../Conversations/Conversations";
-import { Layout } from "./homeLayoutStyledComponents";
+import { Layout, Title } from "./homeLayoutStyledComponents";
 
 interface Props {
   conversations: Conversation[];
@@ -11,6 +11,7 @@ interface Props {
 function HomeLayout({ conversations }: Props): ReactElement {
   return (
     <Layout>
+      <Title>My messages :</Title>
       <Conversations conversations={conversations} />
     </Layout>
   );

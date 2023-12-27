@@ -9,7 +9,6 @@ import {
 } from "./cardStyledComponents";
 import { Conversation } from "../../types/conversation";
 
-import Profile from "../../assets/img-profilepic.jpg";
 import { getLoggedUserId } from "../../utils/getLoggedUserId";
 import { getDateFormattedFromTimestamp } from "../../utils/getDateFormattedFromTimestamp";
 
@@ -19,9 +18,15 @@ interface Props {
 
 function Card({ conversation }: Props) {
   const userId = getLoggedUserId();
+
+  const displayName =
+    userId === conversation.recipientId
+      ? conversation.senderNickname
+      : conversation.recipientNickname;
+
   return (
     <Container href={`/conversation/${conversation.id}`}>
-      <ProfilePic src={Profile} />
+      <ProfilePic> {displayName.charAt(0).toUpperCase()} </ProfilePic>
       <CardInformations>
         <CardName>
           {userId === conversation.recipientId
