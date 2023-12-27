@@ -7,14 +7,23 @@ export const Container = styled(Link)`
   align-items: center;
   margin: 0.5rem;
   border-radius: 10px;
-  border: 1px solid lightgrey;
-  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  width: calc(100% + 8rem);
   padding: 1.2rem;
   color: white;
+  transition: transform 0.1s ease-in-out, background-color 0.3s ease-in-out;
+
   &:hover {
-    transition: background-color 0.3s ease-in-out;
-    cursor: pointer;
-    background-color: rgba(234, 234, 234, 1);
+    background-color: rgba(220, 230, 255, 1);
+    box-shadow: 2.3px 2.3px 4.1px -7px rgba(0, 0, 0, 0.03),
+      5.4px 5.4px 9.4px -7px rgba(0, 0, 0, 0.044),
+      9.7px 9.7px 16.9px -7px rgba(0, 0, 0, 0.055),
+      16.1px 16.1px 28.1px -7px rgba(0, 0, 0, 0.065),
+      26.5px 26.5px 46.3px -7px rgba(0, 0, 0, 0.075),
+      46.2px 46.2px 80.9px -7px rgba(0, 0, 0, 0.088),
+      100px 100px 175px -7px rgba(0, 0, 0, 0.11);
   }
 `;
 
