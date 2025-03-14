@@ -4,18 +4,18 @@ import Image from 'next/image'
 import Logo from '../assets/lbc-logo.webp'
 import styles from '../styles/Home.module.css'
 
-const Home = ():ReactElement => {
+export default function Home(): ReactElement {
   const year = new Date().getFullYear()
 
   return (
     <div className={styles.container}>
       <Head>
         <title>Frontend Technical test - Leboncoin</title>
-        <meta name="description" content="Frontend exercise for developpers who want to join us on leboncoin.fr"></meta>
+        <meta name="description" content="Frontend exercise for developpers who want to join us on leboncoin.fr" />
       </Head>
 
       <main className={styles.main}>
-        <Image src={Logo} alt="Leboncoin Frontend Team" width={400} height={125} />
+        <Image src={Logo} alt="Leboncoin Frontend Team" width={400} height={125} priority />
         <h1 className={styles.title}>
           Welcome !
         </h1>
@@ -63,5 +63,3 @@ const Home = ():ReactElement => {
     </div>
   )
 }
-
-export default Home
