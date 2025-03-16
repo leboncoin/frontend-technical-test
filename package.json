@@ -18,8 +18,7 @@
     "next": "^15.2.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sharp": "^0.33.5",
-    "styled-components": "^6.1.15"
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
@@ -35,8 +34,5 @@
     "jest-environment-jsdom": "^29.7.0",
     "json-server": "^0.17.1",
     "typescript": "^5.8.2"
-  },
-  "resolutions": {
-    "styled-components": "^6"
   }
 }

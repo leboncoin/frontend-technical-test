@@ -6,9 +6,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  compiler: {
-    styledComponents: true,
-  },
   // Modern i18n config
   i18n: {
     locales: ['fr'],
