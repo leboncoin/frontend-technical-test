@@ -1,16 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Next.js 15 now uses app directory by default
-  // We're keeping pages directory for backward compatibility
-  // but can migrate to app directory later
+  // Explicitly enable the App Router
+  experimental: {
+    appDir: true
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Modern i18n config
-  i18n: {
-    locales: ['fr'],
-    defaultLocale: 'fr',
-  }
+  // Replace legacy i18n config with newer approach
+  // (i18n is now handled in app/[locale] structure or middleware)
 }
 
 module.exports = nextConfig
