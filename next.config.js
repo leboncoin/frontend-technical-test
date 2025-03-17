@@ -1,14 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Explicitly enable the App Router
-  experimental: {
-    appDir: true
-  },
+  // Next.js 15 enables App Router by default, we don't need to specify it explicitly
   eslint: {
     ignoreDuringBuilds: true,
-  },
-  // Replace legacy i18n config with newer approach
-  // (i18n is now handled in app/[locale] structure or middleware)
+  }
 }
 
 module.exports = nextConfig
