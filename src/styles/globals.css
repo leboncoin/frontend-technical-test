@@ -1,3 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --color-leboncoin-orange: #ec6e24;
+}
+
 html,
 body {
   padding: 0;
