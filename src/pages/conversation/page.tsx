@@ -106,6 +106,7 @@ export default function ConversationDetail(): ReactElement {
         <div style={{ display: "flex", alignItems: "center" }}>
           <button
             onClick={handleBackClick}
+            aria-label="Go back to conversation list"
             style={{
               background: "none",
               border: "none",
@@ -150,7 +151,9 @@ export default function ConversationDetail(): ReactElement {
         </div>
       </div>
 
-      <div
+      <main
+        role="main"
+        aria-label={`Messages in conversation with ${conversation.recipientNickname}`}
         style={{
           flex: 1,
           padding: "20px",
@@ -205,7 +208,7 @@ export default function ConversationDetail(): ReactElement {
               </div>
             </div>
           ))}
-      </div>
+      </main>
 
       <div
         style={{
@@ -219,6 +222,9 @@ export default function ConversationDetail(): ReactElement {
       >
         {sendError && (
           <div
+            id="send-error"
+            role="alert"
+            aria-live="polite"
             style={{
               position: "absolute",
               bottom: "80px",
@@ -235,15 +241,24 @@ export default function ConversationDetail(): ReactElement {
           </div>
         )}
 
+        <label htmlFor="message-input" style={{ display: "none" }}>
+          Message to {conversation.recipientNickname}
+        </label>
         <input
+          id="message-input"
           type="text"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
-          onKeyPress={(e) =>
-            e.key === "Enter" && !sendingMessage && handleSendMessage()
-          }
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !sendingMessage && newMessage.trim()) {
+              e.preventDefault();
+              handleSendMessage();
+            }
+          }}
           placeholder="Type a message..."
           disabled={sendingMessage}
+          aria-label={`Type a message to ${conversation.recipientNickname}`}
+          aria-describedby={sendError ? "send-error" : undefined}
           style={{
             flex: 1,
             padding: "12px 16px",
@@ -253,11 +268,13 @@ export default function ConversationDetail(): ReactElement {
             fontSize: "15px",
             backgroundColor: "#f8f9fa",
             opacity: sendingMessage ? 0.6 : 1,
+            minHeight: "44px", // Better touch target for mobile
           }}
         />
         <button
           onClick={handleSendMessage}
           disabled={!newMessage.trim() || sendingMessage}
+          aria-label="Send message"
           style={{
             padding: "12px 20px",
             backgroundColor:
@@ -270,6 +287,8 @@ export default function ConversationDetail(): ReactElement {
             fontSize: "14px",
             fontWeight: "600",
             transition: "background-color 0.2s ease",
+            minHeight: "44px", // Better touch target for mobile
+            minWidth: "60px",
           }}
         >
           {sendingMessage ? "Sending..." : "Send"}

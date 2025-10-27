@@ -28,7 +28,7 @@ export default function Home(): ReactElement {
   };
 
   return (
-    <div
+        <div
       style={{
         minHeight: "100vh",
         fontFamily:
@@ -39,6 +39,7 @@ export default function Home(): ReactElement {
       <Head>
         <title>Conversations - Leboncoin</title>
         <meta name="description" content="Chat application for Leboncoin" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
       <Header title="Conversations" />
@@ -47,7 +48,7 @@ export default function Home(): ReactElement {
         style={{
           maxWidth: "600px",
           margin: "0 auto",
-          padding: "0 20px",
+          padding: "0 16px",
         }}
       >
         <NewConversationButton
@@ -56,15 +57,16 @@ export default function Home(): ReactElement {
         />
       </div>
 
-      <div
+            <main
+        role="main"
+        aria-label="Conversation list"
         style={{
           maxWidth: "600px",
           margin: "0 auto",
-          backgroundColor: "white",
+          backgroundColor: "transparent",
           borderRadius: "8px",
           marginTop: "20px",
-          overflow: "hidden",
-          boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
+          padding: "0 16px",
         }}
       >
         {loading && <LoadingSpinner message="Loading conversations..." />}
@@ -88,29 +90,52 @@ export default function Home(): ReactElement {
           </div>
         )}
 
-        {!loading &&
-          !error &&
-          conversations.map((conversation, index) => (
-            <div
-              key={conversation.id}
-              onClick={() => handleConversationClick(conversation)}
-              style={{
-                padding: "16px 20px",
-                borderBottom:
-                  index < conversations.length - 1
-                    ? "1px solid #f0f2f5"
-                    : "none",
-                cursor: "pointer",
-                backgroundColor: "white",
-                transition: "background-color 0.2s ease",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = "#f8f9fa")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = "white")
-              }
-            >
+        {!loading && !error && conversations.length > 0 && (
+          <ul
+            role="list"
+            aria-label="Available conversations"
+            style={{ listStyle: "none", margin: 0, padding: 0 }}
+          >
+            {conversations.map((conversation, index) => (
+              <li key={conversation.id} role="listitem">
+                <div
+                  onClick={() => handleConversationClick(conversation)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleConversationClick(conversation);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Open conversation with ${conversation.recipientNickname}`}
+                  style={{
+                    padding: "16px 20px",
+                    marginBottom: index < conversations.length - 1 ? "8px" : "0",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    backgroundColor: "white",
+                    transition: "background-color 0.2s ease, box-shadow 0.2s ease",
+                    outline: "none",
+                    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#f8f9fa";
+                    e.currentTarget.style.boxShadow = "0 2px 6px rgba(0,0,0,0.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "white";
+                    e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)";
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.backgroundColor = "#f8f9fa";
+                    e.currentTarget.style.boxShadow = "0 2px 6px rgba(0,0,0,0.15)";
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.backgroundColor = "white";
+                    e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)";
+                  }}
+                >
               <div style={{ display: "flex", alignItems: "center" }}>
                 <div style={{ marginRight: "16px" }}>
                   <Avatar name={conversation.recipientNickname} size={48} />
@@ -154,8 +179,11 @@ export default function Home(): ReactElement {
                 </div>
               </div>
             </div>
-          ))}
-      </div>
+                </li>
+            ))}
+          </ul>
+        )}
+      </main>
     </div>
   );
 }
