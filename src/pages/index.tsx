@@ -1,65 +1,215 @@
-import type { ReactElement } from 'react'
-import Head from 'next/head'
-import Image from 'next/image'
-import Logo from '../assets/lbc-logo.webp'
-import styles from '../styles/Home.module.css'
+import type { ReactElement } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import type { Conversation } from "../types/conversation";
+import Logo from "../assets/lbc-logo.webp";
+
+// TODO: replace mocks with real API integration
+const MOCK_CONVERSATIONS: Conversation[] = [
+  {
+    id: 1,
+    recipientId: 2,
+    recipientNickname: "Jeremie",
+    senderId: 1,
+    senderNickname: "Thibaut",
+    lastMessageTimestamp: 1625637849,
+  },
+  {
+    id: 2,
+    recipientId: 3,
+    recipientNickname: "Patrick",
+    senderId: 1,
+    senderNickname: "Thibaut",
+    lastMessageTimestamp: 1620284667,
+  },
+  {
+    id: 3,
+    recipientId: 1,
+    recipientNickname: "Thibaut",
+    senderId: 4,
+    senderNickname: "Elodie",
+    lastMessageTimestamp: 1625648667,
+  },
+];
 
 export default function Home(): ReactElement {
-  const year = new Date().getFullYear()
+  const router = useRouter();
+
+  const getAvatarColor = (name: string): string => {
+    const colors = [
+      "#f59e0b",
+      "#ef4444",
+      "#ec4899",
+      "#10b981",
+      "#3b82f6",
+      "#8b5cf6",
+      "#f97316",
+      "#06b6d4",
+    ];
+    const index = name.charCodeAt(0) % colors.length;
+    return colors[index];
+  };
+
+  const formatTimestamp = (timestamp: number): string => {
+    const date = new Date(timestamp * 1000);
+    return date.toLocaleDateString("en-US", {
+      day: "2-digit",
+      month: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  const handleConversationClick = (conversation: Conversation) => {
+    router.push(`/conversation/page?id=${conversation.id}`);
+  };
 
   return (
-    <div className={styles.container}>
+    <div
+      style={{
+        minHeight: "100vh",
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        backgroundColor: "#f0f2f5",
+      }}
+    >
       <Head>
-        <title>Frontend Technical test - Leboncoin</title>
-        <meta name="description" content="Frontend exercise for developpers who want to join us on leboncoin.fr" />
+        <title>Conversations - Leboncoin</title>
+        <meta name="description" content="Chat application for Leboncoin" />
       </Head>
 
-      <main className={styles.main}>
-        <Image src={Logo} alt="Leboncoin Frontend Team" width={400} height={125} priority />
-        <h1 className={styles.title}>
-          Welcome !
-        </h1>
-
-        <p className={styles.description}>
-          This test is based on a <a title="Next.js documentation" href="https://nextjs.org/docs/getting-started" target="_blank" rel="noopener noreferrer">Next.js</a> application.<br />
-          Fork the repository and use the <code className={styles.code}>main</code> branch as your starting point.
-          <br /><br />
-
-          Get started by reading{' '}
-          <code className={styles.code}>README.md</code> and editing <code className={styles.code}>src/pages/index.js</code>
-          <br />
-          Once you are done, send the repository link to your HR contact.
-        </p>
-
-        <div className={styles.grid}>
-          <article className={styles.card}>
-            <h2>Design</h2>
-            <p>Feel free to create any design you want for this exercise. Let your creativity talks !</p>
-          </article>
-
-          <article className={styles.card}>
-            <h2>Libraries</h2>
-            <p>Feel free to use any library you want. Only Next.js / React are required.</p>
-          </article>
-
-          <article className={styles.card}>
-            <h2>API Server</h2>
-            <p>
-              Start the API server on port <code className={styles.code}>3005</code> by running<br /><code className={styles.code}>npm run start-server</code>.<br/>
-              Find the swagger definitions in <code className={styles.code}>docs/api-swagger.yml</code> or <a title="API Swagger documentation" href="https://leboncoin.tech/frontend-technical-test/" target="_blank" rel="noopener noreferrer">the online documentation</a>.
-            </p>
-          </article>
-
-          <article className={styles.card}>
-            <h2>Timing</h2>
-            <p>We recommend 4 hours for this test. You are free to spend more (or less) time, let us know how much time did you spend.</p>
-          </article>
+      <div
+        style={{
+          backgroundColor: "white",
+          borderBottom: "1px solid #e1e5e9",
+          padding: "20px 24px",
+          boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "16px",
+          }}
+        >
+          <Image
+            src={Logo}
+            alt="Leboncoin Frontend Team"
+            width={200}
+            height={62}
+            priority
+          />
         </div>
-      </main>
+        <h1
+          style={{
+            margin: "16px 0 0 0",
+            fontSize: "24px",
+            fontWeight: "600",
+            color: "#1c1e21",
+            textAlign: "center",
+          }}
+        >
+          Conversations
+        </h1>
+      </div>
 
-      <footer className={styles.footer}>
-        &copy; leboncoin - {year}
-      </footer>
+      <div
+        style={{
+          maxWidth: "600px",
+          margin: "0 auto",
+          backgroundColor: "white",
+          borderRadius: "8px",
+          marginTop: "20px",
+          overflow: "hidden",
+          boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
+        }}
+      >
+        {MOCK_CONVERSATIONS.map((conversation, index) => (
+          <div
+            key={conversation.id}
+            onClick={() => handleConversationClick(conversation)}
+            style={{
+              padding: "16px 20px",
+              borderBottom:
+                index < MOCK_CONVERSATIONS.length - 1
+                  ? "1px solid #f0f2f5"
+                  : "none",
+              cursor: "pointer",
+              backgroundColor: "white",
+              transition: "background-color 0.2s ease",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = "#f8f9fa")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "white")
+            }
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div
+                style={{
+                  width: "48px",
+                  height: "48px",
+                  borderRadius: "50%",
+                  backgroundColor: getAvatarColor(
+                    conversation.recipientNickname
+                  ),
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "white",
+                  fontWeight: "600",
+                  fontSize: "18px",
+                  marginRight: "16px",
+                  flexShrink: 0,
+                }}
+              >
+                {conversation.recipientNickname.charAt(0).toUpperCase()}
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <h3
+                  style={{
+                    margin: "0 0 4px 0",
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    color: "#1c1e21",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {conversation.recipientNickname}
+                </h3>
+                <p
+                  style={{
+                    margin: "0",
+                    fontSize: "14px",
+                    color: "#65676b",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Last message:{" "}
+                  {formatTimestamp(conversation.lastMessageTimestamp)}
+                </p>
+              </div>
+              <div
+                style={{
+                  fontSize: "20px",
+                  color: "#65676b",
+                  marginLeft: "12px",
+                }}
+              >
+                →
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }
