@@ -1,84 +1,32 @@
 import type { ReactElement } from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import type { Conversation } from "../../types/conversation";
-import type { Message } from "../../types/message";
-
-// TODO: replace mocks with real API integration
-const MOCK_CONVERSATIONS: Conversation[] = [
-  {
-    id: 1,
-    recipientId: 2,
-    recipientNickname: "Jeremie",
-    senderId: 1,
-    senderNickname: "Thibaut",
-    lastMessageTimestamp: 1625637849,
-  },
-  {
-    id: 2,
-    recipientId: 3,
-    recipientNickname: "Patrick",
-    senderId: 1,
-    senderNickname: "Thibaut",
-    lastMessageTimestamp: 1620284667,
-  },
-  {
-    id: 3,
-    recipientId: 1,
-    recipientNickname: "Thibaut",
-    senderId: 4,
-    senderNickname: "Elodie",
-    lastMessageTimestamp: 1625648667,
-  },
-];
-
-const MOCK_MESSAGES: Message[] = [
-  {
-    id: 1,
-    conversationId: 1,
-    timestamp: 1625637849,
-    authorId: 1,
-    body: "Bonjour c'est le premier message de la première conversation",
-  },
-  {
-    id: 2,
-    conversationId: 1,
-    timestamp: 1625637867,
-    authorId: 1,
-    body: "Bonjour c'est le second message de la première conversation",
-  },
-  {
-    id: 3,
-    conversationId: 1,
-    timestamp: 1625648667,
-    authorId: 2,
-    body: "Bonjour c'est le troisième message de la première conversation",
-  },
-  {
-    id: 4,
-    conversationId: 2,
-    timestamp: 1620284667,
-    authorId: 1,
-    body: "Bonjour c'est le premier message de la seconde conversation",
-  },
-];
+import { useConversations, useMessages, useSendMessage } from "../../hooks/api";
+import Header from "../../components/Header";
 
 export default function ConversationDetail(): ReactElement {
   const router = useRouter();
   const { id } = router.query;
   const [newMessage, setNewMessage] = useState("");
-  const [conversation, setConversation] = useState<Conversation | null>(null);
 
-  useEffect(() => {
-    if (id) {
-      const conversationId = parseInt(id as string, 10);
-      const foundConversation = MOCK_CONVERSATIONS.find(
-        (c) => c.id === conversationId
-      );
-      setConversation(foundConversation || null);
-    }
-  }, [id]);
+  const conversationId = id ? parseInt(id as string, 10) : null;
+  const { conversations } = useConversations();
+  const {
+    messages,
+    loading: messagesLoading,
+    error: messagesError,
+    refetch: refetchMessages,
+  } = useMessages(conversationId);
+  const {
+    sendMessage,
+    loading: sendingMessage,
+    error: sendError,
+  } = useSendMessage();
+
+  const conversation =
+    conversations.find((c) => c.id === conversationId) || null;
 
   const getAvatarColor = (name: string): string => {
     const colors = [
@@ -105,11 +53,15 @@ export default function ConversationDetail(): ReactElement {
     });
   };
 
-  // TODO: implement send message (POST to API)
-  const handleSendMessage = () => {
-    if (newMessage.trim()) {
-      // TODO: send message to backend
-      setNewMessage("");
+  const handleSendMessage = async () => {
+    if (newMessage.trim() && conversationId) {
+      try {
+        await sendMessage(conversationId, newMessage.trim());
+        setNewMessage("");
+        refetchMessages();
+      } catch (error) {
+        console.error("Failed to send message:", error);
+      }
     }
   };
 
@@ -126,17 +78,13 @@ export default function ConversationDetail(): ReactElement {
           justifyContent: "center",
           height: "100vh",
           fontFamily:
-            '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+            "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
         }}
       >
         <p>Loading conversation...</p>
       </div>
     );
   }
-
-  const conversationMessages = MOCK_MESSAGES.filter(
-    (msg) => msg.conversationId === conversation.id
-  );
 
   return (
     <div
@@ -145,7 +93,7 @@ export default function ConversationDetail(): ReactElement {
         display: "flex",
         flexDirection: "column",
         fontFamily:
-          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+          "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
         backgroundColor: "#f8f9fa",
       }}
     >
@@ -156,6 +104,8 @@ export default function ConversationDetail(): ReactElement {
           content={`Chat with ${conversation.recipientNickname}`}
         />
       </Head>
+
+      <Header />
 
       <div
         style={{
@@ -233,43 +183,69 @@ export default function ConversationDetail(): ReactElement {
           overflow: "auto",
         }}
       >
-        {conversationMessages.map((message) => (
+        {messagesLoading && (
           <div
-            key={message.id}
             style={{
-              marginBottom: "16px",
-              display: "flex",
-              justifyContent:
-                message.authorId === 1 ? "flex-end" : "flex-start",
+              padding: "40px 20px",
+              textAlign: "center",
+              color: "#65676b",
             }}
           >
+            <p>Loading messages...</p>
+          </div>
+        )}
+
+        {messagesError && (
+          <div
+            style={{
+              padding: "40px 20px",
+              textAlign: "center",
+              color: "#e74c3c",
+            }}
+          >
+            <p>Error loading messages: {messagesError}</p>
+          </div>
+        )}
+
+        {!messagesLoading &&
+          !messagesError &&
+          messages.map((message) => (
             <div
+              key={message.id}
               style={{
-                maxWidth: "70%",
-                padding: "12px 16px",
-                borderRadius:
-                  message.authorId === 1
-                    ? "20px 20px 6px 20px"
-                    : "20px 20px 20px 6px",
-                backgroundColor: message.authorId === 1 ? "#0084ff" : "white",
-                color: message.authorId === 1 ? "white" : "#1c1e21",
-                boxShadow: "0 1px 1px rgba(0,0,0,0.1)",
-                fontSize: "15px",
-                lineHeight: "1.3",
+                marginBottom: "16px",
+                display: "flex",
+                justifyContent:
+                  message.authorId === 1 ? "flex-end" : "flex-start",
               }}
             >
-              <p style={{ margin: "0 0 4px 0" }}>{message.body}</p>
-              <small
+              <div
                 style={{
-                  opacity: message.authorId === 1 ? 0.8 : 0.6,
-                  fontSize: "11px",
+                  maxWidth: "70%",
+                  padding: "12px 16px",
+                  borderRadius:
+                    message.authorId === 1
+                      ? "20px 20px 6px 20px"
+                      : "20px 20px 20px 6px",
+                  backgroundColor: message.authorId === 1 ? "#0084ff" : "white",
+                  color: message.authorId === 1 ? "white" : "#1c1e21",
+                  boxShadow: "0 1px 1px rgba(0,0,0,0.1)",
+                  fontSize: "15px",
+                  lineHeight: "1.3",
                 }}
               >
-                {formatTimestamp(message.timestamp)}
-              </small>
+                <p style={{ margin: "0 0 4px 0" }}>{message.body}</p>
+                <small
+                  style={{
+                    opacity: message.authorId === 1 ? 0.8 : 0.6,
+                    fontSize: "11px",
+                  }}
+                >
+                  {formatTimestamp(message.timestamp)}
+                </small>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       <div
@@ -282,12 +258,33 @@ export default function ConversationDetail(): ReactElement {
           alignItems: "flex-end",
         }}
       >
+        {sendError && (
+          <div
+            style={{
+              position: "absolute",
+              bottom: "80px",
+              left: "20px",
+              right: "20px",
+              padding: "8px",
+              backgroundColor: "#e74c3c",
+              color: "white",
+              borderRadius: "4px",
+              fontSize: "14px",
+            }}
+          >
+            Error sending message: {sendError}
+          </div>
+        )}
+
         <input
           type="text"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+          onKeyPress={(e) =>
+            e.key === "Enter" && !sendingMessage && handleSendMessage()
+          }
           placeholder="Type a message..."
+          disabled={sendingMessage}
           style={{
             flex: 1,
             padding: "12px 16px",
@@ -296,24 +293,27 @@ export default function ConversationDetail(): ReactElement {
             outline: "none",
             fontSize: "15px",
             backgroundColor: "#f8f9fa",
+            opacity: sendingMessage ? 0.6 : 1,
           }}
         />
         <button
           onClick={handleSendMessage}
-          disabled={!newMessage.trim()}
+          disabled={!newMessage.trim() || sendingMessage}
           style={{
             padding: "12px 20px",
-            backgroundColor: newMessage.trim() ? "#0084ff" : "#e4e6ea",
-            color: newMessage.trim() ? "white" : "#bcc0c4",
+            backgroundColor:
+              newMessage.trim() && !sendingMessage ? "#0084ff" : "#e4e6ea",
+            color: newMessage.trim() && !sendingMessage ? "white" : "#bcc0c4",
             border: "none",
             borderRadius: "20px",
-            cursor: newMessage.trim() ? "pointer" : "not-allowed",
+            cursor:
+              newMessage.trim() && !sendingMessage ? "pointer" : "not-allowed",
             fontSize: "14px",
             fontWeight: "600",
             transition: "background-color 0.2s ease",
           }}
         >
-          Send
+          {sendingMessage ? "Sending..." : "Send"}
         </button>
       </div>
     </div>

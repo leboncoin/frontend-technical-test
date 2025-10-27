@@ -1,40 +1,13 @@
 import type { ReactElement } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import type { Conversation } from "../types/conversation";
-import Logo from "../assets/lbc-logo.webp";
-
-// TODO: replace mocks with real API integration
-const MOCK_CONVERSATIONS: Conversation[] = [
-  {
-    id: 1,
-    recipientId: 2,
-    recipientNickname: "Jeremie",
-    senderId: 1,
-    senderNickname: "Thibaut",
-    lastMessageTimestamp: 1625637849,
-  },
-  {
-    id: 2,
-    recipientId: 3,
-    recipientNickname: "Patrick",
-    senderId: 1,
-    senderNickname: "Thibaut",
-    lastMessageTimestamp: 1620284667,
-  },
-  {
-    id: 3,
-    recipientId: 1,
-    recipientNickname: "Thibaut",
-    senderId: 4,
-    senderNickname: "Elodie",
-    lastMessageTimestamp: 1625648667,
-  },
-];
+import { useConversations } from "../hooks/api";
+import Header from "../components/Header";
 
 export default function Home(): ReactElement {
   const router = useRouter();
+  const { conversations, loading, error } = useConversations();
 
   const getAvatarColor = (name: string): string => {
     const colors = [
@@ -79,42 +52,7 @@ export default function Home(): ReactElement {
         <meta name="description" content="Chat application for Leboncoin" />
       </Head>
 
-      <div
-        style={{
-          backgroundColor: "white",
-          borderBottom: "1px solid #e1e5e9",
-          padding: "20px 24px",
-          boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "16px",
-          }}
-        >
-          <Image
-            src={Logo}
-            alt="Leboncoin Frontend Team"
-            width={200}
-            height={62}
-            priority
-          />
-        </div>
-        <h1
-          style={{
-            margin: "16px 0 0 0",
-            fontSize: "24px",
-            fontWeight: "600",
-            color: "#1c1e21",
-            textAlign: "center",
-          }}
-        >
-          Conversations
-        </h1>
-      </div>
+      <Header title="Conversations" />
 
       <div
         style={{
@@ -127,88 +65,126 @@ export default function Home(): ReactElement {
           boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
         }}
       >
-        {MOCK_CONVERSATIONS.map((conversation, index) => (
+        {loading && (
           <div
-            key={conversation.id}
-            onClick={() => handleConversationClick(conversation)}
             style={{
-              padding: "16px 20px",
-              borderBottom:
-                index < MOCK_CONVERSATIONS.length - 1
-                  ? "1px solid #f0f2f5"
-                  : "none",
-              cursor: "pointer",
-              backgroundColor: "white",
-              transition: "background-color 0.2s ease",
+              padding: "40px 20px",
+              textAlign: "center",
+              color: "#65676b",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = "#f8f9fa")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = "white")
-            }
           >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "50%",
-                  backgroundColor: getAvatarColor(
-                    conversation.recipientNickname
-                  ),
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "white",
-                  fontWeight: "600",
-                  fontSize: "18px",
-                  marginRight: "16px",
-                  flexShrink: 0,
-                }}
-              >
-                {conversation.recipientNickname.charAt(0).toUpperCase()}
-              </div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <h3
+            <p>Loading conversations...</p>
+          </div>
+        )}
+
+        {error && (
+          <div
+            style={{
+              padding: "40px 20px",
+              textAlign: "center",
+              color: "#e74c3c",
+            }}
+          >
+            <p>Error: {error}</p>
+          </div>
+        )}
+
+        {!loading && !error && conversations.length === 0 && (
+          <div
+            style={{
+              padding: "40px 20px",
+              textAlign: "center",
+              color: "#65676b",
+            }}
+          >
+            <p>No conversations yet</p>
+          </div>
+        )}
+
+        {!loading &&
+          !error &&
+          conversations.map((conversation, index) => (
+            <div
+              key={conversation.id}
+              onClick={() => handleConversationClick(conversation)}
+              style={{
+                padding: "16px 20px",
+                borderBottom:
+                  index < conversations.length - 1
+                    ? "1px solid #f0f2f5"
+                    : "none",
+                cursor: "pointer",
+                backgroundColor: "white",
+                transition: "background-color 0.2s ease",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = "#f8f9fa")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = "white")
+              }
+            >
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <div
                   style={{
-                    margin: "0 0 4px 0",
-                    fontSize: "16px",
+                    width: "48px",
+                    height: "48px",
+                    borderRadius: "50%",
+                    backgroundColor: getAvatarColor(
+                      conversation.recipientNickname
+                    ),
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "white",
                     fontWeight: "600",
-                    color: "#1c1e21",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
+                    fontSize: "18px",
+                    marginRight: "16px",
+                    flexShrink: 0,
                   }}
                 >
-                  {conversation.recipientNickname}
-                </h3>
-                <p
+                  {conversation.recipientNickname.charAt(0).toUpperCase()}
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <h3
+                    style={{
+                      margin: "0 0 4px 0",
+                      fontSize: "16px",
+                      fontWeight: "600",
+                      color: "#1c1e21",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {conversation.recipientNickname}
+                  </h3>
+                  <p
+                    style={{
+                      margin: "0",
+                      fontSize: "14px",
+                      color: "#65676b",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    Last message:{" "}
+                    {formatTimestamp(conversation.lastMessageTimestamp)}
+                  </p>
+                </div>
+                <div
                   style={{
-                    margin: "0",
-                    fontSize: "14px",
+                    fontSize: "20px",
                     color: "#65676b",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
+                    marginLeft: "12px",
                   }}
                 >
-                  Last message:{" "}
-                  {formatTimestamp(conversation.lastMessageTimestamp)}
-                </p>
-              </div>
-              <div
-                style={{
-                  fontSize: "20px",
-                  color: "#65676b",
-                  marginLeft: "12px",
-                }}
-              >
-                →
+                  →
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
