@@ -23,6 +23,14 @@
       "senderId": 4,
       "senderNickname": "Elodie",
       "lastMessageTimestamp": 1625648667
+    },
+    {
+      "recipientId": 5,
+      "recipientNickname": "antoine",
+      "senderId": 1,
+      "senderNickname": "Thibaut",
+      "lastMessageTimestamp": 1761598964,
+      "id": 4
     }
   ],
   "messages": [
@@ -67,6 +75,20 @@
       "body": "test 2",
       "timestamp": 1761596109,
       "id": 6
+    },
+    {
+      "conversationId": 3,
+      "authorId": 1,
+      "body": "hola",
+      "timestamp": 1761598346,
+      "id": 7
+    },
+    {
+      "conversationId": 4,
+      "authorId": 1,
+      "body": "buenas noches",
+      "timestamp": 1761599238,
+      "id": 8
     }
   ],
   "users": [
@@ -89,6 +111,11 @@
       "id": 4,
       "nickname": "Elodie",
       "token": "xxxx"
+    },
+    {
+      "nickname": "antoine",
+      "token": "xxxx",
+      "id": 5
     }
   ]
 }

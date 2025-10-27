@@ -36,14 +36,21 @@ export function useConversations(): UseConversationsReturn {
       setError(null);
 
       const userId = getLoggedUserId();
-      const response = await fetch(`${API_BASE_URL}/conversations/${userId}`);
 
+      const response = await fetch(`${API_BASE_URL}/db`);
       if (!response.ok) {
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
 
       const data = await response.json();
-      setConversations(data);
+      const allConversations = data.conversations || [];
+
+      const userConversations = allConversations.filter(
+        (conv: Conversation) =>
+          conv.senderId === userId || conv.recipientId === userId
+      );
+
+      setConversations(userConversations);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unknown error");
       console.error("Error fetching conversations:", err);

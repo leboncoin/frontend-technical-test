@@ -4,25 +4,14 @@ import { useRouter } from "next/router";
 import type { Conversation } from "../types/conversation";
 import { useConversations } from "../hooks/api";
 import Header from "../components/Header";
+import Avatar from "../components/Avatar";
+import LoadingSpinner from "../components/LoadingSpinner";
+import NewConversationButton from "../components/NewConversationButton";
+import { ErrorDisplay, parseError } from "../utils/errorHandling";
 
 export default function Home(): ReactElement {
   const router = useRouter();
-  const { conversations, loading, error } = useConversations();
-
-  const getAvatarColor = (name: string): string => {
-    const colors = [
-      "#f59e0b",
-      "#ef4444",
-      "#ec4899",
-      "#10b981",
-      "#3b82f6",
-      "#8b5cf6",
-      "#f97316",
-      "#06b6d4",
-    ];
-    const index = name.charCodeAt(0) % colors.length;
-    return colors[index];
-  };
+  const { conversations, loading, error, refetch } = useConversations();
 
   const formatTimestamp = (timestamp: number): string => {
     const date = new Date(timestamp * 1000);
@@ -58,6 +47,19 @@ export default function Home(): ReactElement {
         style={{
           maxWidth: "600px",
           margin: "0 auto",
+          padding: "0 20px",
+        }}
+      >
+        <NewConversationButton
+          conversations={conversations}
+          onConversationCreated={refetch}
+        />
+      </div>
+
+      <div
+        style={{
+          maxWidth: "600px",
+          margin: "0 auto",
           backgroundColor: "white",
           borderRadius: "8px",
           marginTop: "20px",
@@ -65,28 +67,13 @@ export default function Home(): ReactElement {
           boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
         }}
       >
-        {loading && (
-          <div
-            style={{
-              padding: "40px 20px",
-              textAlign: "center",
-              color: "#65676b",
-            }}
-          >
-            <p>Loading conversations...</p>
-          </div>
-        )}
+        {loading && <LoadingSpinner message="Loading conversations..." />}
 
         {error && (
-          <div
-            style={{
-              padding: "40px 20px",
-              textAlign: "center",
-              color: "#e74c3c",
-            }}
-          >
-            <p>Error: {error}</p>
-          </div>
+          <ErrorDisplay
+            error={parseError({ message: error })}
+            onRetry={() => window.location.reload()}
+          />
         )}
 
         {!loading && !error && conversations.length === 0 && (
@@ -125,25 +112,8 @@ export default function Home(): ReactElement {
               }
             >
               <div style={{ display: "flex", alignItems: "center" }}>
-                <div
-                  style={{
-                    width: "48px",
-                    height: "48px",
-                    borderRadius: "50%",
-                    backgroundColor: getAvatarColor(
-                      conversation.recipientNickname
-                    ),
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "white",
-                    fontWeight: "600",
-                    fontSize: "18px",
-                    marginRight: "16px",
-                    flexShrink: 0,
-                  }}
-                >
-                  {conversation.recipientNickname.charAt(0).toUpperCase()}
+                <div style={{ marginRight: "16px" }}>
+                  <Avatar name={conversation.recipientNickname} size={48} />
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <h3

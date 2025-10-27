@@ -5,6 +5,9 @@ import { useRouter } from "next/router";
 import type { Conversation } from "../../types/conversation";
 import { useConversations, useMessages, useSendMessage } from "../../hooks/api";
 import Header from "../../components/Header";
+import Avatar from "../../components/Avatar";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import { ErrorDisplay, parseError } from "../../utils/errorHandling";
 
 export default function ConversationDetail(): ReactElement {
   const router = useRouter();
@@ -27,21 +30,6 @@ export default function ConversationDetail(): ReactElement {
 
   const conversation =
     conversations.find((c) => c.id === conversationId) || null;
-
-  const getAvatarColor = (name: string): string => {
-    const colors = [
-      "#f59e0b",
-      "#ef4444",
-      "#ec4899",
-      "#10b981",
-      "#3b82f6",
-      "#8b5cf6",
-      "#f97316",
-      "#06b6d4",
-    ];
-    const index = name.charCodeAt(0) % colors.length;
-    return colors[index];
-  };
 
   const formatTimestamp = (timestamp: number): string => {
     const date = new Date(timestamp * 1000);
@@ -135,22 +123,8 @@ export default function ConversationDetail(): ReactElement {
             ←
           </button>
 
-          <div
-            style={{
-              width: "40px",
-              height: "40px",
-              borderRadius: "50%",
-              backgroundColor: getAvatarColor(conversation.recipientNickname),
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "white",
-              fontWeight: "600",
-              fontSize: "16px",
-              marginRight: "12px",
-            }}
-          >
-            {conversation.recipientNickname.charAt(0).toUpperCase()}
+          <div style={{ marginRight: "12px" }}>
+            <Avatar name={conversation.recipientNickname} size={40} />
           </div>
           <div>
             <h2
@@ -183,28 +157,13 @@ export default function ConversationDetail(): ReactElement {
           overflow: "auto",
         }}
       >
-        {messagesLoading && (
-          <div
-            style={{
-              padding: "40px 20px",
-              textAlign: "center",
-              color: "#65676b",
-            }}
-          >
-            <p>Loading messages...</p>
-          </div>
-        )}
+        {messagesLoading && <LoadingSpinner message="Loading messages..." />}
 
         {messagesError && (
-          <div
-            style={{
-              padding: "40px 20px",
-              textAlign: "center",
-              color: "#e74c3c",
-            }}
-          >
-            <p>Error loading messages: {messagesError}</p>
-          </div>
+          <ErrorDisplay
+            error={parseError({ message: messagesError })}
+            onRetry={refetchMessages}
+          />
         )}
 
         {!messagesLoading &&
