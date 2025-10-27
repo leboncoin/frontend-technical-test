@@ -1,65 +1,189 @@
-import type { ReactElement } from 'react'
-import Head from 'next/head'
-import Image from 'next/image'
-import Logo from '../assets/lbc-logo.webp'
-import styles from '../styles/Home.module.css'
+import type { ReactElement } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import type { Conversation } from "../types/conversation";
+import { useConversations } from "../hooks/api";
+import Header from "../components/Header";
+import Avatar from "../components/Avatar";
+import LoadingSpinner from "../components/LoadingSpinner";
+import NewConversationButton from "../components/NewConversationButton";
+import { ErrorDisplay, parseError } from "../utils/errorHandling";
 
 export default function Home(): ReactElement {
-  const year = new Date().getFullYear()
+  const router = useRouter();
+  const { conversations, loading, error, refetch } = useConversations();
+
+  const formatTimestamp = (timestamp: number): string => {
+    const date = new Date(timestamp * 1000);
+    return date.toLocaleDateString("en-US", {
+      day: "2-digit",
+      month: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  const handleConversationClick = (conversation: Conversation) => {
+    router.push(`/conversation/page?id=${conversation.id}`);
+  };
 
   return (
-    <div className={styles.container}>
+        <div
+      style={{
+        minHeight: "100vh",
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        backgroundColor: "#f0f2f5",
+      }}
+    >
       <Head>
-        <title>Frontend Technical test - Leboncoin</title>
-        <meta name="description" content="Frontend exercise for developpers who want to join us on leboncoin.fr" />
+        <title>Conversations - Leboncoin</title>
+        <meta name="description" content="Chat application for Leboncoin" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <main className={styles.main}>
-        <Image src={Logo} alt="Leboncoin Frontend Team" width={400} height={125} priority />
-        <h1 className={styles.title}>
-          Welcome !
-        </h1>
+      <Header title="Conversations" />
 
-        <p className={styles.description}>
-          This test is based on a <a title="Next.js documentation" href="https://nextjs.org/docs/getting-started" target="_blank" rel="noopener noreferrer">Next.js</a> application.<br />
-          Fork the repository and use the <code className={styles.code}>main</code> branch as your starting point.
-          <br /><br />
+      <div
+        style={{
+          maxWidth: "600px",
+          margin: "0 auto",
+          padding: "0 16px",
+        }}
+      >
+        <NewConversationButton
+          conversations={conversations}
+          onConversationCreated={refetch}
+        />
+      </div>
 
-          Get started by reading{' '}
-          <code className={styles.code}>README.md</code> and editing <code className={styles.code}>src/pages/index.js</code>
-          <br />
-          Once you are done, send the repository link to your HR contact.
-        </p>
+            <main
+        role="main"
+        aria-label="Conversation list"
+        style={{
+          maxWidth: "600px",
+          margin: "0 auto",
+          backgroundColor: "transparent",
+          borderRadius: "8px",
+          marginTop: "20px",
+          padding: "0 16px",
+        }}
+      >
+        {loading && <LoadingSpinner message="Loading conversations..." />}
 
-        <div className={styles.grid}>
-          <article className={styles.card}>
-            <h2>Design</h2>
-            <p>Feel free to create any design you want for this exercise. Let your creativity talks !</p>
-          </article>
+        {error && (
+          <ErrorDisplay
+            error={parseError({ message: error })}
+            onRetry={() => window.location.reload()}
+          />
+        )}
 
-          <article className={styles.card}>
-            <h2>Libraries</h2>
-            <p>Feel free to use any library you want. Only Next.js / React are required.</p>
-          </article>
+        {!loading && !error && conversations.length === 0 && (
+          <div
+            style={{
+              padding: "40px 20px",
+              textAlign: "center",
+              color: "#65676b",
+            }}
+          >
+            <p>No conversations yet</p>
+          </div>
+        )}
 
-          <article className={styles.card}>
-            <h2>API Server</h2>
-            <p>
-              Start the API server on port <code className={styles.code}>3005</code> by running<br /><code className={styles.code}>npm run start-server</code>.<br/>
-              Find the swagger definitions in <code className={styles.code}>docs/api-swagger.yml</code> or <a title="API Swagger documentation" href="https://leboncoin.tech/frontend-technical-test/" target="_blank" rel="noopener noreferrer">the online documentation</a>.
-            </p>
-          </article>
-
-          <article className={styles.card}>
-            <h2>Timing</h2>
-            <p>We recommend 4 hours for this test. You are free to spend more (or less) time, let us know how much time did you spend.</p>
-          </article>
-        </div>
+        {!loading && !error && conversations.length > 0 && (
+          <ul
+            role="list"
+            aria-label="Available conversations"
+            style={{ listStyle: "none", margin: 0, padding: 0 }}
+          >
+            {conversations.map((conversation, index) => (
+              <li key={conversation.id} role="listitem">
+                <div
+                  onClick={() => handleConversationClick(conversation)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleConversationClick(conversation);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Open conversation with ${conversation.recipientNickname}`}
+                  style={{
+                    padding: "16px 20px",
+                    marginBottom: index < conversations.length - 1 ? "8px" : "0",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    backgroundColor: "white",
+                    transition: "background-color 0.2s ease, box-shadow 0.2s ease",
+                    outline: "none",
+                    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#f8f9fa";
+                    e.currentTarget.style.boxShadow = "0 2px 6px rgba(0,0,0,0.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "white";
+                    e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)";
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.backgroundColor = "#f8f9fa";
+                    e.currentTarget.style.boxShadow = "0 2px 6px rgba(0,0,0,0.15)";
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.backgroundColor = "white";
+                    e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)";
+                  }}
+                >
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <div style={{ marginRight: "16px" }}>
+                  <Avatar name={conversation.recipientNickname} size={48} />
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <h3
+                    style={{
+                      margin: "0 0 4px 0",
+                      fontSize: "16px",
+                      fontWeight: "600",
+                      color: "#1c1e21",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {conversation.recipientNickname}
+                  </h3>
+                  <p
+                    style={{
+                      margin: "0",
+                      fontSize: "14px",
+                      color: "#65676b",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    Last message:{" "}
+                    {formatTimestamp(conversation.lastMessageTimestamp)}
+                  </p>
+                </div>
+                <div
+                  style={{
+                    fontSize: "20px",
+                    color: "#65676b",
+                    marginLeft: "12px",
+                  }}
+                >
+                  →
+                </div>
+              </div>
+            </div>
+                </li>
+            ))}
+          </ul>
+        )}
       </main>
-
-      <footer className={styles.footer}>
-        &copy; leboncoin - {year}
-      </footer>
     </div>
-  )
+  );
 }
