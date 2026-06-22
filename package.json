@@ -2,6 +2,7 @@
   "name": "frontend-technical-test",
   "version": "0.1.0",
   "private": true,
+  "author": "Ignacio Mansilla Derqui <imansilladerqui@hotmail.com> (https://github.com/imansilladerqui)",
   "scripts": {
     "dev": "next dev",
     "dev:turbo": "next dev --turbo",
@@ -9,30 +10,46 @@
     "start": "next start",
     "start-server": "json-server --watch src/server/db.json --routes src/server/routes.json --middlewares src/server/middleware/conversations.js --port 3005",
     "test": "jest",
-    "lint": "next lint"
+    "test:coverage": "jest --coverage",
+    "test:e2e": "playwright test",
+    "test:all": "pnpm lint && pnpm format:check && pnpm test:coverage && pnpm build && pnpm test:e2e",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
+  "packageManager": "pnpm@9.15.0",
   "engines": {
     "node": ">=18.0.0"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.101.0",
     "next": "^15.2.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-error-boundary": "^6.1.2",
     "sharp": "^0.33.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.0",
+    "@tailwindcss/postcss": "^4.3.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
+    "@types/jest": "^30.0.0",
     "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "eslint": "^9.22.0",
     "eslint-config-next": "^15.2.2",
+    "eslint-config-prettier": "^10.1.8",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "json-server": "^0.17.1",
+    "postcss": "^8.5.15",
+    "prettier": "^3.8.4",
+    "tailwindcss": "^4.3.1",
     "typescript": "^5.8.2"
   }
 }

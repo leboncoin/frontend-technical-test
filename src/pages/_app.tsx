@@ -1,10 +1,18 @@
 import type { AppProps } from 'next/app'
-import { getLoggedUserId } from '../utils/getLoggedUserId'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { ErrorBoundary } from 'react-error-boundary'
+import { ErrorFallback } from '@/components/ErrorFallback'
+import { queryClient } from '@/lib/react-query'
 import '../styles/globals.css'
 
-// Default way to get a logged user
-export const loggedUserId = getLoggedUserId()
+export const loggedUserId = 1
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+const App = ({ Component, pageProps }: AppProps) => (
+  <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => window.location.reload()}>
+    <QueryClientProvider client={queryClient}>
+      <Component {...pageProps} />
+    </QueryClientProvider>
+  </ErrorBoundary>
+)
+
+export default App
