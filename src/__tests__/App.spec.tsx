@@ -1,11 +1,20 @@
-import { render, screen } from "@testing-library/react"
-import App from "../pages"
+import { render, waitFor } from '@testing-library/react'
+import Home from '../pages'
 
-describe("App", () => {
-  it("should render correctly App", () => {
-    render(<App />)
-    expect(
-      screen.getByText(/Welcome/)
-    ).toBeInTheDocument()
+const mockReplace = jest.fn()
+
+jest.mock('next/router', () => ({
+  useRouter: () => ({
+    replace: mockReplace,
+    isReady: true,
+  }),
+}))
+
+describe('Home', () => {
+  it('redirects to messages page', async () => {
+    render(<Home />)
+    await waitFor(() => {
+      expect(mockReplace).toHaveBeenCalledWith('/messages')
+    })
   })
 })

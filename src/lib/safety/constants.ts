@@ -1,0 +1,5 @@
+export const MAX_MESSAGE_LENGTH = 1000
+export const SEND_DEBOUNCE_MS = 500
+export const RATE_LIMIT_MAX = 10
+export const RATE_LIMIT_WINDOW_MS = 60_000
+export const DUPLICATE_MESSAGE_WINDOW_MS = 2_000

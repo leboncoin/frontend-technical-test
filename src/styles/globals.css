@@ -1,16 +1,54 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@import 'tailwindcss';
+
+@theme {
+  --color-brand: #ff6e14;
+  --color-brand-hover: #e55f0a;
+  --color-primary: #1a73e8;
+  --color-primary-hover: #1558b0;
+  --color-danger: #d32f2f;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+@layer base {
+  html,
+  body {
+    @apply m-0 p-0 bg-white text-neutral-900 font-sans;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  *,
+  *::before,
+  *::after {
+    @apply box-border;
+  }
+
+  button,
+  input,
+  textarea {
+    font-family: inherit;
+  }
 }
 
-* {
-  box-sizing: border-box;
+@layer components {
+  .modal-dialog::backdrop {
+    background-color: rgb(0 0 0 / 0.4);
+  }
+}
+
+@keyframes snackbar-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-snackbar-in {
+  animation: snackbar-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
