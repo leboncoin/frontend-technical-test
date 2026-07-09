@@ -1,2 +1,2 @@
-const stub = '/test-file-stub'
-export default stub
+const stub = '/test-file-stub';
+export default stub;

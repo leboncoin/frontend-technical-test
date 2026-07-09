@@ -6,7 +6,8 @@
       "recipientNickname": "Jeremie",
       "senderId": 1,
       "senderNickname": "Thibaut",
-      "lastMessageTimestamp": 1625637849
+      "lastMessageTimestamp": 1625648667,
+      "lastMessageBody": "Bonjour c'est le troisième message de la première conversation"
     },
     {
       "id": 2,
@@ -14,7 +15,8 @@
       "recipientNickname": "Patrick",
       "senderId": 1,
       "senderNickname": "Thibaut",
-      "lastMessageTimestamp": 1620284667
+      "lastMessageTimestamp": 1620284667,
+      "lastMessageBody": "Bonjour c'est le premier message de la seconde conversation"
     },
     {
       "id": 3,
@@ -22,7 +24,8 @@
       "recipientNickname": "Thibaut",
       "senderId": 4,
       "senderNickname": "Elodie",
-      "lastMessageTimestamp": 1625648667
+      "lastMessageTimestamp": 1625648667,
+      "lastMessageBody": ""
     }
   ],
   "messages": [
@@ -53,6 +56,13 @@
       "timestamp": 1620284667,
       "authorId": 2,
       "body": "Bonjour c'est le premier message de la seconde conversation"
+    },
+    {
+      "authorId": 1,
+      "body": "Je suis interessée",
+      "conversationId": 1,
+      "timestamp": 1783587887,
+      "id": 5
     }
   ],
   "users": [
@@ -74,6 +84,16 @@
     {
       "id": 4,
       "nickname": "Elodie",
+      "token": "xxxx"
+    },
+    {
+      "id": 5,
+      "nickname": "Elise",
+      "token": "xxxx"
+    },
+    {
+      "id": 6,
+      "nickname": "Julien",
       "token": "xxxx"
     }
   ]

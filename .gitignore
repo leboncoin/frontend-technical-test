@@ -8,6 +8,8 @@ yarn.lock
 
 # testing
 /coverage
+/playwright-report
+/test-results
 
 # next.js
 /.next/
@@ -36,3 +38,6 @@ yarn-error.log*
 
 # SWC
 .swc
+
+# TypeScript
+*.tsbuildinfo
