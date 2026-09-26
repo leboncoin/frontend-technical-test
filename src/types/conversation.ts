@@ -3,6 +3,6 @@ export interface Conversation {
   recipientId: number
   recipientNickname: string
   senderId: number
-  senderNickname: string,
-  lastMessageTimestamp: number,
+  senderNickname: string
+  lastMessageTimestamp: number
 }
