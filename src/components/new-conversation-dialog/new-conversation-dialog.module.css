@@ -1,0 +1,116 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 10;
+}
+
+.dialog {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #333333;
+  cursor: pointer;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font: inherit;
+  background: #ffffff;
+}
+
+.select:focus-visible {
+  outline: 2px solid var(--color-accent, #ec6e24);
+  outline-offset: 1px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.primaryButton,
+.secondaryButton {
+  min-height: 40px;
+  padding: 0.45rem 1.1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primaryButton {
+  border: none;
+  background: var(--color-accent-strong, #b34700);
+  color: #ffffff;
+}
+
+.primaryButton:disabled {
+  background: #f0c9ae;
+  cursor: not-allowed;
+}
+
+.secondaryButton {
+  border: 1px solid #cccccc;
+  background: #ffffff;
+  color: #333333;
+}
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible,
+.closeButton:focus-visible {
+  outline: 2px solid var(--color-accent, #ec6e24);
+  outline-offset: 2px;
+}
+
+.hint {
+  color: #666666;
+  margin: 0.5rem 0 0;
+}
+
+.error {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  color: #8a1c19;
+}

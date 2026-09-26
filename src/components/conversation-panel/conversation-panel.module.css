@@ -1,0 +1,58 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: #ffffff;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eaeaea;
+  background: #ffffff;
+}
+
+.backButton {
+  display: none; /* mobile only, the list is visible on desktop */
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #333333;
+  cursor: pointer;
+  margin-left: -0.5rem;
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  font-size: 1.1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #666666;
+}
+
+/* Keep in sync with the layout breakpoint (see Messaging.module.css):
+   767.98px closes the fractional-DPR gap between mobile and desktop. */
+@media (max-width: 767.98px) {
+  .backButton {
+    display: inline-flex;
+  }
+}

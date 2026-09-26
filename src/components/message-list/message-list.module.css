@@ -1,0 +1,106 @@
+.container {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1rem;
+  background: #fafafa;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: min(80%, 100%);
+}
+
+.itemOwn {
+  align-items: flex-end;
+  align-self: flex-end;
+}
+
+.author {
+  font-size: 0.75rem;
+  color: #666666;
+  margin: 0 0.4rem 0.15rem;
+}
+
+.bubble {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 14px 14px 14px 4px;
+  padding: 0.5rem 0.75rem;
+}
+
+.bubbleOwn {
+  background: var(--color-accent-strong, #b34700);
+  border-color: var(--color-accent-strong, #b34700);
+  color: #ffffff;
+  border-radius: 14px 14px 4px 14px;
+}
+
+.body {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+.time {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.68rem;
+  color: #666666;
+  text-align: right;
+}
+
+.bubbleOwn .time {
+  color: #ffffff;
+}
+
+.stateBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.stateText {
+  margin: 0;
+  color: #666666;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+[role='alert'].stateText {
+  color: #8a1c19;
+  font-weight: 500;
+}
+
+.retryButton {
+  min-height: 40px;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #8a1c19;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #8a1c19;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.retryButton:focus-visible {
+  outline: 2px solid #8a1c19;
+  outline-offset: 2px;
+}

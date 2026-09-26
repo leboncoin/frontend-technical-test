@@ -1,0 +1,73 @@
+/* App shell: brand bar + responsive two-pane/one-pane layout. */
+.shell {
+  height: 100vh;
+  height: 100dvh; /* mobile browsers with dynamic toolbars */
+  display: flex;
+  flex-direction: column;
+  background: #f0f2f5;
+}
+
+.appHeader {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 1rem;
+  background: #ffffff;
+  border-bottom: 1px solid #eaeaea;
+  flex-shrink: 0;
+}
+
+.layout {
+  flex: 1;
+  min-height: 0; /* let panes own the vertical space */
+  display: grid;
+  grid-template-columns: min(360px, 35vw) 1fr;
+}
+
+.listPane {
+  min-height: 0;
+  border-right: 1px solid #e6e6e6;
+  background: #ffffff;
+}
+
+.conversationPane {
+  min-height: 0;
+}
+
+.placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: #fafafa;
+}
+
+.placeholderText {
+  margin: 0;
+  color: #666666;
+  text-align: center;
+}
+
+@media (max-width: 767.98px) {
+  .layout {
+    display: block;
+  }
+
+  .listPane,
+  .conversationPane {
+    height: 100%;
+  }
+
+  .listPane {
+    border-right: none;
+  }
+
+  .layout[data-view="conversation"] .listPane {
+    display: none;
+  }
+
+  .layout[data-view="list"] .conversationPane {
+    display: none;
+  }
+}
